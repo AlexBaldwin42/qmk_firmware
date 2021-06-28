@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
-#define COMBO_COUNT 2
+#define COMBO_COUNT 6
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 150
@@ -52,6 +52,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
+
+#define bool _Bool
 
 // Reduce size
 #define NO_ACTION_MACRO

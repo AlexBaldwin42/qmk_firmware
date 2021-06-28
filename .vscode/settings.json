@@ -23,5 +23,32 @@
         "editor.trimAutoWhitespace": false,
         "files.trimTrailingWhitespace": false
     },
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "yapf",
+
+    // "terminal.integrated.profiles.msys": {
+    //     "zsh (login)": {
+    //       "path": "C:\\QMK_MSYS\\usr\\bin\\bash.exe",
+    //       "args": ["-l"]
+    //     }
+    "terminal.integrated.shell.windows": "C:\\QMK_MSYS\\usr\\bin\\bash.exe",
+     "terminal.integrated.env.windows": {
+         "MSYSTEM": "MINGW64",
+         "CHERE_INVOKING": "1"
+     },
+     "terminal.integrated.shellArgs.windows": [
+         "--login"
+     ],
+     "terminal.integrated.cursorStyle": "line",
+     "terminal.integrated.profiles.windows": {
+        "Git Bash": null
+      },
+
+      {
+        "terminal.integrated.defaultProfile.osx": "fish",
+        // Use a fully POSIX-compatible shell and avoid running a complex ~/.fishrc
+        // for tasks and debug
+        "terminal.integrated.automationShell.osx": "/bin/sh"
+    }
+
+
 }

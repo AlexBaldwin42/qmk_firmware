@@ -17,7 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "config.h"
 #include "keycodes.h"
+#include <stdio.h>
+#include <stdint.h>
 
 #if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
 #    include "rgb.c"
@@ -74,9 +77,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+enum combo_events {
+  DF_CTRL_TAB,
+  SD_CTRL_SHIFT_TAB,
+  WER_WIN_CTRL_RIGHT,
+  QWE_WIN_CTRL_LEFT,
+  ER_ALT_TAB,
+  WE_ALT_SHIFT_TAB
+
+};
+
+const uint16_t PROGMEM ctrl_tab_combo[] = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM ctrl_shift_tab_combo[] = {KC_S, KC_D, COMBO_END};
+const uint16_t PROGMEM win_ctrl_right_combo[] = {KC_W, KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM win_ctrl_left_combo[] = {KC_Q, KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM alt_tab[] = {KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM alt_shift_tab[] = {KC_W, KC_E, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [DF_CTRL_TAB] = COMBO_ACTION(ctrl_tab_combo),
+  [SD_CTRL_SHIFT_TAB] = COMBO_ACTION(ctrl_shift_tab_combo),
+  [WER_WIN_CTRL_RIGHT] = COMBO_ACTION(win_ctrl_right_combo),
+  [QWE_WIN_CTRL_LEFT] = COMBO_ACTION(win_ctrl_left_combo),
+  [ER_ALT_TAB] = COMBO_ACTION(alt_tab),
+  [WE_ALT_SHIFT_TAB] = COMBO_ACTION(alt_shift_tab),
+};
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+  switch(combo_index) {
+    case DF_CTRL_TAB:
+      if (pressed) {
+        tap_code16(LCTL(KC_TAB));
+      }
+      break;
+    case SD_CTRL_SHIFT_TAB:
+      if (pressed) {
+            tap_code16(LCTL(LSFT(KC_TAB)));
+      }
+      break;
+    case WER_WIN_CTRL_RIGHT:
+        if(pressed){
+            tap_code16(LGUI(LCTL(KC_RIGHT)));
+        }
+        break;
+    case QWE_WIN_CTRL_LEFT:
+        if(pressed){
+                tap_code16(LGUI(LCTL(KC_LEFT)));
+        }
+        break;
+    case ER_ALT_TAB:
+        if(pressed){
+            tap_code16(LALT(KC_TAB));
+        }
+        break;
+    case WE_ALT_SHIFT_TAB:
+        if(pressed){
+                tap_code16(LALT(LSFT(KC_TAB)));
+        }
+        break;
+  }
+}
+
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (!is_master) {
+  if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
   }
   return rotation;
@@ -108,33 +172,6 @@ void oled_render_layer_state(void) {
     }
 }
 
-enum combo_events {
-  CV_CTRL_TAB,
-  ZX_CTRL_SHIFT_TAB
-};
-
-const uint16_t PROGMEM ctrl_tab_combo[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM ctrl_shift_tab_combo[] = {KC_Z, KC_X, COMBO_END};
-
-combo_t key_combos[COMBO_COUNT] = {
-  [CV_CTRL_TAB] = COMBO_ACTION(ctrl_tab_combo),
-  [ZX_CTRL_SHIFT_TAB] = COMBO_ACTION(ctrl_shift_tab_combo),
-};
-
-void process_combo_event(uint16_t combo_index, bool pressed) {
-  switch(combo_index) {
-    case CV_CTRL_TAB:
-      if (pressed) {
-        tap_code16(LCTL(KC_TAB));
-      }
-      break;
-    case ZX_CTRL_SHIFT_TAB:
-      if (pressed) {
-        tap_code16(LCTL(LSFT(KC_TAB)));
-      }
-      break;
-  }
-}
 
 char keylog_str[24] = {};
 
@@ -189,7 +226,7 @@ void oled_render_logo(void) {
 }
 
 void oled_task_user(void) {
-    if (is_master) {
+    if (is_keyboard_master()) {
         oled_render_layer_state();
         oled_render_keylog();
     } else {
@@ -203,4 +240,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-#endif //OLED_DRIVER_ENABLE
+#endif // OLED_DRIVER_ENABLE
