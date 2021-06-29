@@ -82,8 +82,8 @@ enum combo_events {
   SD_CTRL_SHIFT_TAB,
   WER_WIN_CTRL_RIGHT,
   QWE_WIN_CTRL_LEFT,
-  ER_ALT_TAB,
-  WE_ALT_SHIFT_TAB
+  RT_ALT_TAB,
+  WE_WIN_TAB
 
 };
 
@@ -91,16 +91,16 @@ const uint16_t PROGMEM ctrl_tab_combo[] = {KC_D, KC_F, COMBO_END};
 const uint16_t PROGMEM ctrl_shift_tab_combo[] = {KC_S, KC_D, COMBO_END};
 const uint16_t PROGMEM win_ctrl_right_combo[] = {KC_W, KC_E, KC_R, COMBO_END};
 const uint16_t PROGMEM win_ctrl_left_combo[] = {KC_Q, KC_W, KC_E, COMBO_END};
-const uint16_t PROGMEM alt_tab[] = {KC_E, KC_R, COMBO_END};
-const uint16_t PROGMEM alt_shift_tab[] = {KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM alt_tab[] = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM win_tab[] = {KC_W, KC_E, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
   [DF_CTRL_TAB] = COMBO_ACTION(ctrl_tab_combo),
   [SD_CTRL_SHIFT_TAB] = COMBO_ACTION(ctrl_shift_tab_combo),
   [WER_WIN_CTRL_RIGHT] = COMBO_ACTION(win_ctrl_right_combo),
   [QWE_WIN_CTRL_LEFT] = COMBO_ACTION(win_ctrl_left_combo),
-  [ER_ALT_TAB] = COMBO_ACTION(alt_tab),
-  [WE_ALT_SHIFT_TAB] = COMBO_ACTION(alt_shift_tab),
+  [RT_ALT_TAB] = COMBO_ACTION(alt_tab),
+  [WE_WIN_TAB] = COMBO_ACTION(win_tab),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
@@ -125,14 +125,14 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
                 tap_code16(LGUI(LCTL(KC_LEFT)));
         }
         break;
-    case ER_ALT_TAB:
         if(pressed){
+    case RT_ALT_TAB:
             tap_code16(LALT(KC_TAB));
         }
         break;
-    case WE_ALT_SHIFT_TAB:
+    case WE_WIN_TAB:
         if(pressed){
-                tap_code16(LALT(LSFT(KC_TAB)));
+            tap_code16(LGUI(KC_TAB));
         }
         break;
   }
