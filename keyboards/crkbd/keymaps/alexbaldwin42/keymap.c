@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   	[_NUMPAD] = LAYOUT(
 	//,-----------------------------------------------------.                    ,-----------------------------------------------------.
-	LT(0,KC_NO),   KC_NO,   KC_NO,   KC_NO,   KC_NO, TO(_QWERTY), 					   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR, KC_BSPC,
+	LT(0,KC_NO),   KC_NO,   KC_NO,   KC_NO,   KC_NO, TG(_NUMPAD), 					   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR, KC_BSPC,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 	      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, 					   KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,  KC_DEL,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -162,9 +162,11 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 #define L_LOWER 2
 #define L_RAISE 4
 #define L_ADJUST 8
+#define L_NUMPAD 16
 
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
+
     switch (layer_state) {
         case L_BASE:
             oled_write_ln_P(PSTR("Default"), false);
@@ -180,6 +182,9 @@ void oled_render_layer_state(void) {
         case L_ADJUST|L_RAISE:
         case L_ADJUST|L_LOWER|L_RAISE:
             oled_write_ln_P(PSTR("Adjust"), false);
+            break;
+        case L_NUMPAD:
+            oled_write_ln_P(PSTR("Numpad"), false);
             break;
     }
 }
