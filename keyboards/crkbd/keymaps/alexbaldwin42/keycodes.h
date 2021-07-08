@@ -5,9 +5,10 @@ enum layers {
     _LOWER,
     _RAISE,
     _ADJUST,
+    _NUMPAD
 };
 
-enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, RGBRST };
+enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, NUMPAD };
 
 #define LW_SPC LT(_LOWER, KC_SPC)
 #define LW_BSPC LT(_LOWER, KC_BSPC)
@@ -24,7 +25,7 @@ enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, RGBRST };
 #define CTL_F1 MT(MOD_LCTL, KC_F1)
 #define RSFT_TIL MT(MOD_RSFT, KC_TILD)
 
-#define CTL_V MT(MOD_LCTL, KC_V) 
+#define CTL_V MT(MOD_LCTL, KC_V)
 #define SFT_EQ MT(MOD_LSFT, KC_EQL)
 #define SFT_QT MT(MOD_RSFT, KC_QUOT)
 
