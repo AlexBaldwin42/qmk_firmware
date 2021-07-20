@@ -48,7 +48,10 @@
         // Use a fully POSIX-compatible shell and avoid running a complex ~/.fishrc
         // for tasks and debug
         "terminal.integrated.automationShell.osx": "/bin/sh"
+    },
+
+
+    "[json]": {
+	    "editor.formatOnSave": false
     }
-
-
 }
