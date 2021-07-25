@@ -34,20 +34,26 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 150
+#define IGNORE_MOD_TAP_INTERRUPT
 
 #define RGBLIGHT_SLEEP
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
-//    #define RGBLIGHT_ANIMATIONS
-    #define RGBLED_NUM 27
-#    define RGBLIGHT_LIMIT_VAL 150
-#    define RGBLIGHT_HUE_STEP 16
-#    define RGBLIGHT_SAT_STEP 32
-#    define RGBLIGHT_VAL_STEP 32
+    //#define RGBLIGHT_ANIMATIONS
 
-#    define RGBLIGHT_EFFECT_RAINBOW_MOOD
-#    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+    // Reset this so the default setting is not used. Which will disable the per key led.
+    #undef RGBLED_SPLIT
+    #define RGB_SPLIT
+
+    #define RGBLED_NUM 27
+    #define RGBLIGHT_LIMIT_VAL 150
+    #define RGBLIGHT_HUE_STEP 16
+    #define RGBLIGHT_SAT_STEP 32
+    #define RGBLIGHT_VAL_STEP 32
+
+    #define RGBLIGHT_EFFECT_RAINBOW_MOOD
+    #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 //#    define RGBLIGHT_EFFECT_KNIGHT
 #endif
 

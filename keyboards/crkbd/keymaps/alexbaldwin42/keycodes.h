@@ -54,3 +54,6 @@ enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, NUMPAD };
 #define SFT_K RSFT_T(KC_K)
 #define ALT_L LALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
+
+// left-hand num layer home row mods
+#define SFT_UP RSFT_T(KC_UP)
