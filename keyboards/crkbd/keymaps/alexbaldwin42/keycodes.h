@@ -10,11 +10,7 @@ enum layers {
 
 enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, NUMPAD };
 
-#define LW_SPC LT(_LOWER, KC_SPC)
-#define LW_BSPC LT(_LOWER, KC_BSPC)
 #define CTRL_TB MT(MOD_LCTL, KC_TAB)
-#define RAI_ENT LT(_RAISE, KC_ENT)
-#define RAI_DEL LT(_RAISE, KC_DEL)
 #define ADJ_QT LT(_ADJUST, KC_QUOT)
 #define ALT_X MT(MOD_LALT, KC_X)
 #define ALT_DOT MT(MOD_LALT, KC_DOT)
@@ -57,3 +53,13 @@ enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, NUMPAD };
 
 // left-hand num layer home row mods
 #define SFT_UP RSFT_T(KC_UP)
+
+// Thumb clusters
+// Left
+#define NUM_TAB LT(_NUMPAD, KC_TAB)
+#define LW_BSPC LT(_LOWER, KC_BSPC)
+#define RAI_DEL LT(_RAISE, KC_DEL)
+
+// Right
+#define RAI_ENT LT(_RAISE, KC_ENT)
+#define LW_SPC LT(_LOWER, KC_SPC)
