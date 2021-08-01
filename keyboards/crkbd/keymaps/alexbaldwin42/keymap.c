@@ -31,9 +31,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_EQL,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_MINS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      CTRL_TB,   GUI_A,   ALT_S,   SFT_D,   CTL_F,    KC_G,                         KC_H,   CTL_J,    SFT_K,  ALT_L,GUI_SCLN,   ADJ_QT,
+      CTRL_TB,   GUI_A,   ALT_S,   SFT_D,   CTL_F,    KC_G,                         KC_H,   CTL_J,    SFT_K,  ALT_L,GUI_SCLN,  ADJ_QT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,   CTL_Z,   ALT_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  ALT_DOT,CTL_SLSH, KC_RSFT,
+      KC_LSFT,   CTL_Z,   ALT_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  ALT_DOT,CTL_SLSH,KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           NUM_TAB, LW_BSPC, RAI_DEL,    RAI_ENT,  LW_SPC, KC_LGUI
                                       //`--------------------------'  `--------------------------'
@@ -44,9 +44,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,  GUI_LB,  ALT_RB,  SFT_LP,  CTL_RP,  KC_DOT,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,   KC_F6,  KC_F12,
+      KC_LCTL, GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,   KC_F6,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,  CTL_F1,   ALT_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F5,   KC_F7,    KC_8,  ALT_F9, CTL_F10,RSFT_F11,
+      KC_LSFT,  CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                        KC_F5,   KC_F7,    KC_8,  ALT_F9, CTL_F10,RSFT_F11,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,     _______,_______, _______
                                       //`--------------------------'  `----------------'----------'
@@ -56,9 +56,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS, XXXXXXX, XXXXXXX, KC_HOME,  KC_END, KC_PGUP,                      KC_MINS, CTL_EQL,SFT_LBRC,ALT_RBRC, GUI_BSLS,KC_GRV,
+      KC_CAPS, KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL,SFT_LBRC,ALT_RBRC,GUI_BSLS,  KC_GRV,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     KC_LSFT, _______, TO(_NUMPAD),_______ , KC_ENT,KC_PGDOWN,                   KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, RSFT_TIL,
+      KC_LSFT, _______,TO(_NUMPAD),_______,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,RSFT_TIL,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,_______,     _______, _______, _______
                                       //`--------------------------'  `--------------------------'

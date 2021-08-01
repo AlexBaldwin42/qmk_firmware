@@ -31,10 +31,10 @@ enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, NUMPAD };
 
 // Lower
 // Home row mods
-#define GUI_LB LGUI_T(KC_LABK)
-#define ALT_RB LALT_T(KC_RABK)
-#define SFT_LP LSFT_T(KC_LPRN)
-#define CTL_RP LCTL_T(KC_RPRN)
+#define GUI_BAK LGUI_T(KC_WBAK)
+#define ALT_FWD LALT_T(KC_WFWD)
+#define SFT_HOME LSFT_T(KC_HOME)
+#define CTL_END LCTL_T(KC_END)
 
 #define ALT_F2 MT(MOD_LALT, KC_F2)
 #define CTL_F1 MT(MOD_LCTL, KC_F1)
