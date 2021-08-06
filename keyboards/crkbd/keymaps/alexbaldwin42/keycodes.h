@@ -66,8 +66,9 @@ enum custom_keycodes { QWERTY = SAFE_RANGE, LOWER, RAISE, ADJUST, NUMPAD };
 // Raise
 // Home row mods
 #define CTL_EQL RCTL_T(KC_EQL)
-#define SFT_LBRC RSFT_T(KC_LBRC)
-#define ALT_RBRC LALT_T(KC_RBRC)
+// Don't work :(
+#define SFT_LCBR RSFT_T(KC_LCBR)
+#define ALT_RCBR LALT_T(KC_RCBR)
 #define GUI_BSLS RGUI_T(KC_BSLS)
 
 #define RSFT_TIL MT(MOD_RSFT, KC_TILD)
