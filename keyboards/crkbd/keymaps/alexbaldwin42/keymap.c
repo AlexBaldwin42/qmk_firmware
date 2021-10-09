@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_F5,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_MINS,
+       KC_F5,     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,   KC_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       CTRL_TB,   GUI_A,   ALT_S,   SFT_D,   CTL_F,    KC_G,                         KC_H,   CTL_J,    SFT_K,  ALT_L,GUI_SCLN,  ADJ_QT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -78,9 +78,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   	[_NUMPAD] = LAYOUT(
 	//,-----------------------------------------------------.                    ,-----------------------------------------------------.
-	    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO, TG(_NUMPAD), 				   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR, KC_BSPC,
+ LALT(KC_F4),   KC_NO,     KC_NO,   KC_NO,   KC_NO, TG(_NUMPAD), 				   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR, KC_BSPC,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-	   KC_NO,   KC_NO,   KC_LEFT,  SFT_UP, KC_DOWN, KC_RIGHT, 					   KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,  KC_DEL,
+ LCTL(KC_F4),   KC_NO,   KC_LEFT,  SFT_UP, KC_DOWN, KC_RIGHT, 					   KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,  KC_DEL,
 	//|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
 		KC_NO,   KC_NO,  KC_LSFT,   KC_F10,  KC_F11,  KC_F5, 					   KC_PLUS,   KC_P1,   KC_P2,   KC_P3, KC_SLSH,   KC_NO,
 	//|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
