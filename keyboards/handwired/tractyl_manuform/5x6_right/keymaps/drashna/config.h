@@ -18,4 +18,5 @@
 
 #define TRACKBALL_DPI_OPTIONS { 1200, 1800, 2600, 3400 }
 
-#define DEBOUNCE 45
+#undef DEBOUNCE
+#define DEBOUNCE 15
