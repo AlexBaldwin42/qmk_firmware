@@ -23,7 +23,6 @@
  * See docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
  */
 
-#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
 
 #ifdef POINTING_DEVICE_ENABLE
 // Enable pointer acceleration, which increases the speed by ~2x for large
@@ -35,7 +34,8 @@
 // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
 // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
 // #define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-
+#define FIRMWARE_LENGTH 4094
+#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
 // Flip horizontal direction for drag-scroll.
 #define CHARYBDIS_DRAGSCROLL_REVERSE_X
 // #define CHARYBDIS_DRAGSCROLL_REVERSE_Y

@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "quantum.h"
+#include "charybdis.h"
 
 // clang-format off
 #define LAYOUT_charybdis_4x6(                                     \
@@ -27,7 +27,7 @@
   k20, k21, k22, k23, k24, k25,     k75, k74, k73, k72, k71, k70, \
   k30, k31, k32, k33, k34, k35,     k85, k84, k83, k82, k81, k80, \
                  k43, k44, k41,     k91, k93,                     \
-                      k45, k42,     k92                           \
+                      k45, k42,     k95                           \
 )                                                                 \
 {                                                                 \
   {   k00,   k01,   k02,   k03,   k04,   k05 },                   \
@@ -39,6 +39,6 @@
   {   k60,   k61,   k62,   k63,   k64,   k65 },                   \
   {   k70,   k71,   k72,   k73,   k74,   k75 },                   \
   {   k80,   k81,   k82,   k83,   k84,   k85 },                   \
-  { KC_NO,   k91,   k92,   k93, KC_NO, KC_NO },                   \
+  { KC_NO,   k91, KC_NO,   k93, KC_NO,   k95 },                   \
 }
 // clang-format on

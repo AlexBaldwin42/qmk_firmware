@@ -31,10 +31,10 @@ Manuform](../../handwired/dactyl_manuform) layout.
 qmk compile -kb bastardkb/charybdis/4x6 -km default
 ```
 
-Check out the `stock` layout if you're looking for Via/Vial support:
+Check out the `via` layout if you're looking for Via/Vial support:
 
 ```shell
-qmk compile -kb bastardkb/charybdis/4x6 -km stock
+qmk compile -kb bastardkb/charybdis/4x6 -km via
 ```
 
 ### Charybdis (3x5)
@@ -46,10 +46,10 @@ Manuform](../../handwired/dactyl_manuform) layout.
 qmk compile -kb bastardkb/charybdis/3x5 -km default
 ```
 
-Check out the `stock` layout if you're looking for Via/Vial support:
+Check out the `via` layout if you're looking for Via/Vial support:
 
 ```shell
-qmk compile -kb bastardkb/charybdis/3x5 -km stock
+qmk compile -kb bastardkb/charybdis/3x5 -km via
 ```
 
 ## Customizing the firmware
@@ -155,4 +155,56 @@ The acceleration factor can be further tune _via_ the
 
 ```c
 #define CHARYBDIS_POINTER_ACCELERATION_FACTOR 24
+```
+
+### Custom keycodes
+
+The Charybdis firmware defines a number of keycodes to leverage its features,
+namely:
+
+```
+#ifndef NO_CHARYBDIS_KEYCODES
+enum charybdis_keycodes {
+  POINTER_DEFAULT_DPI_FORWARD = SAFE_RANGE,
+  POINTER_DEFAULT_DPI_REVERSE,
+  POINTER_SNIPING_DPI_FORWARD,
+  POINTER_SNIPING_DPI_REVERSE,
+  SNIPING_MODE,
+  SNIPING_MODE_TOGGLE,
+  DRAGSCROLL_MODE,
+  DRAGSCROLL_MODE_TOGGLE,
+  CHARYBDIS_SAFE_RANGE,
+};
+
+#define DPI_MOD POINTER_DEFAULT_DPI_FORWARD
+#define DPI_RMOD POINTER_DEFAULT_DPI_REVERSE
+#define S_D_MOD POINTER_SNIPING_DPI_FORWARD
+#define S_D_RMOD POINTER_SNIPING_DPI_REVERSE
+#define SNIPING SNIPING_MODE
+#define SNP_TOG SNIPING_MODE_TOGGLE
+#define DRGSCRL DRAGSCROLL_MODE
+#define DRG_TOG DRAGSCROLL_MODE_TOGGLE
+#endif // !NO_CHARYBDIS_KEYCODES
+```
+
+Users extending the keycode set themselves (either in their keymap, or in their
+userspace) must start at `CHARYBDIS_SAFE_RANGE` to avoid conflicts, _eg._:
+
+```c
+enum userspace_keycodes {
+#ifndef NO_CHARYBDIS_KEYCODES
+  MY_FIRST_KEYCODE = CHARYBDIS_SAFE_RANGE,
+#else
+  MY_FIRST_KEYCODE = SAFE_RANGE,
+#endif // !NO_CHARYBDIS_KEYCODES
+  MY_SECOND_KEYCODE,
+  …
+};
+```
+
+To disable the custom keycodes, and reduce binary size, simply add a definition
+in `config.h`:
+
+```c
+#define NO_CHARYBDIS_KEYCODES
 ```

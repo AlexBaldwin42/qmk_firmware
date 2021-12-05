@@ -31,24 +31,6 @@ enum charybdis_keymap_bstiq_layers {
 // Automatically enable sniping when the mouse layer is on.
 #define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_MOUSE
 
-enum charybdis_keymap_keycodes {
-#ifdef VIA_ENABLE
-  USER_RESET = USER00,
-#else
-  USER_RESET = SAFE_RANGE,
-#endif  // VIA_ENABLE
-  POINTER_DEFAULT_DPI_FORWARD,
-  POINTER_SNIPING_DPI_FORWARD,
-  DRAGSCROLL_MODE,
-  KEYMAP_SAFE_RANGE,
-};
-
-#define USR_RST USER_RESET
-#define DPI_MOD POINTER_DEFAULT_DPI_FORWARD
-#define S_D_MOD POINTER_SNIPING_DPI_FORWARD
-#define DRGSCRL DRAGSCROLL_MODE
-#define DRG_TOG DRAGSCROLL_MODE_TOGGLE
-
 #define BSP_NAV LT(LAYER_NAV, KC_BSPC)
 #define ENT_MBO LT(LAYER_MBO, KC_ENT)
 #define TAB_MED LT(LAYER_MEDIA, KC_TAB)
@@ -97,8 +79,8 @@ enum charybdis_keymap_keycodes {
 #define U_NU KC_NO // Available but not used.
 
 /** Convenience row shorthands. */
-#define __________________RESET_L__________________ USR_RST,    U_NA,    U_NA,    U_NA,    U_NA
-#define __________________RESET_R__________________    U_NA,    U_NA,    U_NA,    U_NA, USR_RST
+#define __________________RESET_L__________________   RESET,    U_NA,    U_NA,    U_NA,    U_NA
+#define __________________RESET_R__________________    U_NA,    U_NA,    U_NA,    U_NA,   RESET
 #define ______________HOME_ROW_GASC_L______________ KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,    U_NA
 #define ______________HOME_ROW_ALGR_L______________    U_NA, KC_ALGR,    U_NA,    U_NA,    U_NA
 #define ______________HOME_ROW_GASC_R______________    U_NA, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI
@@ -216,53 +198,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-/** Whether SHIFT mod is enabled. */
-static bool _has_shift_mod(void) {
-#ifdef NO_ACTION_ONESHOT
-  return mod_config(get_mods()) & MOD_MASK_SHIFT;
-#else
-  return mod_config(get_mods() | get_oneshot_mods()) & MOD_MASK_SHIFT;
-#endif  // NO_ACTION_ONESHOT
-}
-
-#ifdef POINTING_DEVICE_ENABLE
-bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-  switch (keycode) {
-    case USER_RESET:
-      if (record->event.pressed) {
-#ifdef RGB_MATRIX_ENABLE
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-        rgb_matrix_sethsv_noeeprom(HSV_RED);
-#endif  // RGB_MATRIX_ENABLE
-      } else {
-        reset_keyboard();
-      }
-      break;
-    case POINTER_DEFAULT_DPI_FORWARD:
-      if (record->event.pressed) {
-        // Step backward if shifted, forward otherwise.
-        charybdis_cycle_pointer_default_dpi(/* forward= */ !_has_shift_mod());
-      }
-      break;
-    case POINTER_SNIPING_DPI_FORWARD:
-      if (record->event.pressed) {
-        // Step backward if shifted, forward otherwise.
-        charybdis_cycle_pointer_sniping_dpi(/* forward= */ !_has_shift_mod());
-      }
-      break;
-    case DRAGSCROLL_MODE:
-      charybdis_set_pointer_dragscroll_enabled(record->event.pressed);
-      break;
-  }
-  return true;
-}
-
-#ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
+#if defined(POINTING_DEVICE_ENABLE) && defined(CHARYBDIS_AUTO_SNIPING_ON_LAYER)
 layer_state_t layer_state_set_kb(layer_state_t state) {
   state = layer_state_set_user(state);
   charybdis_set_pointer_sniping_enabled(
       layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
   return state;
 }
-#endif  // CHARYBDIS_AUTO_SNIPING_ON_LAYER
-#endif  // POINTING_DEVICE_ENABLE
+#endif  // POINTING_DEVICE_ENABLE && CHARYBDIS_AUTO_SNIPING_ON_LAYER
+
+#ifdef RGB_MATRIX_ENABLE
+// Forward-declare this helper function since it is defined in rgb_matrix.c.
+void rgb_matrix_update_pwm_buffers(void);
+#endif
+
+void shutdown_user(void) {
+#ifdef RGBLIGHT_ENABLE
+  rgblight_enable_noeeprom();
+  rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+  rgblight_setrgb_red();
+#endif  // RGBLIGHT_ENABLE
+#ifdef RGB_MATRIX_ENABLE
+  rgb_matrix_set_color_all(RGB_RED);
+  rgb_matrix_update_pwm_buffers();
+#endif  // RGB_MATRIX_ENABLE
+}

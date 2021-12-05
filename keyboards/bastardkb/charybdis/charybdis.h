@@ -18,22 +18,51 @@
 
 #pragma once
 
+// clang-format off
 #if defined(KEYBOARD_bastardkb_charybdis_3x5)
-#include "3x5/3x5.h"
+#    include "3x5.h"
 #elif defined(KEYBOARD_bastardkb_charybdis_4x6)
-#include "4x6/4x6.h"
+#    include "4x6.h"
 #else
-#error "Unsuported format"
+#    error "Unsuported format"
 #endif
+// clang-format on
 
-#ifdef POINTING_DEVICE_ENABLE
 #include "quantum.h"
 
-/** Return the current DPI value for the pointer's default mode. */
+#ifdef POINTING_DEVICE_ENABLE
+#    ifndef NO_CHARYBDIS_KEYCODES
+enum charybdis_keycodes {
+#        ifdef VIA_ENABLE
+    POINTER_DEFAULT_DPI_FORWARD = USER00,
+#        else
+    POINTER_DEFAULT_DPI_FORWARD = SAFE_RANGE,
+#        endif  // VIA_ENABLE
+    POINTER_DEFAULT_DPI_REVERSE,
+    POINTER_SNIPING_DPI_FORWARD,
+    POINTER_SNIPING_DPI_REVERSE,
+    SNIPING_MODE,
+    SNIPING_MODE_TOGGLE,
+    DRAGSCROLL_MODE,
+    DRAGSCROLL_MODE_TOGGLE,
+    CHARYBDIS_SAFE_RANGE,
+};
+
+#        define DPI_MOD POINTER_DEFAULT_DPI_FORWARD
+#        define DPI_RMOD POINTER_DEFAULT_DPI_REVERSE
+#        define S_D_MOD POINTER_SNIPING_DPI_FORWARD
+#        define S_D_RMOD POINTER_SNIPING_DPI_REVERSE
+#        define SNIPING SNIPING_MODE
+#        define SNP_TOG SNIPING_MODE_TOGGLE
+#        define DRGSCRL DRAGSCROLL_MODE
+#        define DRG_TOG DRAGSCROLL_MODE_TOGGLE
+#    endif  // !NO_CHARYBDIS_KEYCODES
+
+/** \brief Return the current DPI value for the pointer's default mode. */
 uint32_t charybdis_get_pointer_default_dpi(void);
 
 /**
- * Update the pointer's default DPI to the next or previous step.
+ * \brief Update the pointer's default DPI to the next or previous step.
  *
  * Increases the DPI value if `forward` is `true`, decreases it otherwise.
  * The increment/decrement steps are equal to CHARYBDIS_DEFAULT_DPI_CONFIG_STEP.
@@ -43,18 +72,19 @@ uint32_t charybdis_get_pointer_default_dpi(void);
 void charybdis_cycle_pointer_default_dpi(bool forward);
 
 /**
- * Same as `charybdis_cycle_pointer_default_dpi`, but do not write to EEPROM.
+ * \brief Same as `charybdis_cycle_pointer_default_dpi`, but do not write to
+ * EEPROM.
  *
  * This means that reseting the board will revert the value to the last
  * persisted one.
  */
 void charybdis_cycle_pointer_default_dpi_noeeprom(bool forward);
 
-/** Return the current DPI value for the pointer's sniper-mode. */
+/** \brief Return the current DPI value for the pointer's sniper-mode. */
 uint32_t charybdis_get_pointer_sniping_dpi(void);
 
 /**
- * Update the pointer's sniper-mode DPI to the next or previous step.
+ * \brief Update the pointer's sniper-mode DPI to the next or previous step.
  *
  * Increases the DPI value if `forward` is `true`, decreases it otherwise.
  * The increment/decrement steps are equal to CHARYBDIS_SNIPING_DPI_CONFIG_STEP.
@@ -64,28 +94,33 @@ uint32_t charybdis_get_pointer_sniping_dpi(void);
 void charybdis_cycle_pointer_sniping_dpi(bool forward);
 
 /**
- * Same as `charybdis_cycle_pointer_sniping_dpi`, but do not write to EEPROM.
+ * \brief Same as `charybdis_cycle_pointer_sniping_dpi`, but do not write to
+ * EEPROM.
  *
  * This means that reseting the board will revert the value to the last
  * persisted one.
  */
 void charybdis_cycle_pointer_sniping_dpi_noeeprom(bool forward);
 
-/** Whether sniper-mode is enabled. */
+/** \brief Whether sniper-mode is enabled. */
 bool charybdis_get_pointer_sniping_enabled(void);
 
 /**
- * Enable/disable sniper mode (decrease dpi to slow down the pointer for more
- * accurate movements).
+ * \brief Enable/disable sniper mode.
+ *
+ * When sniper mode is enabled the dpi is reduced to slow down the pointer for
+ * more accurate movements.
  */
 void charybdis_set_pointer_sniping_enabled(bool enable);
 
-/** Whether drag-scroll is enabled. */
+/** \brief Whether drag-scroll is enabled. */
 bool charybdis_get_pointer_dragscroll_enabled(void);
 
 /**
- * Enable/disable drag-scroll mode (pointer movements scroll horizontally and
- * vertically instead of moving the pointer's position).
+ * \brief Enable/disable drag-scroll mode.
+ *
+ * When drag-scroll mode is enabled, horizontal and vertical pointer movements
+ * are translated into horizontal and vertical scroll movements.
  */
 void charybdis_set_pointer_dragscroll_enabled(bool enable);
 #endif  // POINTING_DEVICE_ENABLE

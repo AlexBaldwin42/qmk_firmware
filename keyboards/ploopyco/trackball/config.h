@@ -60,3 +60,5 @@
 
 /* PMW3360 Settings */
 #define PMW3360_CS_PIN             B0
+#define FIRMWARE_LENGTH 4094
+#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"

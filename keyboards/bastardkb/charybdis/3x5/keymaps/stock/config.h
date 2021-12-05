@@ -80,6 +80,7 @@
 
 /** Charybdis-specific features. */
 #define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
+#define MAX_CPI  100
 #ifdef POINTING_DEVICE_ENABLE
 // Enable pointer acceleration, which increases the speed by ~2x for large
 // displacement, while maintaining 1x speed for slow movements.  See also:
