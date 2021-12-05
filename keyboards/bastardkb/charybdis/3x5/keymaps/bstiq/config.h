@@ -1,4 +1,5 @@
 /**
+ * Copyright 2021 Quentin LEBASTARD <qlebastard@gmail.com>
  * Copyright 2021 Charly Delay <charly@codesink.dev> (@0xcharly)
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,8 +23,55 @@
  *
  * See docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
  */
+#ifndef TAPPING_TERM
+#define TAPPING_TERM 160
+#endif  // TAPPING_TERM
 
-#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
+/**
+ * Enable rapid switch from tap to hold.  Disable auto-repeat when pressing key
+ * twice, except for one-shot keys.
+ *
+ * See docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-force-hold
+ */
+#define TAPPING_FORCE_HOLD
+
+/*
+ * Tap-or-Hold decision modes.
+ *
+ * Note that the following flags behave differently when combined (ie. when 2 or
+ * more are enabled).
+ *
+ * See bit.ly/tap-or-hold for a visual explanation of the following tap-or-hold
+ * decision modes.
+ */
+
+/**
+ * Faster tap-hold trigger.
+ *
+ * Without `PERMISSIVE_HOLD`, within `TAPPING_TERM`:
+ *   Mod(a)🠗 e🠗 e🠕 Mod(a)🠕 ➞ ae
+ * With `PERMISSIVE_HOLD`, within `TAPPING_TERM`:
+ *   Mod(a)🠗 e🠗 e🠕 Mod(a)🠕 ➞ Mod+e
+ *
+ * See docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
+ */
+#define PERMISSIVE_HOLD
+
+/**
+ * Prevent normal rollover on alphas from accidentally triggering mods.
+ *
+ * Ignores key presses that interrupt a mod-tap.  Must-have for Home Row mod.
+ *
+ * Without `IGNORE_MOD_TAP_INTERRUPT`, within `TAPPING_TERM`:
+ *   Mod(a)🠗 e🠗 Mod(a)🠕 e🠕 ➞ Mod+e
+ * With `IGNORE_MOD_TAP_INTERRUPT`, within `TAPPING_TERM`:
+ *   Mod(a)🠗 e🠗 Mod(a)🠕 e🠕 ➞ ae
+ *
+ * See docs.qmk.fm/using-qmk/software-features/tap_hold#ignore-mod-tap-interrupt
+ */
+#define IGNORE_MOD_TAP_INTERRUPT
+
+/** Charybdis-specific features. */
 
 #ifdef POINTING_DEVICE_ENABLE
 // Enable pointer acceleration, which increases the speed by ~2x for large
@@ -41,23 +89,13 @@
 // #define CHARYBDIS_DRAGSCROLL_REVERSE_Y
 #endif  // POINTING_DEVICE_ENABLE
 
-
-#ifndef TAPPING_TERM
-#define TAPPING_TERM 150
-#define IGNORE_MOD_TAP_INTERRUPT
-#define TAPPING_FORCE_HOLD
-#endif  // TAPPING_TERM
-
 /** RGB Matrix. */
-#ifdef RGB_MATRIX_ENABLE
-// Disable control of RGB matrix by keycodes (must use firmware implementation
-// to control the feature).
-//#define RGB_MATRIX_DISABLE_KEYCODES
 
+#ifdef RGB_MATRIX_ENABLE
 // Limit maximum brightness to keep power consumption reasonable, and avoid
 // disconnects.
 #undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 64
 
 // Rainbow swirl as startup mode.
 #define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT

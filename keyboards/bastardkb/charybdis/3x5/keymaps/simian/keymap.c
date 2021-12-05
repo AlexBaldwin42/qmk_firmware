@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+-
         CTL_Z,   ALT_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  ALT_DOT,CTL_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+-
-                                 LW_BSPC, RAI_DEL, NUM_TAB,   RAI_ENT,  LW_SPC
+                                 NUM_TAB, LW_BSPC, RAI_DEL,   RAI_ENT,  LW_SPC
                              //`--------------------------'  `--------------------------'
 
   ),
@@ -119,11 +119,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_RAISE] = LAYOUT_charybdis_3x5(
   //,--------------------------------------------.                    ,---------------------------------------------
-      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_GRV, KC_QUOT,
+      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
       KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+
-      KC_ESC,TO(_NUMPAD),_______,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,
+      KC_ESC,TO(_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+
                                           _______, _______,_______,     _______, _______
                                       //`--------------------------'  `--------------------------'
