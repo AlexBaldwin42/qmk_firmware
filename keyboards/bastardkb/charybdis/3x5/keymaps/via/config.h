@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-#define FIRMWARE_LENGTH 4094
-#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
+//#define FIRMWARE_LENGTH 4094
+//#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
 #ifdef VIA_ENABLE
 /* Via/Vial configuration. */
 #    define DYNAMIC_KEYMAP_LAYER_COUNT 7

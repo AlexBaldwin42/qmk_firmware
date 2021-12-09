@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-------------------------------------------.                    ,-----------------------------------------------
      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(_NUMPAD), RGB_TOG,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--
-     RGB_TOG, RGB_M_R, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,
+     RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--
      RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--
