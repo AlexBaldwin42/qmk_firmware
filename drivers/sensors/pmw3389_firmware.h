@@ -18,12 +18,15 @@
 
 #pragma once
 
+#include "progmem.h"
+
 // PID, Inverse PID, SROM version
 const uint8_t firmware_signature[] PROGMEM = {0x42, 0xBD, 0x04};
 
+#define FIRMWARE_LENGTH 4094
 // clang-format off
 // Firmware Blob foor PMW3389
-const uint16_t firmware_length = 4094;
+
 // clang-format off
 const uint8_t firmware_data[] PROGMEM = {    // SROM 0x04
 0x01, 0xe8, 0xba, 0x26, 0x0b, 0xb2, 0xbe, 0xfe, 0x7e, 0x5f, 0x3c, 0xdb, 0x15, 0xa8, 0xb3,
