@@ -54,5 +54,14 @@
 #endif  // RGB_MATRIX_ENABLE
 
 #define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
+//#define PMW3360_CPI 1600
+#define PMW3360_CPI 1
+#    define MAX_CPI 0x9F
 #undef DIODE_DIRECTION
 #define DIODE_DIRECTION COL2ROW
+#undef POINTING_DEVICE_INVERT_X
+#define POINTING_DEVICE_INVERT_Y
+
+
+
+
