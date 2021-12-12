@@ -34,51 +34,15 @@
 }
 
 void keyboard_post_init_user(void) {
+    //charybdis_set_pointer_sniping_enabled(true);
+    //pointing_device_set_cpi(12800);
   // Customise these values to desired behaviour
-  //debug_enable=true;
+  debug_enable=true;
   //debug_matrix=true;
   //debug_keyboard=true;
   //debug_mouse=true;
- //print("keyboard_post_init_user");
-}
-
-//#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 400
-#        undef CHARYBDIS_MINIMUM_DEFAULT_DPI
-#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 50
-
-
-//#        define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 200
-#        undef CHARYBDIS_DEFAULT_DPI_CONFIG_STEP
-#        define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 25
-
-
-//#        define CHARYBDIS_MINIMUM_SNIPING_DPI 200
-#        undef CHARYBDIS_MINIMUM_SNIPING_DPI
-#        define CHARYBDIS_MINIMUM_SNIPING_DPI 50
-
-
-//#        define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 100
-#        undef CHARYBDIS_SNIPING_DPI_CONFIG_STEP
-#        define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 12
-
-// Fixed DPI for drag-scroll.
-#        undef CHARYBDIS_DRAGSCROLL_DPI
-#        define CHARYBDIS_DRAGSCROLL_DPI 10
-
-#       undef CHARYBDIS_DRAGSCROLL_BUFFER_SIZE
-#        define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE 6
-
-#        undef CHARYBDIS_POINTER_ACCELERATION_FACTOR
-
-#        define CHARYBDIS_POINTER_ACCELERATION_FACTOR 24
-
-void keyboard_post_init_user(void) {
-  // Customise these values to desired behaviour
-  //debug_enable=true;
-  //debug_matrix=true;
-  //debug_keyboard=true;
-  //debug_mouse=true;
-  pointing_device_set_cpi(10);
+  //pointing_device_set_cpi(10);
+  print("hello");
 }
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
@@ -95,13 +59,13 @@ enum charybdis_keymap_layers {
 };
 
 // Automatically enable sniping-mode on the pointer layer.
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_POINTER
+//#define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 static uint16_t auto_pointer_layer_timer = 0;
 
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 750
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
 
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
@@ -167,9 +131,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 /** \brief Mouse emulation and pointer functions. */
 #define LAYOUT_LAYER_POINTER                                                                  \
-    XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
-    _______, DRGSCRL, SNIPING, EEP_RST,   RESET,   RESET, EEP_RST, SNIPING, DRGSCRL, _______, \
+    _______, DRG_TOG, SNIPING, EEP_RST,   RESET,   RESET, EEP_RST, SNIPING, DRGSCRL, _______, \
                       KC_BTN2, KC_BTN1, KC_BTN3, KC_BTN3, KC_BTN1
 
 /**
@@ -285,7 +249,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         }
         auto_pointer_layer_timer = timer_read();
     }
-     pointing_device_set_cpi(10);
+
     return mouse_report;
 }
 
@@ -297,7 +261,7 @@ void matrix_scan_kb(void) {
         rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
 #        endif  // RGB_MATRIX_ENABLE
     }
-    pointing_device_set_cpi(10);
+
     matrix_scan_user();
 }
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE

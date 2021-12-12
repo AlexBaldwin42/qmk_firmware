@@ -232,7 +232,7 @@ bool pmw3360_check_signature(void) {
 report_pmw3360_t pmw3360_read_burst(void) {
     if (!_inBurst) {
 #ifdef CONSOLE_ENABLE
-        dprintf("burst on");
+        //dprintf("burst on");
 #endif
         spi_write_adv(REG_Motion_Burst, 0x00);
         _inBurst = true;
