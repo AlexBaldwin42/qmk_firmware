@@ -73,7 +73,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
 
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 8
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 2
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif      // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
@@ -82,7 +82,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define TAB_FUN LT(LAYER_FUNCTION, KC_TAB)
 #define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
+//#define _L_PTR(KC) LT(LAYER_POINTER, KC)
 #define _L_PTR(KC) LT(LAYER_POINTER, KC)
+
 
 // Left hand
 // Base
@@ -127,6 +129,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ADJ_KCQ LT(LAYER_ADJUST, KC_Q)
 #define ALT_DOT MT(MOD_LALT, KC_DOT)
 #define CTL_SLSH MT(MOD_RCTL, KC_SLSH)
+#define ADJ_KCSLASH LT(LAYER_ADJUST, KC_SLSH)
+
 
 // Thumb Cluster
 #define RAI_ENT LT(LAYER_RAISE, KC_ENT)
@@ -159,7 +163,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_BASE                                                                                             \
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
         KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                         KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
-        KC_Z,   KC_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,KC_SLSH, \
+        KC_Z,   KC_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
                                  NUM_TAB, LW_BSPC, RAI_DEL,   RAI_ENT,  LW_SPC
 /** Convenience row shorthands. */
 #define _______________DEAD_HALF_ROW_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
@@ -179,8 +183,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_ADJUST                                                                                                 \
      XXXXXXX, KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG,       \
      RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,          \
-     RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,         \
-                                _______, _______, _______,    KC_MPLY, KC_VOLD
+     RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,         \
+                                _______, _______, _______,            KC_VOLD, KC_VOLU
 #define LAYOUT_LAYER_NUMPAD                                                                                                 \
       KC_NO,     KC_NO,   KC_NO,   KC_NO, TG(LAYER_NUMPAD), 				   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR,\
       KC_NO,   KC_LEFT,  SFT_UP, KC_DOWN, KC_RIGHT, 					KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,\
@@ -189,9 +193,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 /** \brief Mouse emulation and pointer functions. */
 #define LAYOUT_LAYER_POINTER                                                                  \
-    XXXXXXX, XXXXXXX, XXXXXXX, DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, \
+    XXXXXXX, XXXXXXX, TO(LAYER_POINTER), DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
-    DRG_TOG, SNIPING, _______, DRGSCRL,   EEP_RST,   RESET, EEP_RST, _______, SNIPING, DRGSCRL, \
+    DRG_TOG, SNIPING, TG(LAYER_POINTER), DRGSCRL,   EEP_RST,   RESET, EEP_RST, _______, SNIPING, DRGSCRL, \
                       KC_BTN2, KC_BTN1, KC_BTN3, KC_BTN2, KC_BTN1
 
 
