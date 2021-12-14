@@ -69,11 +69,11 @@ enum charybdis_keymap_layers {
 static uint16_t auto_pointer_layer_timer = 0;
 
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 1000
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS 750
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
 
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 2
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 6
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif      // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
@@ -180,23 +180,23 @@ static uint16_t auto_pointer_layer_timer = 0;
       KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,        \
       KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
                                           _______, _______,_______,     _______, _______
-#define LAYOUT_LAYER_ADJUST                                                                                                 \
-     XXXXXXX, KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG,       \
-     RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,          \
-     RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,         \
+#define LAYOUT_LAYER_ADJUST                                                                                                                 \
+     XXXXXXX, TO(LAYER_POINTER), KC_CAPS, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG,       \
+     RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
+     RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX,                       \
                                 _______, _______, _______,            KC_VOLD, KC_VOLU
 #define LAYOUT_LAYER_NUMPAD                                                                                                 \
-      KC_NO,     KC_NO,   KC_NO,   KC_NO, TG(LAYER_NUMPAD), 				   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR,\
+      TG(LAYER_NUMPAD),     KC_NO,   KC_NO,   KC_NO, TG(LAYER_NUMPAD), 				   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR,\
       KC_NO,   KC_LEFT,  SFT_UP, KC_DOWN, KC_RIGHT, 					KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,\
 	  KC_LSFT,  KC_F10,   KC_F11,  KC_F12, KC_F5, 					   KC_PLUS,   KC_P1,   KC_P2,   KC_P3, KC_SLSH,\
 									       _______, _______, _______,     KC_ENT,   KC_P0
 
 /** \brief Mouse emulation and pointer functions. */
-#define LAYOUT_LAYER_POINTER                                                                  \
-    XXXXXXX, XXXXXXX, TO(LAYER_POINTER), DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, \
-    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
-    DRG_TOG, SNIPING, TG(LAYER_POINTER), DRGSCRL,   EEP_RST,   RESET, EEP_RST, _______, SNIPING, DRGSCRL, \
-                      KC_BTN2, KC_BTN1, KC_BTN3, KC_BTN2, KC_BTN1
+#define LAYOUT_LAYER_POINTER                                                                                                                                        \
+   TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
+    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
+    DRG_TOG, SNIPING, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+                      KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC
 
 
 
@@ -348,7 +348,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+
 #ifdef POINTING_DEVICE_ENABLE
+#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+#    ifdef RGB_MATRIX_ENABLE
+layer_state_t layer_state_set_user(layer_state_t state) {
+
+
+    switch (get_highest_layer(state)) {
+        case LAYER_POINTER:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+            break;
+        case LAYER_NUMPAD:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+            break;
+        default: // for any other layers, or the default layer
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+            break;
+    }
+  return state;
+}
+#    endif // RGB_MATRIX_ENABLE
+#    endif //CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {

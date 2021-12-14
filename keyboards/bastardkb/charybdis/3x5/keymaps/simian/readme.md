@@ -9,3 +9,7 @@ Manuform](../../../../../handwired/dactyl_manuform) default keymap.
 This layout supports RGB matrix. However, due to space constraints on the MCU,
 only a limited number of effect can be enabled at once. Look at the `config.h`
 file and enable your favorite effect.
+
+
+This is for a handwired Charybdis keyboard. The main difference is the coulumns are aligned so the inner thumb key caps are aligned with the inner column and move out from there.
+RGB is included and 
