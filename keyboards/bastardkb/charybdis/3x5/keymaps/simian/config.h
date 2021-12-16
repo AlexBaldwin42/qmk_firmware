@@ -24,9 +24,9 @@
  *
  * See docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
  */
+#    define TAPPING_FORCE_HOLD
 #    define TAPPING_TERM 140
 #    define IGNORE_MOD_TAP_INTERRUPT
-#    define TAPPING_FORCE_HOLD
 #endif  // TAPPING_TERM
 
 /* RGB Matrix. */
@@ -100,7 +100,8 @@
 #        define CHARYBDIS_DRAGSCROLL_BUFFER_SIZE 6
 #    endif  // !CHARYBDIS_DRAGSCROLL_BUFFER_SIZE
 
+
 #    ifndef CHARYBDIS_POINTER_ACCELERATION_FACTOR
-#        define CHARYBDIS_POINTER_ACCELERATION_FACTOR 36
+#        define CHARYBDIS_POINTER_ACCELERATION_FACTOR 50
 #    endif  // !CHARYBDIS_POINTER_ACCELERATION_FACTOR
 #endif
