@@ -170,23 +170,30 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ______________HOME_ROW_GACS_L______________ KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX
 #define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI
 
+// Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,     KC_8,    KC_9,    KC_0,            \
      GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
      CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                        KC_F5,   KC_F7,    KC_8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,     _______,_______
+
+// Raise
 #define LAYOUT_LAYER_RAISE                                                                                                  \
       KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,          \
       KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,        \
       KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
                                           _______, _______,_______,     _______, _______
+
+// Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
      XXXXXXX, TO(LAYER_POINTER), KC_CAPS, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG,       \
      RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
      RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX,                       \
                                 _______, _______, _______,            KC_VOLD, KC_VOLU
+
+// Numpad
 #define LAYOUT_LAYER_NUMPAD                                                                                                 \
-      TG(LAYER_NUMPAD),     KC_NO,   KC_NO,   KC_NO, TG(LAYER_NUMPAD), 				   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR,\
+      TG(LAYER_NUMPAD),     KC_NO,   KC_NO,   KC_NO, TG(LAYER_NUMPAD),   KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR,\
       KC_NO,   KC_LEFT,  SFT_UP, KC_DOWN, KC_RIGHT, 					KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,\
 	  KC_LSFT,  KC_F10,   KC_F11,  KC_F12, KC_F5, 					   KC_PLUS,   KC_P1,   KC_P2,   KC_P3, KC_SLSH,\
 									       _______, _______, _______,     KC_ENT,   KC_P0
