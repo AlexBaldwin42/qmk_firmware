@@ -33,17 +33,17 @@
   {   KC_NO, KC_NO,   KC_NO, k72, k70 },                \
 }
 
-void keyboard_post_init_user(void) {
-    //charybdis_set_pointer_sniping_enabled(true);
-    //pointing_device_set_cpi(12800);
-  // Customise these values to desired behaviour
-  debug_enable=true;
-  //debug_matrix=true;
-  //debug_keyboard=true;
-  //debug_mouse=true;
-  //pointing_device_set_cpi(10);
-  print("hello");
-}
+// void keyboard_post_init_user(void) {
+//     //charybdis_set_pointer_sniping_enabled(true);
+//     //pointing_device_set_cpi(12800);
+//   // Customise these values to desired behaviour
+//   debug_enable=true;
+//   //debug_matrix=true;
+//   //debug_keyboard=true;
+//   //debug_mouse=true;
+//   //pointing_device_set_cpi(10);
+//   print("hello");
+// }
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
 #endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -334,7 +334,7 @@ static uint16_t auto_pointer_layer_timer = 0;
       __VA_ARGS__
 #define POINTER_MOD(...) _POINTER_MOD(__VA_ARGS__)
 
-#define LAYOUT_wrapper(...) LAYOUT_charybdis_3x5(__VA_ARGS__)
+#define LAYOUT_wrapper(...) LAYOUT_charybdis_4x6(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_wrapper(

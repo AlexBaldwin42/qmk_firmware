@@ -54,3 +54,6 @@
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define RGB_MATRIX_KEYPRESSES
 #endif
+
+
+#define PMW3360_CS_PIN                       B0

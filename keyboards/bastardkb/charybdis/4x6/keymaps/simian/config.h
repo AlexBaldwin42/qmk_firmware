@@ -34,12 +34,12 @@
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
 // to control the feature).
-#    define RGB_MATRIX_DISABLE_KEYCODES
+//#    define RGB_MATRIX_DISABLE_KEYCODES
 
 // Limit maximum brightness to keep power consumption reasonable, and avoid
 // disconnects.
 #    undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 64
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100
 
 // Rainbow swirl as startup mode.
 #    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
@@ -68,7 +68,12 @@
 //#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 64000 // 200 400
 
 #ifdef POINTING_DEVICE_ENABLE
-#define PMW3360_CS_PIN B0
+#define PMW3360_FIRMWARE_H "pmw3389_firmware.h"
+#    define PMW3360_CPI 6400
+#undef ROTATIONAL_TRANSFORM_ANGLE
+#define ROTATIONAL_TRANSFORM_ANGLE 90
+
+//#define PMW3360_CS_PIN B0
 #undef POINTING_DEVICE_INVERT_X
 #define POINTING_DEVICE_INVERT_Y
 #define CHARYBDIS_DRAGSCROLL_REVERSE_Y
@@ -78,15 +83,15 @@
 //#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 //#    ifndef CHARYBDIS_MINIMUM_DEFAULT_DPI
-#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 400
+#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 1
 //#    endif  // CHARYBDIS_MINIMUM_DEFAULT_DPI
 
 //#    ifndef CHARYBDIS_DEFAULT_DPI_CONFIG_STEP
-#        define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 50
+#        define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 5
 //#    endif  // CHARYBDIS_DEFAULT_DPI_CONFIG_STEP
 
 #    ifndef CHARYBDIS_MINIMUM_SNIPING_DPI
-#        define CHARYBDIS_MINIMUM_SNIPING_DPI 100
+#        define CHARYBDIS_MINIMUM_SNIPING_DPI 2
 #    endif  // CHARYBDIS_MINIMUM_SNIPER_MODE_DPI
 #    ifndef CHARYBDIS_SNIPING_DPI_CONFIG_STEP
 #        define CHARYBDIS_SNIPING_DPI_CONFIG_STEP 50
@@ -94,7 +99,7 @@
 
 // Fixed DPI for drag-scroll.
 #    ifndef CHARYBDIS_DRAGSCROLL_DPI
-#        define CHARYBDIS_DRAGSCROLL_DPI 100
+#        define CHARYBDIS_DRAGSCROLL_DPI 20
 #    endif  // CHARYBDIS_DRAGSCROLL_DPI
 
 #    ifndef CHARYBDIS_DRAGSCROLL_BUFFER_SIZE
