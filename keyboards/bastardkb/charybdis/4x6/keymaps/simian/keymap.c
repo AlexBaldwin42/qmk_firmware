@@ -346,6 +346,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    mouse_report.v = mouse_report.v/2;
+    mouse_report.h = mouse_report.h/2;
+
+    mouse_report.x = mouse_report.x/4;
+    mouse_report.y = mouse_report.y/4;
+    return mouse_report;
+}
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
