@@ -180,7 +180,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Raise
 #define LAYOUT_LAYER_RAISE                                                                                                  \
       KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,          \
-      KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,        \
+      KC_QUOT,KC_DQT,   KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,        \
       KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
                                           _______, _______,_______,     _______, _______
 
@@ -370,6 +370,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case LAYER_NUMPAD:
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+            break;
+        case LAYER_RAISE:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
+            break;
+        case LAYER_LOWER:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
             break;
         default: // for any other layers, or the default layer
             rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);

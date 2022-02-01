@@ -122,12 +122,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define RSFT_TIL MT(MOD_RSFT, KC_TILD)
 #define LAYOUT_LAYER_BASE                                                                                        \
-_______,_______, _______,_______,_______,_______,                  _______, _______,_______,_______, _______,_______,\
-_______,ADJ_KCQ,    KC_W,    KC_E,    KC_R,    KC_T,                    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,_______, \
+_______,  _______, _______,_______,_______,_______,                  _______, _______,_______,_______, _______,_______,\
+KC_F5,ADJ_KCQ,    KC_W,    KC_E,    KC_R,    KC_T,                    KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,KC_ESC, \
 _______,KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                         KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN, _______, \
 _______,KC_Z,   KC_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH,_______, \
-                                 NUM_TAB, LW_BSPC, RAI_DEL,   RAI_ENT,  LW_SPC,\
-                                                KC_BTN1,DRGSCRL, KC_BTN2\
+                                 NUM_TAB, LW_BSPC,RAI_DEL,               RAI_ENT,   LW_SPC,\
+                                            KC_BTN1, DRGSCRL,    KC_BTN2 \
 /** Convenience row shorthands. */
 #define _______________DEAD_HALF_ROW_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #define ______________HOME_ROW_GACS_L______________ XXXXXXX, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX
@@ -146,7 +146,7 @@ _______,CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                        KC_F5
 #define LAYOUT_LAYER_RAISE         \
 _______,_______, _______,_______,_______,_______,                  _______, _______,_______,_______, _______,_______,\
 _______,KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,      _______,    \
-_______,KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,     _______,   \
+_______,KC_QUOT,KC_DQT, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,     _______,   \
 _______,KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE, _______,        \
                                           _______, _______,_______,     _______, _______, \
                                       _______,_______,     _______\
@@ -171,7 +171,7 @@ _______,KC_LSFT,  KC_F10,   KC_F11,  KC_F12, KC_F5, 					   KC_PLUS,   KC_P1,   
 
 /** \brief Mouse emulation and pointer functions. */
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-_______,_______, _______,_______,_______,_______,                  _______, _______,_______,_______, _______,_______,\
+_______,_______, _______,_______,_______,EEP_RST,                  EEP_RST, _______,_______,_______, _______,_______,\
  _______,  TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER),_______, \
      ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                      \
  _______,   DRG_TOG, SNIPING, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,_______,                                                                     \
@@ -293,7 +293,7 @@ _______,_______, _______,_______,_______,_______,                  _______, ____
              R15,         R16,         R17,         R18,         R19,       R20,\
              L20,  LGUI_T(L21),  LALT_T(L22), LSFT_T(L23), LCTL_T(L24),     L25,\
              R25,  RCTL_T(R26), RSFT_T(R27), LALT_T(R28), RGUI_T(R29),      R29,\
-      LCTL_T(L30),        L31,         L32,         L33,         L34,       L35,\
+             L30,  LCTL_T(L31),        L32,         L33,         L34,       L35,\
             R35,          R36,         R37,         R38,         R39,       R40, \
       __VA_ARGS__
 #define HOME_ROW_MOD_GACS(...) _HOME_ROW_MOD_GACS(__VA_ARGS__)
@@ -342,36 +342,137 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   [LAYER_MEDIA] = LAYOUT_wrapper(LAYOUT_LAYER_MEDIA),
 //   [LAYER_NUMERAL] = LAYOUT_wrapper(LAYOUT_LAYER_NUMERAL),
 //   [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
-//   [LAYER_SYMBOLS] = LAYOUT_wrapper(LAYOUT_LAYER_SYMBOLS),
+//   [LAYER_SYMBOLS] = LAYOUT_wrapper(LAYOUT_LAYER_SYMBOLS),z
 };
 // clang-format on
 
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    mouse_report.v = mouse_report.v/2;
-    mouse_report.h = mouse_report.h/2;
+// report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+//     mouse_report.v = mouse_report.v/2;
+//     mouse_report.h = mouse_report.h/2;
 
-    mouse_report.x = mouse_report.x/4;
-    mouse_report.y = mouse_report.y/4;
-    return mouse_report;
-}
+//     mouse_report.x = mouse_report.x/4;
+//     mouse_report.y = mouse_report.y/4;
+//     return mouse_report;
+// }
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef RGB_MATRIX_ENABLE
+
+// void rgb_matrix_indicators_user (void){
+//     switch(get_highest_layer(layer_state|default_layer_state)) {
+//             case LAYER_POINTER:
+
+//             rgb_matrix_set_color_all(RGB_GREEN);
+//             break;
+//         case LAYER_NUMPAD:
+//             rgb_matrix_set_color_all(RGB_BLUE);
+
+//             break;
+//         case LAYER_RAISE:
+//             rgb_matrix_set_color_all(RGB_MAGENTA);
+
+//             break;
+//         case LAYER_LOWER:
+//             rgb_matrix_set_color_all(RGB_PURPLE);
+
+//             break;
+//         default: // for any other layers, or the default layer
+//             break;
+//     }
+// }
+
+// void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+//     for (uint8_t i = led_min -10; i <= led_max+30; i++) {
+//         switch(get_highest_layer(layer_state|default_layer_state)) {
+//              case LAYER_POINTER:
+
+//                 //mode_noeeprom(RGB_MATRIX_NONE);
+//                 // rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+//                 rgb_matrix_set_color(i, RGB_GREEN);
+
+//                 break;
+//             case LAYER_NUMPAD:
+//                 //mode = rgb_matrix_get_mode();
+//                 //rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+//                 // rgb_matrix_sethsv_noeeprom(HSV_BLUE);
+//                 rgb_matrix_set_color(i,RGB_BLUE);
+
+//                 break;
+//             case LAYER_RAISE:
+//     //            mode = rgb_matrix_get_mode();
+//                 ///rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+//                 //rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
+//                 rgb_matrix_set_color(i,RGB_MAGENTA);
+
+//                 break;
+//             case LAYER_LOWER:
+//     //          mode = rgb_matrix_get_mode();
+//                 //rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+//                 // rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
+//                 rgb_matrix_set_color(i,RGB_PURPLE);
+
+//                 break;
+//             default: // for any other layers, or the default layer
+//         // //        extern void eeconfig_read_rgb_matrix(void);
+//         //         rgb_matrix_mode_noeeprom(rgb_matrix_config.mode);
+//         //         //mode = rgb_matrix_get_mode();
+//         //         //rgb_matrix_mode_noeeprom(mode);
+//         //         rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+//                 break;
+//         }
+//     }
+// }
+ //static int mode;
+
 layer_state_t layer_state_set_user(layer_state_t state) {
+//  if(mode != RGB_MATRIX_NONE){
+//                 mode = rgb_matrix_get_mode();
+//              }
 
 
     switch (get_highest_layer(state)) {
         case LAYER_POINTER:
+            //  if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
+            //     mode = rgb_matrix_get_mode();
+            //  }
+
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
             break;
         case LAYER_NUMPAD:
+            // if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
+
+            //     mode = rgb_matrix_get_mode();
+            //  }
+            //mode = rgb_matrix_get_mode();
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_BLUE);
             break;
+        case LAYER_RAISE:
+//            mode = rgb_matrix_get_mode();
+            // if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
+            //     mode = rgb_matrix_get_mode();
+            //  }
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
+            break;
+        case LAYER_LOWER:
+            // if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
+            //     mode = rgb_matrix_get_mode();
+            //  }
+  //          mode = rgb_matrix_get_mode();
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
+            break;
         default: // for any other layers, or the default layer
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+    //        extern void eeconfig_read_rgb_matrix(void);
+            //rgb_matrix_mode_noeeprom(rgb_matrix_config.mode);
+            //mode = rgb_matrix_get_mode();
+            //rgb_matrix_mode_noeeprom(mode);
+             rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+            //rgb_matrix_mode_noeeprom(mode);
+
             break;
     }
   return state;
