@@ -16,6 +16,12 @@
  */
 #pragma once
 
+// Pin switchin to B6
+#undef SERIAL_USART_TX_PIN
+#define SERIAL_USART_TX_PIN B6
+// #define SERIAL_USART_DRIVER      SD1
+
+
 #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
@@ -39,7 +45,7 @@
 // Limit maximum brightness to keep power consumption reasonable, and avoid
 // disconnects.
 #    undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 40
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 69
 
 // Rainbow swirl as startup mode.
 #    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
@@ -96,7 +102,7 @@
 //#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 //#    ifndef CHARYBDIS_MINIMUM_DEFAULT_DPI
-#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 300
+#        define CHARYBDIS_MINIMUM_DEFAULT_DPI 400
 //#    endif  // CHARYBDIS_MINIMUM_DEFAULT_DPI
 
 //#    ifndef CHARYBDIS_DEFAULT_DPI_CONFIG_STEP
