@@ -15,18 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-#define MASTER_RIGHT
 
-//Size reduction
-#ifndef NO_DEBUG
-#define NO_DEBUG
-#endif // !NO_DEBUG
-#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
-#define NO_PRINT
-#endif // !NO_PRINT
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-#ifndef TAPPING_TERM
+#define DEBUG_MATRIX_SCAN_RATE
+
+#define POINTER_LAYER_TIMEOUT_MS 3000
+ #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
  *
@@ -79,11 +72,6 @@
 #undef DIODE_DIRECTION
 #define DIODE_DIRECTION COL2ROW
 
-
-
-//#define CHARYBDIS_MINIMUM_DEFAULT_DPI 10 //  400 3200 10
-//#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 64000 // 200 400
-
 #ifdef POINTING_DEVICE_ENABLE
 #define PMW3360_CS_PIN B0
 #undef POINTING_DEVICE_INVERT_X
@@ -92,7 +80,7 @@
 
 #    define CHARYBDIS_POINTER_ACCELERATION_ENABLE
 
-#    define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+//#    define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 //#    ifndef CHARYBDIS_MINIMUM_DEFAULT_DPI
 #        define CHARYBDIS_MINIMUM_DEFAULT_DPI 400

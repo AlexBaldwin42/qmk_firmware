@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "print.h"
 #undef LAYOUT_charybdis_3x5
 #define LAYOUT_charybdis_3x5(                           \
   k00, k01, k02, k03, k04,     k44, k43, k42, k41, k40, \
@@ -152,8 +153,6 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define RSFT_TIL MT(MOD_RSFT, KC_TILD)
 
 
-
-
 #define LAYOUT_LAYER_BASE                                                                                             \
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
         KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                         KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
@@ -196,7 +195,7 @@ static uint16_t auto_pointer_layer_timer = 0;
    TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
     DRG_TOG, _______, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
-                      KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC
+                      KC_BTN2, KC_BTN1, KC_BTN3, RAI_ENT, LW_SPC
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
     L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,                  \
@@ -257,12 +256,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 
+
 #ifdef POINTING_DEVICE_ENABLE
-#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+//#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef RGB_MATRIX_ENABLE
 layer_state_t layer_state_set_user(layer_state_t state) {
 
-
+dprint("layterstatset");
     switch (get_highest_layer(state)) {
         case LAYER_POINTER:
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
@@ -287,36 +287,35 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   return state;
 }
 #    endif // RGB_MATRIX_ENABLE
-#    endif //CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-#    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-//static bool hold_pointer_layer;
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
-        if (auto_pointer_layer_timer == 0) {
-            layer_on(LAYER_POINTER);
-#        ifdef RGB_MATRIX_ENABLE
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-#        endif  // RGB_MATRIX_ENABLE
-        }
-        auto_pointer_layer_timer = timer_read();
-    }
+//#    endif //CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+// #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+// // report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+// //     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
+// //         if (auto_pointer_layer_timer == 0) {
+// //             layer_on(LAYER_POINTER);
+// // #        ifdef RGB_MATRIX_ENABLE
+// //             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+// //             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+// // #        endif  // RGB_MATRIX_ENABLE
+// //         }
+// //         auto_pointer_layer_timer = timer_read();
+// //     }
 
-    return mouse_report;
-}
+// //     return mouse_report;
+// // }
 
-void matrix_scan_kb(void) {
-    if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
-        auto_pointer_layer_timer = 0;
-        layer_off(LAYER_POINTER);
-#        ifdef RGB_MATRIX_ENABLE
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
-#        endif  // RGB_MATRIX_ENABLE
-    }
+// void matrix_scan_kb(void) {
+//     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
+//         auto_pointer_layer_timer = 0;
+//         layer_off(LAYER_POINTER);
+// #        ifdef RGB_MATRIX_ENABLE
+//         rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+// #        endif  // RGB_MATRIX_ENABLE
+//     }
 
-    matrix_scan_user();
-}
-#    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+//     matrix_scan_user();
+// }
+// #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_kb(layer_state_t state) {
@@ -344,3 +343,137 @@ void shutdown_user(void) {
 #endif  // RGB_MATRIX_ENABLE
 }
 
+#ifdef POINTING_DEVICE_ENABLE
+static uint16_t mouse_timer           = 0;
+static uint16_t mouse_debounce_timer  = 0;
+static uint8_t  mouse_keycode_tracker = 0;
+bool            tap_toggling = false, enable_acceleration = false;
+
+__attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
+    return mouse_report;
+    dprint("keymap poinitng devic\n");
+
+}
+
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    #ifdef CONSOLE_ENABLE
+
+#endif
+    int8_t x = mouse_report.x, y = mouse_report.y;
+    mouse_report.x = 0;
+    mouse_report.y = 0;
+
+    if (x != 0 && y != 0) {
+        mouse_timer = timer_read();
+        if (timer_elapsed(mouse_debounce_timer) > TAPPING_TERM) {
+            if (enable_acceleration) {
+                x = (x > 0 ? x * x / 16 + x : -x * x / 16 + x);
+                y = (y > 0 ? y * y / 16 + y : -y * y / 16 + y);
+            }
+            mouse_report.x = x;
+            mouse_report.y = y;
+            if (!layer_state_is(LAYER_POINTER)) {
+                layer_on(LAYER_POINTER);
+                 dprint("LayerOn \n" );
+            }
+        }
+    } else if (timer_elapsed(mouse_timer) > POINTER_LAYER_TIMEOUT_MS && layer_state_is(LAYER_POINTER) && !mouse_keycode_tracker && !tap_toggling) {
+                 dprint("Layeroff1 \n" );
+
+        layer_off(LAYER_POINTER);
+    } else if (tap_toggling) {
+        if (!layer_state_is(LAYER_POINTER)) {
+            layer_on(LAYER_POINTER);
+                 dprint("Layeron2 \n" );
+
+        }
+    }
+    # ifdef RGB_MATRIX_ENABLE
+    if(layer_state_is(LAYER_POINTER)){
+        dprint("green2 \n" );
+            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+
+    }
+#        endif  // RGB_MATRIX_ENABLE
+    return pointing_device_task_keymap(mouse_report);
+}
+
+// bool process_record_user(uint16_t keycode, keyrecord_t* record){
+//     dprint("process RecordUse");
+
+//      process_record_pointing(keycode,  record);
+//     return true;
+// }
+
+// bool process_record_pointing(uint16_t keycode, keyrecord_t* record) {
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+dprint("procesrcordpoints" );
+    switch (keycode) {
+        case  LT(LAYER_RAISE, KC_ENT):
+        case  LT(LAYER_LOWER, KC_SPC):
+        dprint("ltlowe" );
+             layer_off(LAYER_POINTER);
+             break;
+        case TT(LAYER_POINTER):
+            if (record->event.pressed) {
+                mouse_keycode_tracker++;
+            } else {
+#if TAPPING_TOGGLE != 0
+                if (record->tap.count == TAPPING_TOGGLE) {
+                    tap_toggling ^= 1;
+#    if TAPPING_TOGGLE == 1
+                    if (!tap_toggling) mouse_keycode_tracker -= record->tap.count + 1;
+#    else
+                    if (!tap_toggling) mouse_keycode_tracker -= record->tap.count;
+#    endif
+                } else {
+                    mouse_keycode_tracker--;
+                }
+#endif
+            }
+            mouse_timer = timer_read();
+            break;
+        case TG(LAYER_POINTER):
+            if (record->event.pressed) {
+                tap_toggling ^= 1;
+            }
+            break;
+        case MO(LAYER_POINTER):
+
+#if (defined(KEYBOARD_bastardkb_charybdis) || defined(KEYBOARD_handwired_tractyl_manuform)) && !defined(NO_CHARYBDIS_KEYCODES)
+        case SAFE_RANGE ... (CHARYBDIS_SAFE_RANGE-1):
+#endif
+        case KC_MS_UP ... KC_MS_WH_RIGHT:
+            record->event.pressed ? mouse_keycode_tracker++ : mouse_keycode_tracker--;
+            mouse_timer = timer_read();
+            break;
+        // case KC_ACCEL:
+        //     enable_acceleration = record->event.pressed;
+        //     record->event.pressed ? mouse_keycode_tracker++ : mouse_keycode_tracker--;
+        //     mouse_timer = timer_read();
+        //     break;
+        case QK_ONE_SHOT_MOD ... QK_ONE_SHOT_MOD_MAX:
+            break;
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+            if (record->event.pressed || !record->tap.count) {
+                break;
+            }
+        default:
+            if (IS_NOEVENT(record->event)) break;
+            if ((keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX) && (((keycode >> 0x8) & 0xF) == LAYER_POINTER)) {
+                record->event.pressed ? mouse_keycode_tracker++ : mouse_keycode_tracker--;
+                mouse_timer = timer_read();
+                break;
+            }
+            if (layer_state_is(LAYER_POINTER) && !mouse_keycode_tracker && !tap_toggling) {
+                layer_off(LAYER_POINTER);
+            }
+            mouse_keycode_tracker = 0;
+            mouse_debounce_timer  = timer_read();
+            break;
+    }
+    return true;
+}
+#endif      // POINTING_DEVICE_ENABLE
