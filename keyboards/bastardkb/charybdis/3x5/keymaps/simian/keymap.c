@@ -178,7 +178,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
    TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    _______, DRG_TOG, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+    _______,_______, _______, DRGSCRL,   DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
                       KC_BTN2, KC_BTN1, KC_BTN3, RAI_ENT, LW_SPC
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
