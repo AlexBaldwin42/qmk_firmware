@@ -345,54 +345,54 @@ void shutdown_user(void) {
 }
 
 
-bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    if (!process_record_user(keycode, record)) {
-        debug_charybdis_config_to_console(&g_charybdis_config);
-        return false;
-    }
-#    ifdef POINTING_DEVICE_ENABLE
-#        ifndef NO_CHARYBDIS_KEYCODES
-    switch (keycode) {
-        case POINTER_DEFAULT_DPI_FORWARD:
-            if (record->event.pressed) {
-                // Step backward if shifted, forward otherwise.
-                charybdis_cycle_pointer_default_dpi(/* forward= */ !has_shift_mod());
-            }
-            break;
-        case POINTER_DEFAULT_DPI_REVERSE:
-            if (record->event.pressed) {
-                // Step forward if shifted, backward otherwise.
-                charybdis_cycle_pointer_default_dpi(/* forward= */ has_shift_mod());
-            }
-            break;
-        case POINTER_SNIPING_DPI_FORWARD:
-            if (record->event.pressed) {
-                // Step backward if shifted, forward otherwise.
-                charybdis_cycle_pointer_sniping_dpi(/* forward= */ !has_shift_mod());
-            }
-            break;
-        case POINTER_SNIPING_DPI_REVERSE:
-            if (record->event.pressed) {
-                // Step forward if shifted, backward otherwise.
-                charybdis_cycle_pointer_sniping_dpi(/* forward= */ has_shift_mod());
-            }
-            break;
-        case SNIPING_MODE:
-            charybdis_set_pointer_sniping_enabled(record->event.pressed);
-            break;
-        case SNIPING_MODE_TOGGLE:
-            if (record->event.pressed) {
-                charybdis_set_pointer_sniping_enabled(!charybdis_get_pointer_sniping_enabled());
-            }
-            break;
-        case DRAGSCROLL_MODE:
-            charybdis_set_pointer_dragscroll_enabled(record->event.pressed);
-            break;
-        case DRAGSCROLL_MODE_TOGGLE:
-            if (record->event.pressed) {
-                charybdis_set_pointer_dragscroll_enabled(!charybdis_get_pointer_dragscroll_enabled());
-            }
-            break;
-    }
-    return true;
-}
+// bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+//     if (!process_record_user(keycode, record)) {
+//         debug_charybdis_config_to_console(&g_charybdis_config);
+//         return false;
+//     }
+// #    ifdef POINTING_DEVICE_ENABLE
+// #        ifndef NO_CHARYBDIS_KEYCODES
+//     switch (keycode) {
+//         case POINTER_DEFAULT_DPI_FORWARD:
+//             if (record->event.pressed) {
+//                 // Step backward if shifted, forward otherwise.
+//                 charybdis_cycle_pointer_default_dpi(/* forward= */ !has_shift_mod());
+//             }
+//             break;
+//         case POINTER_DEFAULT_DPI_REVERSE:
+//             if (record->event.pressed) {
+//                 // Step forward if shifted, backward otherwise.
+//                 charybdis_cycle_pointer_default_dpi(/* forward= */ has_shift_mod());
+//             }
+//             break;
+//         case POINTER_SNIPING_DPI_FORWARD:
+//             if (record->event.pressed) {
+//                 // Step backward if shifted, forward otherwise.
+//                 charybdis_cycle_pointer_sniping_dpi(/* forward= */ !has_shift_mod());
+//             }
+//             break;
+//         case POINTER_SNIPING_DPI_REVERSE:
+//             if (record->event.pressed) {
+//                 // Step forward if shifted, backward otherwise.
+//                 charybdis_cycle_pointer_sniping_dpi(/* forward= */ has_shift_mod());
+//             }
+//             break;
+//         case SNIPING_MODE:
+//             charybdis_set_pointer_sniping_enabled(record->event.pressed);
+//             break;
+//         case SNIPING_MODE_TOGGLE:
+//             if (record->event.pressed) {
+//                 charybdis_set_pointer_sniping_enabled(!charybdis_get_pointer_sniping_enabled());
+//             }
+//             break;
+//         case DRAGSCROLL_MODE:
+//             charybdis_set_pointer_dragscroll_enabled(record->event.pressed);
+//             break;
+//         case DRAGSCROLL_MODE_TOGGLE:
+//             if (record->event.pressed) {
+//                 charybdis_set_pointer_dragscroll_enabled(!charybdis_get_pointer_dragscroll_enabled());
+//             }
+//             break;
+//     }
+//     return true;
+// }
