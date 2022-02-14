@@ -34,17 +34,6 @@
   {   KC_NO, KC_NO,   KC_NO, k72, k70 },                \
 }
 
-// void keyboard_post_init_user(void) {
-//     //charybdis_set_pointer_sniping_enabled(true);
-//     //pointing_device_set_cpi(12800);
-//   // Customise these values to desired behaviour
-//   debug_enable=true;
-//   //debug_matrix=true;
-//   //debug_keyboard=true;
-//   //debug_mouse=true;
-//   //pointing_device_set_cpi(10);
-//   print("hello");
-// }
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
 #endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -55,12 +44,7 @@ enum charybdis_keymap_layers {
     LAYER_RAISE,
     LAYER_ADJUST,
     LAYER_NUMPAD,
-    // LAYER_FUNCTION,
-    // LAYER_NAVIGATION,
-    // LAYER_MEDIA,
     LAYER_POINTER,
-    // LAYER_NUMERAL,
-    // LAYER_SYMBOLS,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -194,7 +178,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
    TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    DRG_TOG, _______, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+    _______, DRG_TOG, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
                       KC_BTN2, KC_BTN1, KC_BTN3, RAI_ENT, LW_SPC
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -245,46 +229,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [LAYER_ADJUST] = LAYOUT_wrapper(LAYOUT_LAYER_ADJUST),
    [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD),
    [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
-
-//   [LAYER_FUNCTION] = LAYOUT_wrapper(LAYOUT_LAYER_FUNCTION),
-//   [LAYER_NAVIGATION] = LAYOUT_wrapper(LAYOUT_LAYER_NAVIGATION),
-//   [LAYER_MEDIA] = LAYOUT_wrapper(LAYOUT_LAYER_MEDIA),
-//   [LAYER_NUMERAL] = LAYOUT_wrapper(LAYOUT_LAYER_NUMERAL),
-//   [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
-//   [LAYER_SYMBOLS] = LAYOUT_wrapper(LAYOUT_LAYER_SYMBOLS),
 };
 // clang-format on
 
 
 
+
 #ifdef POINTING_DEVICE_ENABLE
+
+
 //#    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef RGB_MATRIX_ENABLE
-layer_state_t layer_state_set_user(layer_state_t state) {
+void rgb_matrix_indicators_user(void) {
+   HSV hsv = {0,0,0};
 
-dprint("layterstatset");
-    switch (get_highest_layer(state)) {
-        case LAYER_POINTER:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-            break;
-        case LAYER_NUMPAD:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-            break;
-        case LAYER_RAISE:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
-            break;
-        case LAYER_LOWER:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
-            break;
-        default: // for any other layers, or the default layer
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
-            break;
+    if (IS_LAYER_ON(LAYER_POINTER)) {
+        HSV hsv1 = {HSV_GREEN};
+        hsv = hsv1;
+
+    } else if (IS_LAYER_ON(LAYER_NUMPAD)) {
+      HSV hsv1 = {HSV_BLUE};
+        hsv = hsv1;
+    } else if (IS_LAYER_ON(LAYER_RAISE)) {
+        HSV hsv1 = {HSV_MAGENTA};
+        hsv = hsv1;
+    } else if (IS_LAYER_ON(LAYER_LOWER)) {
+        HSV hsv1 = {HSV_TEAL};
+        hsv = hsv1;
     }
-  return state;
+    if(!(hsv.v == 0 && hsv.s == 0 && hsv.v == 0)){
+        if (hsv.v > rgb_matrix_get_val()) {
+            hsv.v = rgb_matrix_get_val();
+        }
+        RGB rgb = hsv_to_rgb(hsv);
+        rgb_matrix_set_color_all(rgb.r, rgb.g,rgb.b);
+    }
+
 }
 #    endif // RGB_MATRIX_ENABLE
 //#    endif //CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -309,7 +289,7 @@ dprint("layterstatset");
 //         auto_pointer_layer_timer = 0;
 //         layer_off(LAYER_POINTER);
 // #        ifdef RGB_MATRIX_ENABLE
-//         rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
+//         rgb_matrix_mode_noeeprom(RGB_ATRIX_STARTUP_MODE);
 // #        endif  // RGB_MATRIX_ENABLE
 //     }
 
@@ -331,17 +311,17 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
 void rgb_matrix_update_pwm_buffers(void);
 #endif
 
-void shutdown_user(void) {
-#ifdef RGBLIGHT_ENABLE
-    rgblight_enable_noeeprom();
-    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-    rgblight_setrgb_red();
-#endif  // RGBLIGHT_ENABLE
-#ifdef RGB_MATRIX_ENABLE
-    rgb_matrix_set_color_all(RGB_RED);
-    rgb_matrix_update_pwm_buffers();
-#endif  // RGB_MATRIX_ENABLE
-}
+// void shutdown_user(void) {
+// #ifdef RGBLIGHT_ENABLE
+//     rgblight_enable_noeeprom();
+//     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+//     rgblight_setrgb_red();
+// #endif  // RGBLIGHT_ENABLE
+// #ifdef RGB_MATRIX_ENABLE
+//     rgb_matrix_set_color_all(RGB_RED);
+//     rgb_matrix_update_pwm_buffers();
+// #endif  // RGB_MATRIX_ENABLE
+// }
 
 #ifdef POINTING_DEVICE_ENABLE
 static uint16_t mouse_timer           = 0;
@@ -349,34 +329,28 @@ static uint16_t mouse_debounce_timer  = 0;
 static uint8_t  mouse_keycode_tracker = 0;
 bool            tap_toggling = false, enable_acceleration = false;
 
-__attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
-    return mouse_report;
-    dprint("keymap poinitng devic\n");
-
-}
-
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     #ifdef CONSOLE_ENABLE
 
 #endif
-    int8_t x = mouse_report.x, y = mouse_report.y;
-    mouse_report.x = 0;
-    mouse_report.y = 0;
+     int8_t x = mouse_report.x, y = mouse_report.y;
+    // mouse_report.x = 0;
+    // mouse_report.y = 0;
 
     if (x != 0 && y != 0) {
         mouse_timer = timer_read();
-        if (timer_elapsed(mouse_debounce_timer) > TAPPING_TERM) {
-            if (enable_acceleration) {
-                x = (x > 0 ? x * x / 16 + x : -x * x / 16 + x);
-                y = (y > 0 ? y * y / 16 + y : -y * y / 16 + y);
-            }
-            mouse_report.x = x;
-            mouse_report.y = y;
+        // if (timer_elapsed(mouse_debounce_timer) > TAPPING_TERM) {
+        //     if (enable_acceleration) {
+        //         x = (x > 0 ? x * x / 16 + x : -x * x / 16 + x);
+        //         y = (y > 0 ? y * y / 16 + y : -y * y / 16 + y);
+        //     }
+        //     mouse_report.x = x;
+        //     mouse_report.y = y;
             if (!layer_state_is(LAYER_POINTER)) {
                 layer_on(LAYER_POINTER);
                  dprint("LayerOn \n" );
-            }
+            //}
         }
     } else if (timer_elapsed(mouse_timer) > POINTER_LAYER_TIMEOUT_MS && layer_state_is(LAYER_POINTER) && !mouse_keycode_tracker && !tap_toggling) {
                  dprint("Layeroff1 \n" );
@@ -390,24 +364,16 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         }
     }
     # ifdef RGB_MATRIX_ENABLE
-    if(layer_state_is(LAYER_POINTER)){
-        dprint("green2 \n" );
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+    // if(layer_state_is(LAYER_POINTER)){
+    //     dprint("green2 \n" );
+    //         rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+    //         rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
 
-    }
+    // }
 #        endif  // RGB_MATRIX_ENABLE
-    return pointing_device_task_keymap(mouse_report);
+    return mouse_report;
 }
 
-// bool process_record_user(uint16_t keycode, keyrecord_t* record){
-//     dprint("process RecordUse");
-
-//      process_record_pointing(keycode,  record);
-//     return true;
-// }
-
-// bool process_record_pointing(uint16_t keycode, keyrecord_t* record) {
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 dprint("procesrcordpoints" );
     switch (keycode) {
@@ -460,6 +426,9 @@ dprint("procesrcordpoints" );
             if (record->event.pressed || !record->tap.count) {
                 break;
             }
+        case RGB_MOD:
+
+            break;
         default:
             if (IS_NOEVENT(record->event)) break;
             if ((keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX) && (((keycode >> 0x8) & 0xF) == LAYER_POINTER)) {

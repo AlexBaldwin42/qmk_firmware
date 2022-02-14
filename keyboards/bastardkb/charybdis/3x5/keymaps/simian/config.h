@@ -16,9 +16,8 @@
  */
 #pragma once
 
-#define DEBUG_MATRIX_SCAN_RATE
 
-#define POINTER_LAYER_TIMEOUT_MS 3000
+#define POINTER_LAYER_TIMEOUT_MS 1500
  #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
@@ -37,21 +36,22 @@
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
 // to control the feature).
-#    define RGB_MATRIX_DISABLE_KEYCODES
-
+//#    define RGB_MATRIX_DISABLE_KEYCODES
+#define RGB_MATRIX_KEYPRESSES
 // Limit maximum brightness to keep power consumption reasonable, and avoid
 // disconnects.
 #    undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 90
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100
 
+#define SPLIT_LAYER_STATE_ENABLE
 // Rainbow swirl as startup mode.
 #    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
-// #    define ENABLE_RGB_MATRIX_CYCLE_PINWHEEL
-// #    define ENABLE_RGB_MATRIX_CYCLE_SPIRAL
-// #    define ENABLE_RGB_MATRIX_RAINDROPS
-// #    define ENABLE_RGB_MATRIX_HUE_PENDULUM
-// #    define ENABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
-// #    define SPLIT_LAYER_STATE_ENABLE
+#    define ENABLE_RGB_MATRIX_CYCLE_PINWHEEL
+#    define ENABLE_RGB_MATRIX_CYCLE_SPIRAL
+#    define ENABLE_RGB_MATRIX_RAINDROPS
+#    define ENABLE_RGB_MATRIX_HUE_PENDULUM
+#    define ENABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
+#    define SPLIT_LAYER_STATE_ENABLE
 #    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_LEFT_RIGHT
 
 
