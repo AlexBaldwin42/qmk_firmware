@@ -156,7 +156,7 @@ _______,KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC
 _______,_______, _______,_______,_______,_______,                  _______, _______,_______,_______, _______,_______,\
 _______,XXXXXXX, TO(LAYER_POINTER), KC_CAPS, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG, _______,      \
 _______,RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX, _______,      \
-_______,RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX, _______,      \
+_______,RGB_MOD, RGB_RMOD, RGB_MODE_SWIRL, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX, _______,      \
                                 _______, _______, _______,            KC_VOLD, KC_VOLU, \
                                       _______,_______,     _______\
 
@@ -179,108 +179,6 @@ _______,_______, _______,_______,_______,EEP_RST,                  EEP_RST, ____
                                       _______,_______,     _______\
 
 
-
-
-/*
- * Layers used on the Charybdis Nano.
- *
- * These layers started off heavily inspired by the Miryoku layout, but trimmed
- * down and tailored for a stock experience that is meant to be fundation for
- * further personalization.
- *
- * See https://github.com/manna-harbour/miryoku for the original layout.
- */
-
-/**
- * \brief Function layer.
- *
- * Secondary right-hand layer has function keys mirroring the numerals on the
- * primary layer with extras on the pinkie column, plus system keys on the inner
- * column. App is on the tertiary thumb key and other thumb keys are duplicated
- * from the base layer to enable auto-repeat.
- */
-#define LAYOUT_LAYER_FUNCTION                                                                 \
-    _______________DEAD_HALF_ROW_______________, KC_PSCR,   KC_F7,   KC_F8,   KC_F9,  KC_F12, \
-    ______________HOME_ROW_GACS_L______________, KC_SLCK,   KC_F4,   KC_F5,   KC_F6,  KC_F11, \
-    _______________DEAD_HALF_ROW_______________, KC_PAUS,   KC_F1,   KC_F2,   KC_F3,  KC_F10, \
-                      XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX
-
-/**
- * \brief Media layer.
- *
- * Tertiary left- and right-hand layer is media and RGB control.  This layer is
- * symmetrical to accomodate the left- and right-hand trackball.
- */
-#define LAYOUT_LAYER_MEDIA                                                                    \
-    XXXXXXX,RGB_RMOD, RGB_TOG, RGB_MOD, XXXXXXX, XXXXXXX,RGB_RMOD, RGB_TOG, RGB_MOD, XXXXXXX, \
-    KC_MPRV, KC_VOLD, KC_MUTE, KC_VOLU, KC_MNXT, KC_MPRV, KC_VOLD, KC_MUTE, KC_VOLU, KC_MNXT, \
-    XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,   RESET,   RESET, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX, \
-                      _______, KC_MPLY, KC_MSTP, KC_MSTP, KC_MPLY
-
-
-
-/**
- * \brief Navigation layer.
- *
- * Primary right-hand layer (left home thumb) is navigation and editing. Cursor
- * keys are on the home position, line and page movement below, clipboard above,
- * caps lock and insert on the inner column. Thumb keys are duplicated from the
- * base layer to avoid having to layer change mid edit and to enable auto-repeat.
- */
-#define LAYOUT_LAYER_NAVIGATION                                                               \
-    _______________DEAD_HALF_ROW_______________, _______________DEAD_HALF_ROW_______________, \
-    ______________HOME_ROW_GACS_L______________, KC_CLCK, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
-    _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, \
-                      XXXXXXX, _______, XXXXXXX,  KC_ENT, KC_BSPC
-
-/**
- * \brief Numeral layout.
- *
- * Primary left-hand layer (right home thumb) is numerals and symbols. Numerals
- * are in the standard numpad locations with symbols in the remaining positions.
- * `KC_DOT` is duplicated from the base layer.
- */
-#define LAYOUT_LAYER_NUMERAL                                                                  \
-    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________DEAD_HALF_ROW_______________, \
-    KC_SCLN,    KC_4,    KC_5,    KC_6,  KC_EQL, ______________HOME_ROW_GACS_R______________, \
-     KC_GRV,    KC_1,    KC_2,    KC_3, KC_BSLS, _______________DEAD_HALF_ROW_______________, \
-                       KC_DOT,    KC_0, KC_MINS, XXXXXXX, _______
-
-/**
- * \brief Symbols layer.
- *
- * Secondary left-hand layer has shifted symbols in the same locations to reduce
- * chording when using mods with shifted symbols. `KC_LPRN` is duplicated next to
- * `KC_RPRN`.
- */
-#define LAYOUT_LAYER_SYMBOLS                                                                  \
-    KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, _______________DEAD_HALF_ROW_______________, \
-    KC_COLN,  KC_DLR, KC_PERC, KC_CIRC, KC_PLUS, ______________HOME_ROW_GACS_R______________, \
-    KC_TILD, KC_EXLM,   KC_AT, KC_HASH, KC_PIPE, _______________DEAD_HALF_ROW_______________, \
-                      KC_LPRN, KC_RPRN, KC_UNDS, _______, XXXXXXX
-
-/**
- * \brief Add Home Row mod to a layout.
- *
- * Expects a 10-key per row layout.  Adds support for GACS (Gui, Alt, Ctl, Shift)
- * home row.  The layout passed in parameter must contain at least 20 keycodes.
- *
- * This is meant to be used with `LAYER_ALPHAS_QWERTY` defined above, eg.:
- *
- *     HOME_ROW_MOD_GACS(LAYER_ALPHAS_QWERTY)
-  */
-// #define _HOME_ROW_MOD_GACS(
-//     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,
-//     L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,
-//     L20, L21, L22, L23, L24, R25, R26, R27, R28, R29,
-//     ...)
-//              L00,         L01,         L02,         L03,         L04,
-//              R05,         R06,         R07,         R08,         R09,
-//       LGUI_T(L10), LALT_T(L11), LSFT_T(L12), LCTL_T(L13),        L14,
-//              R15,  RCTL_T(R16), RSFT_T(R17), LALT_T(R18), RGUI_T(R19),
-//      LCTL_T(L20),         L21,         L22,         L23,         L24,
-//              R25,         R26,         R27,         R28,         R29,
- //       __VA_ARGS__
       #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, L05, R05, R06, R07, R08, R09, R10,                  \
     L10, L11, L12, L13, L14, L15, R15, R16, R17, R18, R19, R20,                 \
@@ -337,146 +235,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD),
    [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
 
-//   [LAYER_FUNCTION] = LAYOUT_wrapper(LAYOUT_LAYER_FUNCTION),
-//   [LAYER_NAVIGATION] = LAYOUT_wrapper(LAYOUT_LAYER_NAVIGATION),
-//   [LAYER_MEDIA] = LAYOUT_wrapper(LAYOUT_LAYER_MEDIA),
-//   [LAYER_NUMERAL] = LAYOUT_wrapper(LAYOUT_LAYER_NUMERAL),
-//   [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
-//   [LAYER_SYMBOLS] = LAYOUT_wrapper(LAYOUT_LAYER_SYMBOLS),z
 };
 // clang-format on
 
-// report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-//     mouse_report.v = mouse_report.v/2;
-//     mouse_report.h = mouse_report.h/2;
+#    ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_user(void) {
+   HSV hsv = {0,0,0};
 
-//     mouse_report.x = mouse_report.x/4;
-//     mouse_report.y = mouse_report.y/4;
-//     return mouse_report;
-// }
+    if (IS_LAYER_ON(LAYER_POINTER)) {
+        HSV hsv1 = {HSV_GREEN};
+        hsv = hsv1;
 
+    } else if (IS_LAYER_ON(LAYER_NUMPAD)) {
+      HSV hsv1 = {HSV_BLUE};
+        hsv = hsv1;
+    } else if (IS_LAYER_ON(LAYER_RAISE)) {
+        HSV hsv1 = {HSV_MAGENTA};
+        hsv = hsv1;
+    } else if (IS_LAYER_ON(LAYER_LOWER)) {
+        HSV hsv1 = {HSV_TEAL};
+        hsv = hsv1;
+    }
+    if(!(hsv.v == 0 && hsv.s == 0 && hsv.v == 0)){
+        if (hsv.v > rgb_matrix_get_val()) {
+            hsv.v = rgb_matrix_get_val();
+        }
+        RGB rgb = hsv_to_rgb(hsv);
+        rgb_matrix_set_color_all(rgb.r, rgb.g,rgb.b);
+    }
+
+}
+#endif
 #ifdef POINTING_DEVICE_ENABLE
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef RGB_MATRIX_ENABLE
 
-// void rgb_matrix_indicators_user (void){
-//     switch(get_highest_layer(layer_state|default_layer_state)) {
-//             case LAYER_POINTER:
-
-//             rgb_matrix_set_color_all(RGB_GREEN);
-//             break;
-//         case LAYER_NUMPAD:
-//             rgb_matrix_set_color_all(RGB_BLUE);
-
-//             break;
-//         case LAYER_RAISE:
-//             rgb_matrix_set_color_all(RGB_MAGENTA);
-
-//             break;
-//         case LAYER_LOWER:
-//             rgb_matrix_set_color_all(RGB_PURPLE);
-
-//             break;
-//         default: // for any other layers, or the default layer
-//             break;
-//     }
-// }
-
-// void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-//     for (uint8_t i = led_min -10; i <= led_max+30; i++) {
-//         switch(get_highest_layer(layer_state|default_layer_state)) {
-//              case LAYER_POINTER:
-
-//                 //mode_noeeprom(RGB_MATRIX_NONE);
-//                 // rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-//                 rgb_matrix_set_color(i, RGB_GREEN);
-
-//                 break;
-//             case LAYER_NUMPAD:
-//                 //mode = rgb_matrix_get_mode();
-//                 //rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-//                 // rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-//                 rgb_matrix_set_color(i,RGB_BLUE);
-
-//                 break;
-//             case LAYER_RAISE:
-//     //            mode = rgb_matrix_get_mode();
-//                 ///rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-//                 //rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
-//                 rgb_matrix_set_color(i,RGB_MAGENTA);
-
-//                 break;
-//             case LAYER_LOWER:
-//     //          mode = rgb_matrix_get_mode();
-//                 //rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-//                 // rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
-//                 rgb_matrix_set_color(i,RGB_PURPLE);
-
-//                 break;
-//             default: // for any other layers, or the default layer
-//         // //        extern void eeconfig_read_rgb_matrix(void);
-//         //         rgb_matrix_mode_noeeprom(rgb_matrix_config.mode);
-//         //         //mode = rgb_matrix_get_mode();
-//         //         //rgb_matrix_mode_noeeprom(mode);
-//         //         rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
-//                 break;
-//         }
-//     }
-// }
- //static int mode;
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-//  if(mode != RGB_MATRIX_NONE){
-//                 mode = rgb_matrix_get_mode();
-//              }
-
-
-    switch (get_highest_layer(state)) {
-        case LAYER_POINTER:
-            //  if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
-            //     mode = rgb_matrix_get_mode();
-            //  }
-
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-            break;
-        case LAYER_NUMPAD:
-            // if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
-
-            //     mode = rgb_matrix_get_mode();
-            //  }
-            //mode = rgb_matrix_get_mode();
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_BLUE);
-            break;
-        case LAYER_RAISE:
-//            mode = rgb_matrix_get_mode();
-            // if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
-            //     mode = rgb_matrix_get_mode();
-            //  }
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
-            break;
-        case LAYER_LOWER:
-            // if(mode != rgb_matrix_get_mode() && mode != RGB_MATRIX_NONE){
-            //     mode = rgb_matrix_get_mode();
-            //  }
-  //          mode = rgb_matrix_get_mode();
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
-            break;
-        default: // for any other layers, or the default layer
-    //        extern void eeconfig_read_rgb_matrix(void);
-            //rgb_matrix_mode_noeeprom(rgb_matrix_config.mode);
-            //mode = rgb_matrix_get_mode();
-            //rgb_matrix_mode_noeeprom(mode);
-             rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
-            //rgb_matrix_mode_noeeprom(mode);
-
-            break;
-    }
-  return state;
-}
 #    endif // RGB_MATRIX_ENABLE
 #    endif //CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -484,14 +277,9 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
             layer_on(LAYER_POINTER);
-#        ifdef RGB_MATRIX_ENABLE
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-#        endif  // RGB_MATRIX_ENABLE
         }
         auto_pointer_layer_timer = timer_read();
     }
-
     return mouse_report;
 }
 
@@ -503,7 +291,6 @@ void matrix_scan_kb(void) {
         rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
 #        endif  // RGB_MATRIX_ENABLE
     }
-
     matrix_scan_user();
 }
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
