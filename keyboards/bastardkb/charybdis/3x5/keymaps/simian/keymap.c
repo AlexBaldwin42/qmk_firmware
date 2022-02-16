@@ -74,13 +74,6 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Left hand
 // Base
 // home row mods
-// #define GUI_A LGUI_T(KC_A)
-// #define ALT_S LALT_T(KC_S)
-// #define SFT_D LSFT_T(KC_D)
-// #define CTL_F LCTL_T(KC_F)
-
-// #define CTRL_TB MT(MOD_LCTL, KC_TAB)
-// #define ALT_X MT(MOD_LALT, KC_X)
 #define CTL_V MT(MOD_LCTL, KC_V)
 #define CTL_Z MT(MOD_LCTL, KC_Z)
 
@@ -158,14 +151,14 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_RAISE                                                                                                  \
       KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,          \
       KC_QUOT,KC_DQT,   KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,KC_BSLS,        \
-      KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
+      KC_ESC,TO(LAYER_NUMPAD),KC_ESC,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
                                           _______, _______,_______,     _______, _______
 
 // Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
      XXXXXXX, TO(LAYER_POINTER), KC_CAPS, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG,       \
-     RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
-     RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX,                       \
+     RGB_TOG, RGB_VAI, RGB_VAD,XXXXXXX , XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
+     RGB_MOD, RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX,                       \
                                 _______, _______, _______,            KC_VOLD, KC_VOLU
 
 // Numpad
@@ -178,7 +171,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
    TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    _______,_______, _______, DRGSCRL,   DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+    KC_LCTL,_______, SNIPING, DRGSCRL, _______  ,  DRG_TOG , _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
                       KC_BTN2, KC_BTN1, KC_BTN3, RAI_ENT, LW_SPC
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -243,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 void rgb_matrix_indicators_user(void) {
    HSV hsv = {0,0,0};
 
-    if (IS_LAYER_ON(LAYER_POINTER)) {
+     if (IS_LAYER_ON(LAYER_POINTER)) {
         HSV hsv1 = {HSV_GREEN};
         hsv = hsv1;
 
@@ -363,14 +356,6 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
         }
     }
-    # ifdef RGB_MATRIX_ENABLE
-    // if(layer_state_is(LAYER_POINTER)){
-    //     dprint("green2 \n" );
-    //         rgb_matrix_sethsv_noeeprom(HSV_GREEN);
-    //         rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
-
-    // }
-#        endif  // RGB_MATRIX_ENABLE
     return mouse_report;
 }
 
@@ -382,25 +367,25 @@ dprint("procesrcordpoints" );
         dprint("ltlowe" );
              layer_off(LAYER_POINTER);
              break;
-        case TT(LAYER_POINTER):
-            if (record->event.pressed) {
-                mouse_keycode_tracker++;
-            } else {
-#if TAPPING_TOGGLE != 0
-                if (record->tap.count == TAPPING_TOGGLE) {
-                    tap_toggling ^= 1;
-#    if TAPPING_TOGGLE == 1
-                    if (!tap_toggling) mouse_keycode_tracker -= record->tap.count + 1;
-#    else
-                    if (!tap_toggling) mouse_keycode_tracker -= record->tap.count;
-#    endif
-                } else {
-                    mouse_keycode_tracker--;
-                }
-#endif
-            }
-            mouse_timer = timer_read();
-            break;
+//         case TT(LAYER_POINTER):
+//             if (record->event.pressed) {
+//                 mouse_keycode_tracker++;
+//             } else {
+// #if TAPPING_TOGGLE != 0
+//                 if (record->tap.count == TAPPING_TOGGLE) {
+//                     tap_toggling ^= 1;
+// #    if TAPPING_TOGGLE == 1
+//                     if (!tap_toggling) mouse_keycode_tracker -= record->tap.count + 1;
+// #    else
+//                     if (!tap_toggling) mouse_keycode_tracker -= record->tap.count;
+// #    endif
+//                 } else {
+//                     mouse_keycode_tracker--;
+//                 }
+// #endif
+//             }
+//             mouse_timer = timer_read();
+//             break;
         case TG(LAYER_POINTER):
             if (record->event.pressed) {
                 tap_toggling ^= 1;
@@ -420,12 +405,12 @@ dprint("procesrcordpoints" );
         //     record->event.pressed ? mouse_keycode_tracker++ : mouse_keycode_tracker--;
         //     mouse_timer = timer_read();
         //     break;
-        case QK_ONE_SHOT_MOD ... QK_ONE_SHOT_MOD_MAX:
-            break;
-        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
-            if (record->event.pressed || !record->tap.count) {
-                break;
-            }
+        // case QK_ONE_SHOT_MOD ... QK_ONE_SHOT_MOD_MAX:
+        //     break;
+        // case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+        //     if (record->event.pressed || !record->tap.count) {
+        //         break;
+        //     }
         case RGB_MOD:
 
             break;
@@ -446,3 +431,20 @@ dprint("procesrcordpoints" );
     return true;
 }
 #endif      // POINTING_DEVICE_ENABLE
+
+#ifdef RGB_MATRIX_ENABLE
+// Forward-declare this helper function since it is defined in rgb_matrix.c.
+void rgb_matrix_update_pwm_buffers(void);
+#endif
+
+void shutdown_user(void) {
+#ifdef RGBLIGHT_ENABLE
+    rgblight_enable_noeeprom();
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+    rgblight_setrgb_red();
+#endif  // RGBLIGHT_ENABLE
+#ifdef RGB_MATRIX_ENABLE
+    rgb_matrix_set_color_all(RGB_RED);
+    rgb_matrix_update_pwm_buffers();
+#endif  // RGB_MATRIX_ENABLE
+}

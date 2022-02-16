@@ -17,7 +17,7 @@
 #pragma once
 
 
-#define POINTER_LAYER_TIMEOUT_MS 1500
+#define POINTER_LAYER_TIMEOUT_MS 1000
  #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
