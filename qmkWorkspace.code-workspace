@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.h": "c",
+			"*.c": "c",
+			"*.inc": "c",
+			"*.cpp": "cpp",
+			"*.hpp": "cpp",
+			"xstddef": "c",
+			"type_traits": "c",
+			"utility": "c",
+			"ranges": "c",
+			"iosfwd": "c",
+			"xlocbuf": "c",
+			"array": "c",
+			"atomic": "c",
+			"charconv": "c",
+			"format": "c",
+			"xlocnum": "c"
+		},
+		"terminal.integrated.shell.windows": "C:\\QMK_MSYS\\usr\\bin\\bash.exe",
+		"terminal.integrated.env.windows": {
+			"MSYSTEM": "MINGW64",
+			"CHERE_INVOKING": "1"
+		},
+		"terminal.integrated.shellArgs.windows": [
+			"--login"
+		],
+		"terminal.integrated.cursorStyle": "line",
+		"terminal.integrated.profiles.windows": {
+			"Git Bash": null
+		},
+		"terminal.integrated.automationShell.osx": "/bin/sh"
+	}
+}
