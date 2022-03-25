@@ -30,6 +30,9 @@
 //   { B0, B1, B10, B3, B4, B5 }
 //   //{ B0, B1, B10, B3, B4, B5 } Original switch for broken header
 
+
+
+#define POINTER_LAYER_TIMEOUT_MS 1000
 #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
