@@ -16,11 +16,19 @@
  */
 #pragma once
 
-// Pin switchin to B6
+// // Pin switchin to B6
 // #undef SERIAL_USART_TX_PIN
 // #define SERIAL_USART_TX_PIN B6
-// #define SERIAL_USART_DRIVER      SD1
+// // #define SERIAL_USART_DRIVER      SD1
 
+#undef MATRIX_ROW_PINS
+#define MATRIX_ROW_PINS \
+  { B15, A2, B8, A8}
+#undef MATRIX_COL_PINS
+#define MATRIX_COL_PINS \
+  { B0, B1, B10, B3, B4}
+//   { B0, B1, B10, B3, B4, B5 }
+//   //{ B0, B1, B10, B3, B4, B5 } Original switch for broken header
 
 #ifndef TAPPING_TERM
 /**
