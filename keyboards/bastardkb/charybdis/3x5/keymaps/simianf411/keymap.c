@@ -142,7 +142,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_RAISE                                                                                                  \
       KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,          \
       KC_QUOT,KC_DQT,   KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,KC_BSLS,        \
-      KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
+      KC_ESC,TO(LAYER_NUMPAD),KC_ESC,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
                                           _______, _______,_______,     _______, _______
 
 // Adjust
@@ -162,7 +162,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
    TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    DRG_TOG, _______, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+    KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
                       KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC
 
   #define _HOME_ROW_MOD_GACS(                                            \
@@ -175,7 +175,7 @@ static uint16_t auto_pointer_layer_timer = 0;
       LGUI_T(L10), LALT_T(L11), LSFT_T(L12), LCTL_T(L13),        L14,  \
              R15,  RCTL_T(R16), RSFT_T(R17), LALT_T(R18), RGUI_T(R19), \
      LCTL_T(L20),         L21,         L22,         L23,         L24,  \
-             R25,         R26,         R27,         R28,         R29, \
+            R25,         R26,         R27,         R28,         R29, \
       __VA_ARGS__
 #define HOME_ROW_MOD_GACS(...) _HOME_ROW_MOD_GACS(__VA_ARGS__)
 
@@ -356,6 +356,7 @@ dprint("procesrcordpoints" );
     switch (keycode) {
         case  LT(LAYER_RAISE, KC_ENT):
         case  LT(LAYER_LOWER, KC_SPC):
+        case  KC_LCTL:
         dprint("ltlowe" );
              layer_off(LAYER_POINTER);
              break;
