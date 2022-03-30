@@ -17,25 +17,26 @@
 #pragma once
 
 // // Pin switchin to B6
-// #undef SERIAL_USART_TX_PIN
-// #define SERIAL_USART_TX_PIN B6
+ #undef SERIAL_USART_TX_PIN
+#define SERIAL_USART_TX_PIN B6
 // // #define SERIAL_USART_DRIVER      SD1
+
 
 #undef MATRIX_ROW_PINS
 #define MATRIX_ROW_PINS \
   { B15, A2, B8, A8}
 #undef MATRIX_COL_PINS
 #define MATRIX_COL_PINS \
-  { B0, B1, B10, B3, B4}
+  { B0, B5, B10, B3, B4}
+//  { B0, B1, B10, B3, B4}
+//   { B0, B1, B1
 //   { B0, B1, B10, B3, B4, B5 }
 //   //{ B0, B1, B10, B3, B4, B5 } Original switch for broken header
-
-
 
 #define POINTER_LAYER_TIMEOUT_MS 1000
 #ifndef TAPPING_TERM
 /**
- * \brief Configure the global tapping term (default: 200ms).
+ * brief Configure the global tapping term (default: 200ms).
  *
  * If you have a lot of accidental mod activations, crank up the tapping term.
  *
@@ -46,6 +47,10 @@
 #    define IGNORE_MOD_TAP_INTERRUPT
 #endif  // TAPPING_TERM
 
+
+// Pin switchin to B6
+#undef SERIAL_USART_TX_PIN
+#define SERIAL_USART_TX_PIN B6
 /* RGB Matrix. */
 
 #ifdef RGB_MATRIX_ENABLE
@@ -95,7 +100,9 @@
 // Slow swirl at startup.
 #    define RGB_MATRIX_STARTUP_SPD 32
 
-// Startup values.
+// Startup values.ith this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 #    define RGB_MATRIX_STARTUP_HUE 0
 #    define RGB_MATRIX_STARTUP_SAT 255
 #    define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
