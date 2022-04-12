@@ -156,8 +156,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 // Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
-     XXXXXXX, TO(LAYER_POINTER), KC_CAPS, XXXXXXX, XXXXXXX,                      RESET, XXXXXXX, XXXXXXX, TO(LAYER_NUMPAD), RGB_TOG,       \
-     RGB_TOG, RGB_VAI, RGB_VAD,XXXXXXX , XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
+     XXXXXXX, TO(LAYER_POINTER), KC_CAPS, XXXXXXX, XXXXXXX,                      RESET, RGB_VAI, RGB_VAD, TO(LAYER_NUMPAD), RGB_TOG,       \
+     RGB_TOG, RGB_VAI, RGB_VAD,XXXXXXX , XXXXXXX,                      XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, RGB_MOD,                        \
      RGB_MOD, RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_MPLY , XXXXXXX, XXXXXXX, TO(LAYER_POINTER), XXXXXXX,                       \
                                 _______, _______, _______,            KC_VOLD, KC_VOLU
 

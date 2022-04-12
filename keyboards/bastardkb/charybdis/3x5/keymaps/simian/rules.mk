@@ -11,9 +11,9 @@ BOOTMAGIC_ENABLE = no      # Enable Bootmagic Lite
 # # AUDIO_ENABLE = no           # Audio output
 
 # # AUDIO_SUPPORTED = no        # Audio is not supported
-#  RGB_MATRIX_SUPPORTED = no  # RGB matrix is supported and enabled by default
+ RGB_MATRIX_SUPPORTED = yes  # RGB matrix is supported and enabled by default
 #  RGBLIGHT_SUPPORTED = no  # RGB underglow is supported, but not enabled by default
-#  RGB_MATRIX_ENABLE = no    # Enable keyboard RGB matrix functionality
+  RGB_MATRIX_ENABLE = yes    # Enable keyboard RGB matrix functionality
 # # #RGB_MATRIX_DRIVER = WS2812
 
 # # # Charybdis nano is a split 3x5 keyboard with a maximum of 3 thumb keys (2 on
