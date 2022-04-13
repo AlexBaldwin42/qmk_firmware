@@ -17,21 +17,67 @@
 #pragma once
 
 // // Pin switchin to B6
- #undef SERIAL_USART_TX_PIN
-#define SERIAL_USART_TX_PIN B6
+ //#undef SERIAL_USART_TX_PIN
+//#define SERIAL_USART_TX_PIN B6
+
+
 // // #define SERIAL_USART_DRIVER      SD1
+//#define handwiredFlex
+#define bastardPCB_A2_Pin
+
+//#define bastardPCB just leave standard
+
+#ifdef bastardPCB_A2_Pin
+    #undef SERIAL_USART_TX_PIN
+    #define SERIAL_USART_TX_PIN A2
+    // Wiring configuration for each half.
+    // Switch A2 Row1
+    #undef MATRIX_ROW_PINS
+    #define MATRIX_ROW_PINS \
+    { B0, B8, A8, B9 }
+    #undef MATRIX_COL_PINS
+    #define MATRIX_COL_PINS \
+    { B1, B10, B3, B4, B5 }
 
 
-#undef MATRIX_ROW_PINS
-#define MATRIX_ROW_PINS \
-  { B15, A2, B8, A8}
-#undef MATRIX_COL_PINS
-#define MATRIX_COL_PINS \
-  { B0, B5, B10, B3, B4}
-//  { B0, B1, B10, B3, B4}
-//   { B0, B1, B1
-//   { B0, B1, B10, B3, B4, B5 }
-//   //{ B0, B1, B10, B3, B4, B5 } Original switch for broken header
+
+
+    #define RGB_DI_PIN D3
+    #define WS2812_PWM_DRIVER PWMD2
+    #define WS2812_PWM_CHANNEL 4
+    #define WS2812_PWM_PAL_MODE 1
+    #define WS2812_DMA_STREAM STM32_DMA1_STREAM7
+    #define WS2812_DMA_CHANNEL 3
+#endif
+
+#ifdef bastardPCB
+    // Wiring configuration for each half.
+    // Switch A2 Row1
+    #undef MATRIX_ROW_PINS
+    #define MATRIX_ROW_PINS \
+    { B9, B8, A8, B9 }
+    #undef MATRIX_COL_PINS
+    #define MATRIX_COL_PINS \
+    { B1, B10, B3, B4, B5 }
+#endif
+
+#ifdef handwiredFlex
+    #undef DIODE_DIRECTION
+    #define DIODE_DIRECTION COL2ROW
+    #undef MATRIX_ROW_PINS
+    #define MATRIX_ROW_PINS \
+    { B15, B9, B8, A8}
+
+    //{ B15, A2, B8, A8} hand wired
+    #undef MATRIX_COL_PINS
+    #define MATRIX_COL_PINS \
+    { B0, B5, B10, B3, B4}
+    //  { B0, B1, B10, B3, B4}
+    //   { B0, B1, B1
+    //   { B0, B1, B10, B3, B4, B5 }
+    //   //{ B0, B1, B10, B3, B4, B5 } Original switch for broken header
+#endif
+
 
 #define POINTER_LAYER_TIMEOUT_MS 1000
 #ifndef TAPPING_TERM
@@ -48,10 +94,7 @@
 #endif  // TAPPING_TERM
 
 
-// Pin switchin to B6
-#undef SERIAL_USART_TX_PIN
-#define SERIAL_USART_TX_PIN B6
-/* RGB Matrix. */
+
 
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
@@ -113,8 +156,7 @@
 //#define PMW3360_CPI 200
 //#define PMW3360_CPI 3400
 //#    define MAX_CPI 0x9F
-#undef DIODE_DIRECTION
-#define DIODE_DIRECTION COL2ROW
+
 
 
 
