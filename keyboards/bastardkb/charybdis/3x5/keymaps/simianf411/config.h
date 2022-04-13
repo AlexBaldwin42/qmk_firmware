@@ -39,15 +39,15 @@
     #define MATRIX_COL_PINS \
     { B1, B10, B3, B4, B5 }
 
+//#undef STM32_SERIAL_USE_USART1
+
+  //  #undef SERIAL_USART_DRIVER
+    #define SERIAL_USART_DRIVER SD2
+    //#undef STM32_SERIAL_USE_USART2
+    // #define STM32_SERIAL_USE_USART2 TRUE
+    // #define STM32_SERIAL_USE_USART1 FALSE
 
 
-
-    #define RGB_DI_PIN D3
-    #define WS2812_PWM_DRIVER PWMD2
-    #define WS2812_PWM_CHANNEL 4
-    #define WS2812_PWM_PAL_MODE 1
-    #define WS2812_DMA_STREAM STM32_DMA1_STREAM7
-    #define WS2812_DMA_CHANNEL 3
 #endif
 
 #ifdef bastardPCB
