@@ -44,7 +44,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
 
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
-#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 11
+#        define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD 20
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif      // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
@@ -131,6 +131,13 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ______________HOME_ROW_GACS_L______________ KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX
 #define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI
 
+
+#define LAYOUT_LAYER_POINTER                                                                                                                                        \
+   TG(LAYER_POINTER) ,_______ , _______, _______, S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
+    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
+    KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+                      KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC
+
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,     KC_8,    KC_9,    KC_0,            \
@@ -159,11 +166,6 @@ static uint16_t auto_pointer_layer_timer = 0;
 	  KC_LSFT,  KC_F10,   KC_F11,  KC_F12, KC_F5, 					   KC_PLUS,   KC_P1,   KC_P2,   KC_P3, KC_SLSH,\
 									       _______, _______, _______,     KC_ENT,   KC_P0
 
-#define LAYOUT_LAYER_POINTER                                                                                                                                        \
-   TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
-    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
-                      KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC
 
   #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -209,11 +211,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_wrapper(
     POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LAYER_BASE))
   ),
+   [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
    [LAYER_LOWER] = LAYOUT_wrapper(LAYOUT_LAYER_LOWER),
    [LAYER_RAISE] = LAYOUT_wrapper(LAYOUT_LAYER_RAISE),
    [LAYER_ADJUST] = LAYOUT_wrapper(LAYOUT_LAYER_ADJUST),
-   [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD),
-   [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
+   [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD)
 
 };
 // clang-format on
@@ -319,11 +321,12 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     #ifdef CONSOLE_ENABLE
 
 #endif
+#define THRESHOLD 4
      int8_t x = mouse_report.x, y = mouse_report.y;
     // mouse_report.x = 0;
     // mouse_report.y = 0;
 
-    if (x != 0 && y != 0) {
+    if ((x != 0 && y != 0) && (x >= THRESHOLD || y >= THRESHOLD || x+y >= THRESHOLD)) {
         mouse_timer = timer_read();
         // if (timer_elapsed(mouse_debounce_timer) > TAPPING_TERM) {
         //     if (enable_acceleration) {
