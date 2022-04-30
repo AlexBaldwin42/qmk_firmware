@@ -16,6 +16,19 @@
  */
 #pragma once
 
+#define THREE_THUMB_RIGHT
+
+
+#ifdef THREE_THUMB_RIGHT
+    #undef RGBLED_NUM
+    #define RGBLED_NUM 36
+    #undef RGBLED_SPLIT
+    #define RGBLED_SPLIT \
+    { 18, 17 }
+
+    // clang-format on
+
+#endif //End    THREE_THUMB_RIGHT
 // // Pin switchin to B6
  //#undef SERIAL_USART_TX_PIN
 //#define SERIAL_USART_TX_PIN B6
@@ -23,31 +36,31 @@
 
 // // #define SERIAL_USART_DRIVER      SD1
 //#define handwiredFlex
-#define bastardPCB_A2_Pin
+//#define bastardPCB_A2_Pin
 
 //#define bastardPCB just leave standard
+
+// Wiring configuration for each half.
+// Switch A2 Row1
+#undef MATRIX_ROW_PINS
+#define MATRIX_ROW_PINS \
+{ B0, B8, A8, B9 }
+#undef MATRIX_COL_PINS
+#define MATRIX_COL_PINS \
+{ B1, B10, B3, B4, B5 }
 
 #ifdef bastardPCB_A2_Pin
     #undef SERIAL_USART_TX_PIN
     #define SERIAL_USART_TX_PIN A2
-    // Wiring configuration for each half.
-    // Switch A2 Row1
-    #undef MATRIX_ROW_PINS
-    #define MATRIX_ROW_PINS \
-    { B0, B8, A8, B9 }
-    #undef MATRIX_COL_PINS
-    #define MATRIX_COL_PINS \
-    { B1, B10, B3, B4, B5 }
-
 //#undef STM32_SERIAL_USE_USART1
-
   //  #undef SERIAL_USART_DRIVER
     #define SERIAL_USART_DRIVER SD2
     //#undef STM32_SERIAL_USE_USART2
     // #define STM32_SERIAL_USE_USART2 TRUE
     // #define STM32_SERIAL_USE_USART1 FALSE
-
-
+#endif
+#ifndef bastardPCB_A2_Pin
+    #define SERIAL_USART_DRIVER SD1
 #endif
 
 #ifdef bastardPCB
