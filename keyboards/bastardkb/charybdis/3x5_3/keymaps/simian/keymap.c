@@ -116,7 +116,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-   TG(LAYER_POINTER) ,_______ , _______, _______, S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
+   TG(LAYER_POINTER) ,_______ , _______, _______, S_D_MOD,       KC_BTN1, DRGSCRL, KC_BTN2, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
     KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
                       KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC,_______
@@ -183,7 +183,7 @@ static uint16_t auto_pointer_layer_timer = 0;
              R05,         R06,         R07,         R08,         R09,  \
              L10,         L11,         L12,         L13,         L14,  \
              R15,         R16,         R17,         R18,         R19,  \
-             L20,  _L_PTR(L21),        L22,         L23,         L24,  \
+             L20,         L21,  _L_PTR(L22),        L23,         L24,  \
              R25,         R26,  _L_PTR(R27),        R28,         R29, \
       __VA_ARGS__
 #define POINTER_MOD(...) _POINTER_MOD(__VA_ARGS__)
