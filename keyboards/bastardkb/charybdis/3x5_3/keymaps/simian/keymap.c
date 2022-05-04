@@ -60,7 +60,6 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Left hand
 // Base
 // home row mods
-#define CTL_V MT(MOD_LCTL, KC_V)
 
 // Thumb clusters
 #define NUM_TAB LT(LAYER_NUMPAD, KC_TAB)
@@ -84,7 +83,6 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Right hand
 #define ADJ_KCQ LT(LAYER_ADJUST, KC_Q)
 #define ALT_DOT MT(MOD_LALT, KC_DOT)
-#define CTL_SLSH MT(MOD_RCTL, KC_SLSH)
 #define ADJ_KCSLASH LT(LAYER_ADJUST, KC_SLSH)
 
 
@@ -109,7 +107,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_BASE                                                                                             \
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
         KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                         KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
-        KC_Z,   KC_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
+        KC_Z,   KC_X,    KC_C,   KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
                                  NUM_TAB, LW_BSPC, RAI_DEL,   RAI_ENT,  LW_SPC, KC_ESC
 /** Convenience row shorthands. */
 #define _______________DEAD_HALF_ROW_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
@@ -127,7 +125,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_LOWER                                                                                                  \
      KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,     KC_8,    KC_9,    KC_0,            \
      GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-     CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                        KC_F5,   KC_F7,    KC_8,  ALT_F9, CTL_F10,         \
+     CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                        KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,     _______,_______, _______
 
 // Raise
