@@ -116,10 +116,10 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-   TG(LAYER_POINTER) ,_______ , _______, _______, S_D_MOD,       KC_BTN1, DRGSCRL, KC_BTN2, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
-    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
-                      KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC,_______
+   TG(LAYER_POINTER) ,_______ , _______, _______, S_D_MOD,       KC_BTN1, KC_BTN2,_______ , POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
+    ______________HOME_ROW_GACS_L______________,            DRGSCRL, KC_RCTL, KC_LSFT, KC_LALT, KC_LGUI,                                                                       \
+    KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,           SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+                      KC_BTN2, KC_BTN1, KC_BTN3,        KC_ENT, KC_SPC,_______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
