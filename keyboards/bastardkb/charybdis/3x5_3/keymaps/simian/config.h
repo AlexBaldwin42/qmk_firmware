@@ -22,7 +22,7 @@
 
 // // #define SERIAL_USART_DRIVER      SD1
 //#define handwiredFlex
-#define bastardPCB_A2_Pin
+//#define bastardPCB_A2_Pin
 
 //#define bastardPCB just leave standard
 
@@ -78,7 +78,7 @@
 #endif
 
 
-#define POINTER_LAYER_TIMEOUT_MS 1000
+#define POINTER_LAYER_TIMEOUT_MS 1500
 #ifndef TAPPING_TERM
 /**
  * brief Configure the global tapping term (default: 200ms).
