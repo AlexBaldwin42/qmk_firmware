@@ -22,7 +22,7 @@
 
 // // #define SERIAL_USART_DRIVER      SD1
 //#define handwiredFlex
-//#define bastardPCB_A2_Pin
+#define bastardPCB_A2_Pin
 
 //#define bastardPCB just leave standard
 
