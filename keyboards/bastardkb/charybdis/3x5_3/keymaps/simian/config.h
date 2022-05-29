@@ -17,7 +17,9 @@
 #pragma once
 #undef MATRIX_ROW_PINS
 #define MATRIX_ROW_PINS \
-  { GP27, GP5, GP4, GP9 }
+    { GP26, GP5, GP4, GP9 }
+  //{ GP27, GP5, GP4, GP9 } // switched
+
 #define MATRIX_COL_PINS \
   { GP28, GP21, GP6, GP7, GP8 }
 
@@ -162,10 +164,10 @@
 #endif  // RGB_MATRIX_ENABLE
 
 #ifdef POINTING_DEVICE_ENABLE
-#define PMW3389_CS_PIN GP14
+//#define PMW3389_CS_PIN GP14
 
-#define PMW3389_CS_MODE 3
-#define PMW3389_CS_DIVISOR 64
+//#define PMW3389_CS_MODE 3
+//#define PMW3389_CS_DIVISOR 64
 
 #undef ROTATIONAL_TRANSFORM_ANGLE
 #define ROTATIONAL_TRANSFORM_ANGLE -25
