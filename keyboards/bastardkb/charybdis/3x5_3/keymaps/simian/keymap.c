@@ -59,6 +59,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define NUM_TAB LT(LAYER_NUMPAD, KC_TAB)
 #define LW_BSPC LT(LAYER_LOWER, KC_BSPC)
 #define RAI_DEL LT(LAYER_RAISE, KC_DEL)
+#define NUM_BTN2 LT(LAYER_NUMPAD, KC_BTN2)
 
 // Lower
 // Home row mods
@@ -106,16 +107,16 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-TG(LAYER_POINTER) ,_______ , _______, _______,_______,                KC_BTN1, KC_BTN2,_______ ,_______ , _______, \
-          ______________HOME_ROW_GACS_L______________,                DRGSCRL, KC_RCTL, KC_LSFT, KC_LALT, KC_LGUI,                                                                       \
-         KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,                _______, _______, _______,_______ ,_______ ,                                                                     \
-                            KC_BTN2, KC_BTN1, KC_BTN3,                KC_ENT, KC_SPC,_______
+           _______ , _______, _______, _______,_______,               KC_BTN1, DRGSCRL, _______, _______, _______, \
+            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
+             _______,_______, _______, DRGSCRL,DRG_TOG,               _______, _______, _______, _______, _______,                                                                     \
+                            NUM_BTN2, KC_BTN1, KC_BTN3,               _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
-            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                 KC_6,    KC_7,     KC_8,    KC_9,    KC_0,            \
-         GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                 KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-          CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                 KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
+             KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,     KC_8,    KC_9,    KC_0,            \
+          GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
+           CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,                _______, _______, _______
 
 // Raise
@@ -225,6 +226,23 @@ void rgb_matrix_indicators_user(void) {
 
 }
 #    endif
+
+
+#   ifdef TAPPING_TERM_PER_KEY
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LGUI_T(KC_A):
+        case RGUI_T(KC_SCLN):
+            return TAPPING_TERM + 100;
+        case LALT_T(KC_S):
+        case LALT_T(KC_L):
+            return TAPPING_TERM + 100;
+        default:
+            return TAPPING_TERM;
+    }
+}
+#   endif //TAPPING_TERM_PER_KEY
 
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_kb(layer_state_t state) {
