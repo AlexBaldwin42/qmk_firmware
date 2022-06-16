@@ -240,6 +240,47 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
 void rgb_matrix_update_pwm_buffers(void);
 #endif
 
+bool encoder_update_user(uint8_t index, bool clockwise) {
+
+    if (clockwise) {
+        tap_code(KC_WH_D);
+    } else {
+        tap_code(KC_WH_U);
+    }
+    //if (get_highest_layer(layer_state|default_layer_state) > 0) {
+        //if (index == 0) {
+            //if (clockwise) {
+                //tap_code(KC_WH_D);
+            //} else {
+                //tap_code(KC_WH_U);
+            //}
+        //} else if (index == 1) {
+            //if (clockwise) {
+                //tap_code_delay(KC_VOLU, 10);
+            //} else {
+                //tap_code_delay(KC_VOLD, 10);
+            //}
+        //}
+    //} else {  /* Layer 0 */
+        //if (index == 0) {
+            //if (clockwise) {
+                //tap_code(KC_PGDN);
+            //} else {
+                //tap_code(KC_PGUP);
+            //}
+        //}
+        ////else if (index == 1) {
+            ////if (clockwise) {
+                ////rgb_matrix_increase_speed();
+            ////} else {
+                ////rgb_matrix_decrease_speed();
+            ////}
+        ////}
+    //}
+    return false;
+}
+
+
 #ifdef POINTING_DEVICE_ENABLE
 static uint16_t mouse_timer           = 0;
 static uint16_t mouse_debounce_timer  = 0;

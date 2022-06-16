@@ -5,14 +5,14 @@ MCU = RP2040
 BOOTLOADER = rp2040
 
 # RP2040-specific options
-ALLOW_WARNINGS = yes
+ALLOW_WARNINGS = no
 PICO_INTRINSICS_ENABLED = no # ATM Unsupported by ChibiOS.
 
 # Build Options
 #   change yes to no to disable
 #
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
-MOUSEKEY_ENABLE = no        # Mouse keys
+MOUSEKEY_ENABLE = yes        # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration
@@ -35,3 +35,4 @@ POINTING_DEVICE_DRIVER = pmw3389
 
 SERIAL_DRIVER = pio
 WS2812_DRIVER = pio
+
