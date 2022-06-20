@@ -60,6 +60,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LW_BSPC LT(LAYER_LOWER, KC_BSPC)
 #define RAI_DEL LT(LAYER_RAISE, KC_DEL)
 
+//#define NUM_BTN2 ACTION_TAP_DANCE_LAYER_TOGGLE(KC_BTN2,LAYER_NUMPAD )
 // Lower
 // Home row mods
 #define GUI_BAK LGUI_T(KC_WBAK)
@@ -104,18 +105,17 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define ______________HOME_ROW_GACS_L______________ KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX
 #define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI
 
-
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-TG(LAYER_POINTER) ,_______ , _______, _______,_______,                KC_BTN1, KC_BTN2,_______ ,_______ , _______, \
-          ______________HOME_ROW_GACS_L______________,                DRGSCRL, KC_RCTL, KC_LSFT, KC_LALT, KC_LGUI,                                                                       \
-         KC_LCTL, _______, _______, DRGSCRL,  DRG_TOG,                _______, _______, _______,_______ ,_______ ,                                                                     \
-                            KC_BTN2, KC_BTN1, KC_BTN3,                KC_ENT, KC_SPC,_______
+           _______ , _______, _______, _______,_______,               KC_BTN1, DRGSCRL, _______, _______, _______, \
+            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
+             _______,_______, _______, DRGSCRL,DRG_TOG,               _______, _______, _______, _______, _______,                                                                     \
+                            KC_BTN2, KC_BTN1, KC_BTN3,               _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
-            KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                 KC_6,    KC_7,     KC_8,    KC_9,    KC_0,            \
-         GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                 KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-          CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                 KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
+             KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,       KC_7,    KC_8,    KC_9,   KC_0,            \
+          GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
+           CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,                _______, _______, _______
 
 // Raise
@@ -214,6 +214,9 @@ void rgb_matrix_indicators_user(void) {
     } else if (IS_LAYER_ON(LAYER_LOWER)) {
         HSV hsv1 = {HSV_TEAL};
         hsv = hsv1;
+    }else if (IS_LAYER_ON(LAYER_ADJUST)) {
+        HSV hsv1 = {HSV_PINK};
+        hsv = hsv1;
     }
     if(!(hsv.v == 0 && hsv.s == 0 && hsv.v == 0)){
         if (hsv.v > rgb_matrix_get_val()) {
@@ -225,6 +228,23 @@ void rgb_matrix_indicators_user(void) {
 
 }
 #    endif
+
+
+#   ifdef TAPPING_TERM_PER_KEY
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LGUI_T(KC_A):
+        case RGUI_T(KC_SCLN):
+            return TAPPING_TERM + 50;
+        case LALT_T(KC_S):
+        case LALT_T(KC_L):
+            return TAPPING_TERM + 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+#   endif //TAPPING_TERM_PER_KEY
 
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_kb(layer_state_t state) {
@@ -239,47 +259,6 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 #endif
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-
-    if (clockwise) {
-        tap_code(KC_WH_D);
-    } else {
-        tap_code(KC_WH_U);
-    }
-    //if (get_highest_layer(layer_state|default_layer_state) > 0) {
-        //if (index == 0) {
-            //if (clockwise) {
-                //tap_code(KC_WH_D);
-            //} else {
-                //tap_code(KC_WH_U);
-            //}
-        //} else if (index == 1) {
-            //if (clockwise) {
-                //tap_code_delay(KC_VOLU, 10);
-            //} else {
-                //tap_code_delay(KC_VOLD, 10);
-            //}
-        //}
-    //} else {  /* Layer 0 */
-        //if (index == 0) {
-            //if (clockwise) {
-                //tap_code(KC_PGDN);
-            //} else {
-                //tap_code(KC_PGUP);
-            //}
-        //}
-        ////else if (index == 1) {
-            ////if (clockwise) {
-                ////rgb_matrix_increase_speed();
-            ////} else {
-                ////rgb_matrix_decrease_speed();
-            ////}
-        ////}
-    //}
-    return false;
-}
-
 
 #ifdef POINTING_DEVICE_ENABLE
 static uint16_t mouse_timer           = 0;
@@ -323,6 +302,45 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         }
     }
     return mouse_report;
+}
+bool encoder_update_user(uint8_t index, bool clockwise) {
+
+    if (clockwise) {
+        tap_code(KC_WH_D);
+    } else {
+        tap_code(KC_WH_U);
+    }
+    //if (get_highest_layer(layer_state|default_layer_state) > 0) {
+        //if (index == 0) {
+            //if (clockwise) {
+                //tap_code(KC_WH_D);
+            //} else {
+                //tap_code(KC_WH_U);
+            //}
+        //} else if (index == 1) {
+            //if (clockwise) {
+                //tap_code_delay(KC_VOLU, 10);
+            //} else {
+                //tap_code_delay(KC_VOLD, 10);
+            //}
+        //}
+    //} else {  /* Layer 0 */
+        //if (index == 0) {
+            //if (clockwise) {
+                //tap_code(KC_PGDN);
+            //} else {
+                //tap_code(KC_PGUP);
+            //}
+        //}
+        ////else if (index == 1) {
+            ////if (clockwise) {
+                ////rgb_matrix_increase_speed();
+            ////} else {
+                ////rgb_matrix_decrease_speed();
+            ////}
+        ////}
+    //}
+    return false;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
