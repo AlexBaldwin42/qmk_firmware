@@ -1,5 +1,6 @@
 #EEPROM_DRIVER = spi
 POINTING_DEVICE_DRIVER = pmw3389
+ENCODER_ENABLE = yes
 
 
 # # AUDIO_SUPPORTED = no        # Audio is not supported
