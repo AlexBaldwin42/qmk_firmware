@@ -59,6 +59,12 @@ led_config_t g_led_config = { {
     /* index=9  */ {  54,   0 }, {  54,  21 }, {  54,  42 },
     /* index=12 */ {  72,   0 }, {  72,  21 }, {  72,  42 },
     /* index=15 */ {  72,  64 }, {  90,  64 }, { 108,  64 }, // Thumb cluster
+    {   0,   0 }, {   0,   0 }, {   0,   0 },
+    {   0,   0 }, {   0,   0 }, {   0,   0 },
+    {   0,   0 }, {   0,   0 }, {   0,   0 },
+    {   0,   0 }, {   0,   0 }, {   0,   0 }, //Falcon left
+
+
     // Right split.
     /* index=18 */ { 224,  42 }, { 224,  21 }, { 224,   0 }, // col 10 (right most)
     /* index=21 */ { 206,   0 }, { 206,  21 }, { 206,  42 }, // col 9
@@ -75,6 +81,12 @@ led_config_t g_led_config = { {
     /* index=9  */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=12 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     /* index=15 */ LED_FLAG_MODIFIER, LED_FLAG_MODIFIER, LED_FLAG_MODIFIER, // Thumb cluster
+
+    LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+    LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+    LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+    LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, //Falcon left
+
     // Right split.
     /* index=18 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // col 10
     /* index=21 */ LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, // col 9

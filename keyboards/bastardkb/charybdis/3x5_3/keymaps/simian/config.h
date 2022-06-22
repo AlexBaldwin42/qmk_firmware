@@ -110,6 +110,15 @@
 #define ENCODERS_PAD_B_RIGHT { GP16 } //completely unused pin
 
 #ifdef RGB_MATRIX_ENABLE
+/* Override RGB settings.
+ * \brief 12 LEDs are added by the falcon PCB to the original 36
+*/
+#undef RGBLED_NUM
+#undef RGBLED_SPLIT
+#define RGBLED_NUM 48
+#define RGBLED_SPLIT \
+    { 30, 18 }
+
 // Disable control of RGB matrix by keycodes (must use firmware implementation
 // to control the feature).
 //#    define RGB_MATRIX_DISABLE_KEYCODES
