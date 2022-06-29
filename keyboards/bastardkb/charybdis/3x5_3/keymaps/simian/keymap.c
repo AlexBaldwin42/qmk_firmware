@@ -150,6 +150,20 @@ XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, 
       __VA_ARGS__
 #define HOME_ROW_MOD_GACS(...) _HOME_ROW_MOD_GACS(__VA_ARGS__)
 
+#define _HOME_ROW_MOD_LEFT_GACS(                                            \
+    L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
+    L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,                  \
+    L20, L21, L22, L23, L24, R25, R26, R27, R28, R29,                  \
+    ...)                                                               \
+             L00,         L01,         L02,         L03,         L04,  \
+             R05,         R06,         R07,         R08,         R09,  \
+      LGUI_T(L10),LALT_T(L11), LSFT_T(L12), LCTL_T(L13),         L14,  \
+             R15,         R16,         R17,         R18,         R19, \
+     LCTL_T(L20),         L21,         L22,         L23,         L24,  \
+             R25,         R26,         R27,         R28,         R29, \
+      __VA_ARGS__
+#define _HOME_ROW_MOD_LEFT_GACS(...) _HOME_ROW_MOD_LEFT_GACS(__VA_ARGS__)
+
 /**
  * \brief Add pointer layer keys to a layout.
  *
@@ -181,10 +195,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LAYER_BASE))
   ),
    [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
-   [LAYER_LOWER] = LAYOUT_wrapper(HOME_ROW_MOD_GACS(LAYOUT_LAYER_LOWER)),
-   [LAYER_RAISE] = LAYOUT_wrapper(HOME_ROW_MOD_GACS((LAYOUT_LAYER_RAISE)),
+   [LAYER_LOWER] = LAYOUT_wrapper(_HOME_ROW_MOD_LEFT_GACS(LAYOUT_LAYER_LOWER)),
+   [LAYER_RAISE] = LAYOUT_wrapper(_HOME_ROW_MOD_LEFT_GACS((LAYOUT_LAYER_RAISE)),
    [LAYER_ADJUST] = LAYOUT_wrapper(LAYOUT_LAYER_ADJUST),
-   [LAYER_NUMPAD] = LAYOUT_wrapper(HOME_ROW_MOD_GACS((LAYOUT_LAYER_NUMPAD))
+   [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD)
 
 };
 // clang-format on
