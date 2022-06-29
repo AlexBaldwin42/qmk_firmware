@@ -63,10 +63,10 @@ static uint16_t auto_pointer_layer_timer = 0;
 //#define NUM_BTN2 ACTION_TAP_DANCE_LAYER_TOGGLE(KC_BTN2,LAYER_NUMPAD )
 // Lower
 // Home row mods
-#define GUI_BAK LGUI_T(KC_WBAK)
-#define ALT_FWD LALT_T(KC_WFWD)
-#define SFT_HOME LSFT_T(KC_HOME)
-#define CTL_END LCTL_T(KC_END)
+//#define GUI_BAK LGUI_T(KC_WBAK)
+//#define ALT_FWD LALT_T(KC_WFWD)
+//#define SFT_HOME LSFT_T(KC_HOME)
+//#define CTL_END LCTL_T(KC_END)
 
 #define ALT_F2 MT(MOD_LALT, KC_F2)
 #define CTL_F1 MT(MOD_LCTL, KC_F1)
@@ -100,23 +100,19 @@ static uint16_t auto_pointer_layer_timer = 0;
                KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                 KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
               KC_Z,   KC_X,    KC_C,   KC_V,    KC_B,                 KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
                            NUM_TAB, LW_BSPC, RAI_DEL,  KC_3,        RAI_ENT,  LW_SPC, KC_ESC
-/** Convenience row shorthands. */
-#define _______________DEAD_HALF_ROW_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-#define ______________HOME_ROW_GACS_L______________ KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX
-#define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-           _______ , _______, _______, _______,_______,               KC_BTN1, DRGSCRL, _______, _______, _______, \
-            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
-             _______,_______, _______, DRGSCRL,DRG_TOG,               _______, _______, _______, _______, _______,                                                                     \
-                            KC_BTN2, KC_BTN1, KC_BTN3, _______,       _______, _______, _______
+     _______ , DRGSCRL, _______, SNIPING_MODE,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
+           _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
+            _______,_______, _______, _______,_______,               _______, _______, _______, _______, _______,                                                                     \
+                            KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
              KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,       KC_7,    KC_8,    KC_9,   KC_0,            \
-          GUI_BAK,  ALT_FWD,SFT_HOME,CTL_END,  KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
+          KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
            CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
-                            _______, _______, _______,_______,       _______, _______, _______
+                            _______, _______, _______,_______,        _______, _______, _______
 
 // Raise
 #define LAYOUT_LAYER_RAISE                                                                                                  \
@@ -169,12 +165,12 @@ XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, 
     L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,                  \
     L20, L21, L22, L23, L24, R25, R26, R27, R28, R29,                  \
     ...)                                                               \
-             L00,         L01,         L02,         L03,         L04,  \
-             R05,         R06,         R07,         R08,         R09,  \
-             L10,         L11,         L12,         L13,         L14,  \
-             R15,         R16,         R17,         R18,         R19,  \
-             L20,  _L_PTR(L21),  _L_PTR(L22),        L23,         L24,  \
-             R25,         R26,  _L_PTR(R27),        R28,         R29, \
+             L00,         L01, _L_PTR(L02),        L03,         L04,  \
+             R05,         R06, _L_PTR(R07),        R08,         R09,  \
+             L10,         L11,         L12,        L13,         L14,  \
+             R15,         R16,         R17,        R18,         R19,  \
+             L20,         L21,         L22,        L23,         L24,  \
+             R25,         R26,         R27,        R28,         R29, \
       __VA_ARGS__
 #define POINTER_MOD(...) _POINTER_MOD(__VA_ARGS__)
 
@@ -271,7 +267,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     #ifdef CONSOLE_ENABLE
 
 #endif
-#define THRESHOLD 2
+#define THRESHOLD 3
      int8_t x = mouse_report.x, y = mouse_report.y;
     // mouse_report.x = 0;
     // mouse_report.y = 0;
@@ -305,25 +301,26 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 }
 bool encoder_update_user(uint8_t index, bool clockwise) {
 
-    if (clockwise) {
-        tap_code(KC_WH_D);
-    } else {
-        tap_code(KC_WH_U);
-    }
+    //if (clockwise) {
+        //tap_code(KC_WH_D);
+    //} else {
+        //tap_code(KC_WH_U);
+    //}
     //if (get_highest_layer(layer_state|default_layer_state) > 0) {
-        //if (index == 0) {
-            //if (clockwise) {
-                //tap_code(KC_WH_D);
-            //} else {
-                //tap_code(KC_WH_U);
-            //}
-        //} else if (index == 1) {
-            //if (clockwise) {
-                //tap_code_delay(KC_VOLU, 10);
-            //} else {
-                //tap_code_delay(KC_VOLD, 10);
-            //}
-        //}
+        if (IS_LAYER_ON(LAYER_ADJUST)) {
+            if (clockwise) {
+                tap_code_delay(KC_VOLU, 10);
+            } else {
+                tap_code_delay(KC_VOLD, 10);
+            }
+        } else {
+            if (clockwise) {
+                tap_code(KC_WH_D);
+            } else {
+                tap_code(KC_WH_U);
+            }
+        }
+    //}
     //} else {  /* Layer 0 */
         //if (index == 0) {
             //if (clockwise) {
