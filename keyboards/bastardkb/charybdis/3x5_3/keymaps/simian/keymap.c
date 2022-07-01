@@ -105,7 +105,7 @@ static uint16_t auto_pointer_layer_timer = 0;
      _______ , DRGSCRL, _______, SNIPING_MODE,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
             _______,_______, _______, _______,_______,               _______, _______, _______, _______, _______,                                                                     \
-                            KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
+           LT(LAYER_NUMPAD,KC_BTN2), KC_BTN1, KC_BTN3, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
@@ -143,10 +143,10 @@ XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, 
     ...)                                                               \
              L00,         L01,         L02,         L03,         L04,  \
              R05,         R06,         R07,         R08,         R09,  \
-      LGUI_T(L10), LALT_T(L11), LSFT_T(L12), LCTL_T(L13),        L14,  \
+     LGUI_T(L10), LALT_T(L11), LSFT_T(L12), LCTL_T(L13),        L14,  \
              R15,  RCTL_T(R16), RSFT_T(R17), LALT_T(R18), RGUI_T(R19), \
      LCTL_T(L20),         L21,         L22,         L23,         L24,  \
-            R25,         R26,         R27,         R28,         R29, \
+             R25,         R26,         R27,         R28,         R29, \
       __VA_ARGS__
 #define HOME_ROW_MOD_GACS(...) _HOME_ROW_MOD_GACS(__VA_ARGS__)
 
@@ -157,12 +157,12 @@ XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, 
     ...)                                                               \
              L00,         L01,         L02,         L03,         L04,  \
              R05,         R06,         R07,         R08,         R09,  \
-      LGUI_T(L10),LALT_T(L11), LSFT_T(L12), LCTL_T(L13),         L14,  \
+     LGUI_T(L10), LALT_T(L11), LSFT_T(L12), LCTL_T(L13),         L14,  \
              R15,         R16,         R17,         R18,         R19, \
      LCTL_T(L20),         L21,         L22,         L23,         L24,  \
              R25,         R26,         R27,         R28,         R29, \
       __VA_ARGS__
-#define _HOME_ROW_MOD_LEFT_GACS(...) _HOME_ROW_MOD_LEFT_GACS(__VA_ARGS__)
+#define HOME_ROW_MOD_LEFT_GACS(...) _HOME_ROW_MOD_LEFT_GACS(__VA_ARGS__)
 
 /**
  * \brief Add pointer layer keys to a layout.
@@ -195,8 +195,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LAYER_BASE))
   ),
    [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
-   [LAYER_LOWER] = LAYOUT_wrapper(_HOME_ROW_MOD_LEFT_GACS(LAYOUT_LAYER_LOWER)),
-   [LAYER_RAISE] = LAYOUT_wrapper(_HOME_ROW_MOD_LEFT_GACS((LAYOUT_LAYER_RAISE)),
+   [LAYER_LOWER] = LAYOUT_wrapper(HOME_ROW_MOD_LEFT_GACS(LAYOUT_LAYER_LOWER)),
+   [LAYER_RAISE] = LAYOUT_wrapper(LAYOUT_LAYER_RAISE),
    [LAYER_ADJUST] = LAYOUT_wrapper(LAYOUT_LAYER_ADJUST),
    [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD)
 
