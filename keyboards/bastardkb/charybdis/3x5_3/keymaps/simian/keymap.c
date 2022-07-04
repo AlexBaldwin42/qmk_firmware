@@ -102,10 +102,10 @@ static uint16_t auto_pointer_layer_timer = 0;
                            NUM_TAB, LW_BSPC, RAI_DEL,  KC_3,        RAI_ENT,  LW_SPC, KC_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-     _______ , DRGSCRL, _______, SNIPING_MODE,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
+     DRG_TOG , DRGSCRL, _______, SNIPING_MODE,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
             _______,_______, _______, _______,_______,               _______, _______, _______, _______, _______,                                                                     \
-           LT(LAYER_NUMPAD,KC_BTN2), KC_BTN1, KC_BTN3, _______,      _______, _______, _______
+                    KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
