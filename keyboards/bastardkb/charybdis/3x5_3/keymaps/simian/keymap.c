@@ -99,13 +99,13 @@ static uint16_t auto_pointer_layer_timer = 0;
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,     KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
                KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                 KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
               KC_Z,   KC_X,    KC_C,   KC_V,    KC_B,                 KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
-                           NUM_TAB, LW_BSPC, RAI_DEL,  KC_3,        RAI_ENT,  LW_SPC, KC_ESC
+                           NUM_TAB, LW_BSPC, RAI_DEL,  DRG_TOG,        RAI_ENT,  LW_SPC, KC_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-     DRG_TOG , DRGSCRL, _______, SNIPING_MODE,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
+          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
-            _______,_______, _______, _______,_______,               _______, _______, _______, _______, _______,                                                                     \
-                    KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
+       _______,SNIPING_MODE, _______, DRGSCRL,_______,               _______, _______, _______, _______, _______,                                                                     \
+                            KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
@@ -179,11 +179,11 @@ XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, 
     L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,                  \
     L20, L21, L22, L23, L24, R25, R26, R27, R28, R29,                  \
     ...)                                                               \
-             L00,         L01, _L_PTR(L02),        L03,         L04,  \
+             L00,         L01,         L02,        L03,         L04,  \
              R05,         R06, _L_PTR(R07),        R08,         R09,  \
              L10,         L11,         L12,        L13,         L14,  \
              R15,         R16,         R17,        R18,         R19,  \
-             L20,         L21,         L22,        L23,         L24,  \
+             L20,         L21, _L_PTR(L22),        L23,         L24,  \
              R25,         R26,         R27,        R28,         R29, \
       __VA_ARGS__
 #define POINTER_MOD(...) _POINTER_MOD(__VA_ARGS__)
@@ -286,12 +286,12 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     // mouse_report.x = 0;
     // mouse_report.y = 0;
 
-    if ((x != 0 && y != 0) && (x >= THRESHOLD || y >= THRESHOLD || x+y >= THRESHOLD)) {
+    if (((x != 0 || y != 0) && (abs(x) >= THRESHOLD || abs(y) >= THRESHOLD || abs(x)+abs(y) >= THRESHOLD)) || (layer_state_is(LAYER_POINTER) && (abs(x)>0 || abs(y)>0))) {
         mouse_timer = timer_read();
         // if (timer_elapsed(mouse_debounce_timer) > TAPPING_TERM) {
         //     if (enable_acceleration) {
         //         x = (x > 0 ? x * x / 16 + x : -x * x / 16 + x);
-        //         y = (y > 0 ? y * y / 16 + y : -y * y / 16 + y);
+        //         y = (y > 0 ? y * y / 16 + y : -y * y / 16 + y
         //     }
         //     mouse_report.x = x;
         //     mouse_report.y = y;
