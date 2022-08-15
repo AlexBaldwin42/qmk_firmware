@@ -26,70 +26,11 @@
 
   //{ GP28, GP15, GP6, GP7, GP8 }
 
-/* // Pin switchin to B6
- //#undef SERIAL_USART_TX_PIN
-//#define SERIAL_USART_TX_PIN B6
-
-// // #define SERIAL_USART_DRIVER      SD1
-//#define handwiredFlex
-//#define bastardPCB_A2_Pin
-
-//#define bastardPCB just leave standard
-
-// Wiring configuration for each half.
-// Switch A2 Row1
-//#undef MATRIX_ROW_PINS
-//#define MATRIX_ROW_PINS \
-//{ B0, B8, A8, B9 }
-//#undef MATRIX_COL_PINS
-//#define MATRIX_COL_PINS \
-//{ B1, B10, B3, B4, B5 }
-
-#ifdef bastardPCB_A2_Pin
-    #undef SERIAL_USART_TX_PIN
-    #define SERIAL_USART_TX_PIN A2
-    #define SERIAL_USART_DRIVER SD2
-#endif
-//#ifndef bastardPCB_A2_Pin
-  //  #define SERIAL_USART_DRIVER SD1
-//#endif
-
-#ifdef bastardPCB
-    // Wiring configuration for each half.
-    // Switch A2 Row1
-    #undef MATRIX_ROW_PINS
-    #define MATRIX_ROW_PINS \
-    { B9, B8, A8, B9 }
-    #undef MATRIX_COL_PINS
-    #define MATRIX_COL_PINS \
-    { B1, B10, B3, B4, B5 }
-#endif
-
-#ifdef handwiredFlex
-    #undef DIODE_DIRECTION
-    #define DIODE_DIRECTION COL2ROW
-    #undef MATRIX_ROW_PINS
-    #define MATRIX_ROW_PINS \
-    { B15, B9, B8, A8}
-
-    //{ B15, A2, B8, A8} hand wired
-    #undef MATRIX_COL_PINS
-    #define MATRIX_COL_PINS \
-    { B0, B5, B10, B3, B4}
-    //  { B0, B1, B10, B3, B4}
-    //   { B0, B1, B1
-    //   { B0, B1, B10, B3, B4, B5 }
-    //   //{ B0, B1, B10, B3, B4, B5 } Original switch for broken header
-#endif
-*/
-
 #define POINTER_LAYER_TIMEOUT_MS 1500
 #ifndef TAPPING_TERM
 /**
  * brief Configure the global tapping term (default: 200ms).
- *
  * If you have a lot of accidental mod activations, crank up the tapping term.
- *
  * See docs.qmk.fm/using-qmk/software-features/tap_hold#tapping-term
  */
 #    define TAPPING_FORCE_HOLD
@@ -186,7 +127,8 @@
 
 #ifdef POINTING_DEVICE_ENABLE
 #define PMW3389_CS_PIN GP14
-#undef PMW3360_CS_PIN
+//#define PMW3360_CS_PIN GP14
+//#undef PMW3360_CS_PIN
 #undef SPI_SCK_PIN
 #define SPI_SCK_PIN GP22
 #undef SPI_MOSI_PIN
@@ -196,9 +138,17 @@
 //#define PMW3389_CS_MODE 3
 //#define PMW3389_CS_DIVISOR 64
 
+// Near Thumbcluster Trackball
+// #define POINTING_DEVICE_ROTATION_180
+
+// Top Keyboard
+// Blank
+
 //#undef ROTATIONAL_TRANSFORM_ANGLE
 //#define ROTATIONAL_TRANSFORM_ANGLE -25
 //#define POINTING_DEVICE_ROTATION_90
+//#undef ROTATIONAL_TRANSFORM_ANGLE
+//#define ROTATIONAL_TRANSFORM_ANGLE 45
 
 //#define PMW3360_CS_PIN B0
 #undef POINTING_DEVICE_INVERT_X

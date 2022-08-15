@@ -50,30 +50,16 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define _L_PTR(KC) LT(LAYER_POINTER, KC)
 
-
-// Left hand
-// Base
-// home row mods
-
 // Thumb clusters
 #define NUM_TAB LT(LAYER_NUMPAD, KC_TAB)
 #define LW_BSPC LT(LAYER_LOWER, KC_BSPC)
 #define RAI_DEL LT(LAYER_RAISE, KC_DEL)
-
-//#define NUM_BTN2 ACTION_TAP_DANCE_LAYER_TOGGLE(KC_BTN2,LAYER_NUMPAD )
-// Lower
-// Home row mods
-//#define GUI_BAK LGUI_T(KC_WBAK)
-//#define ALT_FWD LALT_T(KC_WFWD)
-//#define SFT_HOME LSFT_T(KC_HOME)
-//#define CTL_END LCTL_T(KC_END)
 
 #define ALT_F2 MT(MOD_LALT, KC_F2)
 #define CTL_F1 MT(MOD_LCTL, KC_F1)
 
 // Numpad layer home row mods
 #define SFT_UP RSFT_T(KC_UP)
-
 
 // Right hand
 #define ADJ_KCQ LT(LAYER_ADJUST, KC_Q)
@@ -329,9 +315,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
         } else {
             if (clockwise) {
-                tap_code(KC_WH_D);
-            } else {
                 tap_code(KC_WH_U);
+            } else {
+                tap_code(KC_WH_D);
             }
         }
     //}
@@ -360,7 +346,6 @@ dprint("procesrcordpoints" );
         case  LT(LAYER_RAISE, KC_ENT):
         case  LT(LAYER_LOWER, KC_SPC):
         case  KC_LCTL:
-        dprint("ltlowe" );
              layer_off(LAYER_POINTER);
              break;
 //         case TT(LAYER_POINTER):
