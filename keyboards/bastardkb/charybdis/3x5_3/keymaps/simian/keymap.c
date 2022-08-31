@@ -54,6 +54,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define NUM_TAB LT(LAYER_NUMPAD, KC_TAB)
 #define LW_BSPC LT(LAYER_LOWER, KC_BSPC)
 #define RAI_DEL LT(LAYER_RAISE, KC_DEL)
+#define NUM_ESC LT(LAYER_NUMPAD, KC_ESC)
 
 #define ALT_F2 MT(MOD_LALT, KC_F2)
 #define CTL_F1 MT(MOD_LCTL, KC_F1)
@@ -85,7 +86,7 @@ static uint16_t auto_pointer_layer_timer = 0;
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,     KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
                KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                 KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
               KC_Z,   KC_X,    KC_C,   KC_V,    KC_B,                 KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
-                           NUM_TAB, LW_BSPC, RAI_DEL,  DRG_TOG,        RAI_ENT,  LW_SPC, KC_ESC
+                           NUM_TAB, LW_BSPC, RAI_DEL,  DRG_TOG,        RAI_ENT,  LW_SPC, NUM_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
           _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
@@ -116,10 +117,10 @@ XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, 
 
 // Numpad
 #define LAYOUT_LAYER_NUMPAD                                                                                       \
-   TG(LAYER_NUMPAD), KC_NO,   KC_NO,   KC_NO,_______ ,                  KC_CIRC,   KC_P7,   KC_P8,   KC_P9, KC_ASTR,\
-         KC_NO,   KC_LEFT,  SFT_UP, KC_DOWN, KC_RIGHT, 				    KC_MINS,   KC_P4,   KC_P5,   KC_P6,  KC_EQL,\
-	       KC_LSFT,  KC_F10,   KC_F11,  KC_F12, KC_F5,				    KC_PLUS,   KC_P1,   KC_P2,   KC_P3, KC_SLSH,\
-                            _______, _______, _______,_______,           KC_ENT,   KC_P0, KC_DOT
+   TG(LAYER_NUMPAD), KC_F7,   KC_F8,  KC_F9,  KC_F12,                   KC_CIRC,   KC_7,   KC_8,   KC_9, KC_ASTR,\
+        KC_NO,       KC_F4,   KC_F5,  KC_F6,  KC_F11, 				    KC_MINS,   KC_4,   KC_5,   KC_6,  KC_EQL,\
+	       KC_LSFT,  KC_F1,   KC_F2,  KC_F3,  KC_F10,				    KC_PLUS,   KC_1,   KC_2,   KC_3, KC_SLSH,\
+                            _______, _______, _______,_______,          KC_ENT,    KC_0, KC_DOT
 
 
   #define _HOME_ROW_MOD_GACS(                                            \
@@ -184,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    [LAYER_LOWER] = LAYOUT_wrapper(HOME_ROW_MOD_LEFT_GACS(LAYOUT_LAYER_LOWER)),
    [LAYER_RAISE] = LAYOUT_wrapper(LAYOUT_LAYER_RAISE),
    [LAYER_ADJUST] = LAYOUT_wrapper(LAYOUT_LAYER_ADJUST),
-   [LAYER_NUMPAD] = LAYOUT_wrapper(LAYOUT_LAYER_NUMPAD)
+   [LAYER_NUMPAD] = LAYOUT_wrapper(HOME_ROW_MOD_GACS(LAYOUT_LAYER_NUMPAD))
 
 };
 // clang-format on
