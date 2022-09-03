@@ -21,6 +21,8 @@
 // clang-format off
 #if defined(KEYBOARD_bastardkb_charybdis_3x5)
 #    include "3x5.h"
+#elif defined(KEYBOARD_bastardkb_charybdis_3x5_3)
+#    include "3x5_3.h"
 #elif defined(KEYBOARD_bastardkb_charybdis_3x6)
 #    include "3x6.h"
 #elif defined(KEYBOARD_bastardkb_charybdis_4x6)
