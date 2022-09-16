@@ -39,6 +39,10 @@
 #    define IGNORE_MOD_TAP_INTERRUPT
 #endif  // TAPPING_TERM
 
+// Industrial encoder
+#define ENCODER_RESOLUTION 2
+//#define ENCODER_RESOLUTION 4
+
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
 // to control the feature).

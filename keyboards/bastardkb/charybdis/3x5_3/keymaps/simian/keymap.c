@@ -112,7 +112,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
 XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, XXXXXXX, XXXXXXX,XXXXXXX , RGB_TOG,       \
        RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                    XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
-       RGB_MOD, XXXXXXX, RGB_HUI, RGB_HUD, XXXXXXX,                    XXXXXXX , XXXXXXX, XXXXXXX, POINTER_DEFAULT_DPI_FORWARD, XXXXXXX,                       \
+       RGB_MOD, XXXXXXX, RGB_HUI, RGB_HUD, QK_BOOT,                    XXXXXXX , XXXXXXX, XXXXXXX, POINTER_DEFAULT_DPI_FORWARD, XXXXXXX,                       \
                             _______, _______, _______,_______,         KC_VOLD, KC_VOLU, KC_MPLY
 
 // Numpad
@@ -310,15 +310,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     //if (get_highest_layer(layer_state|default_layer_state) > 0) {
         if (IS_LAYER_ON(LAYER_ADJUST)) {
             if (clockwise) {
-                tap_code_delay(KC_VOLU, 10);
-            } else {
                 tap_code_delay(KC_VOLD, 10);
+            } else {
+                tap_code_delay(KC_VOLU, 10);
             }
         } else {
             if (clockwise) {
-                tap_code(KC_WH_U);
-            } else {
                 tap_code(KC_WH_D);
+            } else {
+                tap_code(KC_WH_U);
             }
         }
     //}
