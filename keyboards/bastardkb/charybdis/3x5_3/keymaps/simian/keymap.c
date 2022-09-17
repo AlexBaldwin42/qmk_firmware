@@ -96,9 +96,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
-             KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,       KC_7,    KC_8,    KC_9,   KC_0,            \
+          G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),               G(KC_6),  G(KC_7),G(KC_8),  G(KC_9),G(KC_0),            \
           KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-           CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
+           CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)),  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,_______,        _______, _______, _______
 
 // Raise
@@ -112,7 +112,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
 XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, XXXXXXX, XXXXXXX,XXXXXXX , RGB_TOG,       \
        RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                    XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
-       RGB_MOD, XXXXXXX, RGB_HUI, RGB_HUD, QK_BOOT,                    XXXXXXX , XXXXXXX, XXXXXXX, POINTER_DEFAULT_DPI_FORWARD, XXXXXXX,                       \
+       RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                    XXXXXXX , XXXXXXX, XXXXXXX, POINTER_DEFAULT_DPI_FORWARD, XXXXXXX,                       \
                             _______, _______, _______,_______,         KC_VOLD, KC_VOLU, KC_MPLY
 
 // Numpad
@@ -212,8 +212,8 @@ void rgb_matrix_indicators_user(void) {
         HSV hsv1 = {HSV_TEAL};
         hsv = hsv1;
     }else if (IS_LAYER_ON(LAYER_ADJUST)) {
-        HSV hsv1 = {HSV_PINK};
-        hsv = hsv1;
+        //HSV hsv1 = {HSV_PINK};
+        //hsv = hsv1;
     }
     if(!(hsv.v == 0 && hsv.s == 0 && hsv.v == 0)){
         if (hsv.v > rgb_matrix_get_val()) {
@@ -310,15 +310,29 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     //if (get_highest_layer(layer_state|default_layer_state) > 0) {
         if (IS_LAYER_ON(LAYER_ADJUST)) {
             if (clockwise) {
-                tap_code_delay(KC_VOLD, 10);
-            } else {
                 tap_code_delay(KC_VOLU, 10);
-            }
-        } else {
-            if (clockwise) {
-                tap_code(KC_WH_D);
             } else {
-                tap_code(KC_WH_U);
+                tap_code_delay(KC_VOLD, 10);
+            }
+        } else if(IS_LAYER_ON(LAYER_LOWER)) {
+            if (clockwise) {
+                 tap_code16(C(KC_TAB));
+            } else {
+                 tap_code16(C(S(KC_TAB)));
+            }
+        } else if(IS_LAYER_ON(LAYER_RAISE)) {
+            if (clockwise) {
+                 tap_code16(KC_RIGHT);
+            } else {
+                 tap_code16(KC_LEFT);
+            }
+        } else{
+            if (clockwise) {
+                //tap_code(KC_WH_D);
+                tap_code16(KC_WH_U);
+            } else {
+                //tap_code(KC_WH_U);
+                 tap_code16(KC_WH_D);
             }
         }
     //}
