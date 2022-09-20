@@ -96,9 +96,9 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
-             KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,       KC_7,    KC_8,    KC_9,   KC_0,            \
+          G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),                G(KC_6), G(KC_7), G(KC_8), G(KC_9),G(KC_0),            \
           KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-           CTL_F1,   ALT_F2,   KC_F3,   KC_F4,  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
+     CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)), KC_F5,            KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,_______,        _______, _______, _______
 
 // Raise
@@ -310,17 +310,24 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     //if (get_highest_layer(layer_state|default_layer_state) > 0) {
         if (IS_LAYER_ON(LAYER_ADJUST)) {
             if (clockwise) {
-                tap_code_delay(KC_VOLD, 10);
-            } else {
                 tap_code_delay(KC_VOLU, 10);
-            }
-        } else {
-            if (clockwise) {
-                tap_code(KC_WH_D);
             } else {
+                tap_code_delay(KC_VOLD, 10);
+            }
+        } else if(IS_LAYER_ON(LAYER_NUMPAD)) {
+            if (clockwise) {
+                tap_code(KC_RIGHT);
+            } else {
+                tap_code(KC_LEFT);
+            }
+        }else {
+            if (clockwise) {
                 tap_code(KC_WH_U);
+            } else {
+                tap_code(KC_WH_D);
             }
         }
+
     //}
     //} else {  /* Layer 0 */
         //if (index == 0) {

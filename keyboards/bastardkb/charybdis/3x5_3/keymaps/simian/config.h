@@ -25,7 +25,8 @@
   { GP28, GP21, GP6, GP7, GP8 }
 
   //{ GP28, GP15, GP6, GP7, GP8 }
-
+  
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 #define POINTER_LAYER_TIMEOUT_MS 1500
 #ifndef TAPPING_TERM
 /**
@@ -40,8 +41,10 @@
 #endif  // TAPPING_TERM
 
 // Industrial encoder
-#define ENCODER_RESOLUTION 2
-//#define ENCODER_RESOLUTION 4
+//#define ENCODER_RESOLUTION 2
+#define ENCODER_RESOLUTION 4
+#define ENCODER_DIRECTION_FLIP
+
 
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
