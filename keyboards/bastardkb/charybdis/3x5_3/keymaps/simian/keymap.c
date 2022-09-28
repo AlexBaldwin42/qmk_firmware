@@ -89,22 +89,16 @@ static uint16_t auto_pointer_layer_timer = 0;
                            NUM_TAB, LW_BSPC, RAI_DEL,  DRG_TOG,        RAI_ENT,  LW_SPC, NUM_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, _______,_______, _______, \
+          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
        _______,SNIPING_MODE, _______, DRGSCRL,_______,               _______, _______, _______, _______, _______,                                                                     \
-                            _______, KC_BTN1, KC_BTN2, _______,      _______, _______, _______
+                            KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
-<<<<<<< HEAD
           G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),               G(KC_6),  G(KC_7),G(KC_8),  G(KC_9),G(KC_0),            \
           KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
            CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)),  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
-=======
-          G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),                G(KC_6), G(KC_7), G(KC_8), G(KC_9),G(KC_0),            \
-          KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-     CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)), KC_F5,            KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
->>>>>>> 9a6023ea7f2fbef3bf928b50f10b8e5c776bf37b
                             _______, _______, _______,_______,        _______, _______, _______
 
 // Raise
@@ -320,7 +314,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             } else {
                 tap_code_delay(KC_VOLD, 10);
             }
-<<<<<<< HEAD
         } else if(IS_LAYER_ON(LAYER_LOWER)) {
             if (clockwise) {
                  tap_code16(C(KC_TAB));
@@ -340,22 +333,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             } else {
                 //tap_code(KC_WH_U);
                  tap_code16(KC_WH_D);
-=======
-        } else if(IS_LAYER_ON(LAYER_NUMPAD)) {
-            if (clockwise) {
-                tap_code(KC_RIGHT);
-            } else {
-                tap_code(KC_LEFT);
-            }
-        }else {
-            if (clockwise) {
-                tap_code(KC_WH_U);
-            } else {
-                tap_code(KC_WH_D);
->>>>>>> 9a6023ea7f2fbef3bf928b50f10b8e5c776bf37b
             }
         }
-
     //}
     //} else {  /* Layer 0 */
         //if (index == 0) {
