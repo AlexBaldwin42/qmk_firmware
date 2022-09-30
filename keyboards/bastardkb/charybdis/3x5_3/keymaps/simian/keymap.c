@@ -89,10 +89,10 @@ static uint16_t auto_pointer_layer_timer = 0;
                            NUM_TAB, LW_BSPC, RAI_DEL,  DRG_TOG,        RAI_ENT,  LW_SPC, NUM_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
-          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, DRGSCRL,_______, _______, \
+          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, _______,_______, _______, \
            _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
        _______,SNIPING_MODE, _______, DRGSCRL,_______,               _______, _______, _______, _______, _______,                                                                     \
-                            KC_BTN2, KC_BTN1, KC_BTN3, _______,      _______, _______, _______
+                            _______, KC_BTN1, KC_BTN2, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
@@ -321,6 +321,16 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                  tap_code16(C(S(KC_TAB)));
             }
         } else if(IS_LAYER_ON(LAYER_RAISE)) {
+            if (clockwise) {
+                tap_code16(KC_WH_U);
+                tap_code16(KC_WH_U);
+                tap_code16(KC_WH_U);
+            } else {
+                tap_code16(KC_WH_D);
+                tap_code16(KC_WH_D);
+                tap_code16(KC_WH_D);
+            }
+        } else if(IS_LAYER_ON(LAYER_NUMPAD)) {
             if (clockwise) {
                  tap_code16(KC_RIGHT);
             } else {
