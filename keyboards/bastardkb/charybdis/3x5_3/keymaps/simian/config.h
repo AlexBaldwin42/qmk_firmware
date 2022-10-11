@@ -28,6 +28,12 @@
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 #define POINTER_LAYER_TIMEOUT_MS 1500
 #ifndef TAPPING_TERM
+
+#undef MASTER_RIGHT
+//#undef POINTING_DEVICE_COMBINED
+//#undef POINTING_DEVICE_LEFT
+#define POINTING_DEVICE_RIGHT
+
 /**
  * brief Configure the global tapping term (default: 200ms).
  * If you have a lot of accidental mod activations, crank up the tapping term.
@@ -40,10 +46,10 @@
 #endif  // TAPPING_TERM
 
 // Industrial encoder
-#define ENCODER_RESOLUTION 2
-#define ENCODER_DIRECTION_FLIP
-//#define ENCODER_RESOLUTION 4
-#define ENCODER_DIRECTION_FLIP
+//#define ENCODER_RESOLUTION 2
+//#define ENCODER_DIRECTION_FLIP
+#define ENCODER_RESOLUTION 4
+//#define ENCODER_DIRECTION_FLIP
 
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
