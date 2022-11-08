@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-#undef MATRIX_ROW_PINS
-#define MATRIX_ROW_PINS \
+//#undef MATRIX_ROW_PINS
+//#define MATRIX_ROW_PINS \
     { GP26, GP5, GP4, GP9 }
   //{ GP27, GP5, GP4, GP9 } // switched
 
-#undef MATRIX_COL_PINS
-#define MATRIX_COL_PINS \
-  { GP28, GP21, GP6, GP7, GP8 }
+//#undef MATRIX_COL_PINS
+//#define MATRIX_COL_PINS \
+//  { GP28, GP21, GP6, GP7, GP8 }
 //  { GP28, GP21, GP29, GP7, GP8 }
 
   //{ GP28, GP15, GP6, GP7, GP8 }
@@ -30,7 +30,8 @@
 #define POINTER_LAYER_TIMEOUT_MS 1500
 #ifndef TAPPING_TERM
 
-#undef MASTER_RIGHT
+//#undef MASTER_RIGHT
+#define MASTER_RIGHT
 //#undef POINTING_DEVICE_COMBINED
 //#undef POINTING_DEVICE_LEFT
 #define POINTING_DEVICE_RIGHT
@@ -118,9 +119,11 @@
 #endif  // RGB_MATRIX_ENABLE
 
 #ifdef POINTING_DEVICE_ENABLE
-#define PMW3389_CS_PIN GP14
-//#define PMW3360_CS_PIN GP14
-//#undef PMW3360_CS_PIN
+//#define PMW3389_CS_PIN GP16
+//#define PMW3360_CS_PIN GP16 v3
+#undef PMW33XX_CS_PIN GP14
+#define PMW33XX_CS_PIN GP16
+/////#undef PMW3360_CS_PIN
 #undef SPI_SCK_PIN
 #define SPI_SCK_PIN GP22
 #undef SPI_MOSI_PIN
