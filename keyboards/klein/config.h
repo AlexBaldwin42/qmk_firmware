@@ -32,15 +32,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 5
 
+#define DEBOUNCE 5
+
+#define DIODE_DIRECTION ROW2COL
+/*
 // wiring of each half
 #define MATRIX_ROW_PINS { C6, D7, E6, B4 }
 #define MATRIX_COL_PINS { F6, F7, B1, B3, B2 }
-#define DIODE_DIRECTION ROW2COL
-
+*/
 /* Serial settings */
 #define USE_SERIAL
 /* serial.c configuration for split keyboard */
-#define SOFT_SERIAL_PIN D2
+//#define SOFT_SERIAL_PIN D2
 //#define SPLIT_LAYER_STATE_ENABLE
 //#define SPLIT_USB_DETECT
 #define SERIAL_USE_MULTI_TRANSACTION
