@@ -110,6 +110,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format on
+#    ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_user(void) {
+   HSV hsv = {0,0,0};
+
+     if (IS_LAYER_ON(LAYER_POINTER)) {
+        HSV hsv1 = {HSV_GREEN};
+        hsv = hsv1;
+
+//    } else if (IS_LAYER_ON(LAYER_NUMPAD)) {
+  //    HSV hsv1 = {HSV_BLUE};
+   //     hsv = hsv1;
+    } else if (IS_LAYER_ON(LAYER_RAISE)) {
+        HSV hsv1 = {HSV_MAGENTA};
+        hsv = hsv1;
+    } else if (IS_LAYER_ON(LAYER_LOWER)) {
+        HSV hsv1 = {HSV_TEAL};
+        hsv = hsv1;
+//    }else if (IS_LAYER_ON(LAYER_ADJUST)) {
+        //HSV hsv1 = {HSV_PINK};
+        //hsv = hsv1;
+    }
+    if(!(hsv.v == 0 && hsv.s == 0 && hsv.v == 0)){
+        if (hsv.v > rgb_matrix_get_val()) {
+            hsv.v = rgb_matrix_get_val();
+        }
+        RGB rgb = hsv_to_rgb(hsv);
+        rgb_matrix_set_color_all(rgb.r, rgb.g,rgb.b);
+    }
+
+}
+#    endif
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
