@@ -21,4 +21,5 @@
 
 // wiring of each half
 #define MATRIX_ROW_PINS { GP5, GP6, GP7, GP8 }
-#define MATRIX_COL_PINS { GP23, GP20, GP22, GP26, GP27  }
+//#define MATRIX_COL_PINS { GP23, GP20, GP22, GP26, GP27  }
+#define MATRIX_COL_PINS { GP22, GP27, GP20, GP23, GP26  }
