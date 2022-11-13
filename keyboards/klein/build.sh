@@ -1,1 +1,1 @@
-qmk compile -j 0 -kb klein/rp2040 -km simian
+qmk compile -kb klein/rp2040 -km simian
