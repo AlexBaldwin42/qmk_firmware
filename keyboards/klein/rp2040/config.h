@@ -16,8 +16,11 @@
 #define I2C_DRIVER I2CD2
 
 /* communication between sides */
+#define MASTER_RIGHT
 #define SERIAL_PIO_USE_PIO1
 #define SOFT_SERIAL_PIN GP1
+#define SPLIT_USB_DETECT
+
 
 // wiring of each half
 #define MATRIX_ROW_PINS { GP5, GP6, GP7, GP8 }

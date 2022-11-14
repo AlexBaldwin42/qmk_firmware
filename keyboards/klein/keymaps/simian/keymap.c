@@ -70,7 +70,7 @@ enum charybdis_keymap_layers {
 #define LAYOUT_LAYER_LOWER                                                                                                  \
           G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),               G(KC_6),  G(KC_7),G(KC_8),  G(KC_9),G(KC_0),            \
           KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,               KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
- CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)), KC_F5,           KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
+           CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)),KC_F5,            KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
                             _______, _______, _______,               _______, _______, _______
 
 // Raise
@@ -82,9 +82,9 @@ enum charybdis_keymap_layers {
 
 // Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
-XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                QK_BOOT, XXXXXXX, XXXXXXX,XXXXXXX , RGB_TOG,       \
-       RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                  XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
-       RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                  XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       \
+XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                QK_BOOT, XXXXXXX, XXXXXXX,XXXXXXX , XXXXXXX,       \
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                  XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
+       XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,                  XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       \
                             _______, _______, _______,               KC_VOLD, KC_VOLU, KC_MPLY
 
 // Numpad
