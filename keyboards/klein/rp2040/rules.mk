@@ -6,6 +6,7 @@ PICO_INTRINSICS_ENABLE = no
 
 LTO_ENABLED = no
 
+EXTRAKEY_ENABLE = yes
 
 # Ignore some warnings during the build, likely to be fixed before RP2040 PR is merged
 ALLOW_WARNINGS = yes

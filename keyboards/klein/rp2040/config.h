@@ -19,7 +19,7 @@
 #define MASTER_RIGHT
 #define SERIAL_PIO_USE_PIO1
 #define SOFT_SERIAL_PIN GP1
-#define SPLIT_USB_DETECT
+//#define SPLIT_USB_DETECT
 
 
 // wiring of each half
