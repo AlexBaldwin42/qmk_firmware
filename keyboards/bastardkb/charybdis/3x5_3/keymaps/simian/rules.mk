@@ -3,7 +3,7 @@
 POINTING_DEVICE_DRIVER = pmw3389
 ENCODER_ENABLE = yes
 CAPS_WORD_ENABLE = yes
-
+COMBO_ENABLE = yes
 
 # # AUDIO_SUPPORTED = no        # Audio is not supported
 # RGB_MATRIX_SUPPORTED = no  # RGB matrix is supported and enabled by default

@@ -47,9 +47,12 @@
 #    define IGNORE_MOD_TAP_INTERRUPT
 #endif  // TAPPING_TERM
 
+#define COMBO_COUNT 2
+
+
 // Industrial encoder
-#define ENCODER_RESOLUTION 2
-//#define ENCODER_RESOLUTION 4
+//#define ENCODER_RESOLUTION 2
+#define ENCODER_RESOLUTION 4
 //#define ENCODER_DIRECTION_FLIP
 
 #ifdef RGB_MATRIX_ENABLE

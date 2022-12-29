@@ -80,7 +80,22 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Home row mods
 #define CTL_EQL RCTL_T(KC_EQL)
 
+// Combos
+enum combos{
+  DF_DQT,
+//AS_QT
+  SD_QT
+};
 
+const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
+//const uint16_t PROGMEM as_combo[] = {LGUI_T(KC_A), LALT_T(KC_S), COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {LALT_T(KC_S), LSFT_T(KC_D),  COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [DF_DQT] = COMBO(df_combo, KC_DQT),
+  //[AS_QT] = COMBO(as_combo, KC_QUOT)
+  [SD_QT] = COMBO(sd_combo, KC_QUOT)
+};
 
 #define LAYOUT_LAYER_BASE                                                                                             \
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,     KC_T,                 KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
