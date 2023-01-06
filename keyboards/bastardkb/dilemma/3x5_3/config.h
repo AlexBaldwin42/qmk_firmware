@@ -31,8 +31,10 @@
 #define SOFT_SERIAL_PIN GP1
 
 /* RGB settings. */
-// #define RGB_DI_PIN GP0  // Per-key.
-#define RGB_DI_PIN GP10 // Underglow.
+#define RGB_DI_PIN GP10
+
+/* OLED config. */
+#define OLED_DISPLAY_128X64pick
 
 /* VBUS detection. */
 #define USB_VBUS_PIN GP19
@@ -40,6 +42,10 @@
 /* CRC. */
 #define CRC8_USE_TABLE
 #define CRC8_OPTIMIZE_SPEED
+
+/* Rotary encoder. */
+#define ENCODERS_PAD_A { GP24 }
+#define ENCODERS_PAD_B { GP25 }
 
 /* Cirque trackpad over SPI. */
 #define SPI_SCK_PIN GP22
@@ -49,19 +55,14 @@
 #undef CIRQUE_PINNACLE_DIAMETER_MM
 #define CIRQUE_PINNACLE_DIAMETER_MM 40
 
-/* OLED over i2c. */
-#define I2C1_CLOCK_SPEED 400000
-#define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_16_9
-#define OLED_DISPLAY_HEIGHT 128
-
 /* Reset. */
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP17
 
 /* RGB settings. */
-#define RGBLED_NUM 36
+#define RGBLED_NUM 72
 #define RGBLED_SPLIT \
-    { 18, 18 }
+    { 36, 36 }
 
 /* RGB matrix support. */
 #ifdef RGB_MATRIX_ENABLE
