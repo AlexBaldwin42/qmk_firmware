@@ -38,6 +38,9 @@
 // Pointing device is on the right split.
 #define POINTING_DEVICE_RIGHT
 
+// Enables support for extended i16 mouse reports (instead of i8).
+#define MOUSE_EXTENDED_REPORT
+
 // Limits the frequency that the sensor is polled for motion.
 #define POINTING_DEVICE_TASK_THROTTLE_MS 10
 
@@ -47,3 +50,4 @@
 // Configure for the Cirque model used on the Dilemma.
 #define CIRQUE_PINNACLE_DIAMETER_MM 35
 #define CIRQUE_PINNACLE_CURVED_OVERLAY
+#define POINTING_DEVICE_GESTURES_SCROLL_ENABLE // Circular scroll.
