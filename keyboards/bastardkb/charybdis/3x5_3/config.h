@@ -40,17 +40,19 @@
 #define ENCODERS_PAD_A_RIGHT { GP15 } //completely unused pin
 #define ENCODERS_PAD_B_RIGHT { GP16 } //completely unused pin
 
-/* RGB settings. */
+/* RGB settings. 
 #define RGBLED_NUM 48
+ * */
 #define RGBLED_SPLIT \
     { 30, 18 }
 
 /* RGB matrix support. */
 #ifdef RGB_MATRIX_ENABLE
+#    define RGB_MATRIX_LED_COUNT 48  
 #    define SPLIT_TRANSPORT_MIRROR
 #    define DRIVER_LED_TOTAL RGBLED_NUM
 #    define RGB_MATRIX_SPLIT RGBLED_SPLIT
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 50
+//#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 50
 #    define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED
 #    define RGB_MATRIX_KEYPRESSES

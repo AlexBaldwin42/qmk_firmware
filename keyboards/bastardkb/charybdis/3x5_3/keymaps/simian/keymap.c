@@ -103,39 +103,39 @@ combo_t key_combos[COMBO_COUNT] = {
               KC_Z,   KC_X,    KC_C,   KC_V,    KC_B,                 KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
                            NUM_TAB, LW_BSPC, RAI_DEL,  DRG_TOG,        RAI_ENT,  LW_SPC, NUM_ESC
 
-#define LAYOUT_LAYER_POINTER                                                                                                                                        \
-          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE, _______,_______, _______, \
-           _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______,                                                                       \
-       _______,SNIPING_MODE, _______, DRGSCRL,_______,               _______, _______, _______, _______, _______,                                                                     \
+#define LAYOUT_LAYER_POINTER                                                                                       \
+          _______ , _______, _______, _______,_______,               KC_BTN1,SNIPING_MODE,_______,_______,_______, \
+           _______, _______, _______,_______ ,_______,               KC_BTN2, _______, _______, _______, _______, \
+       _______,SNIPING_MODE, _______, DRGSCRL,_______,               _______, _______, _______, _______, _______,\
                             _______, KC_BTN1, KC_BTN2, _______,      _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                                  \
-          G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),               G(KC_6),  G(KC_7),G(KC_8),  G(KC_9),G(KC_0),            \
-          KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,         \
-           CTL_F1,   ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)),  KC_F5,                KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,         \
+          G(KC_1), G(KC_2), G(KC_3),  G(KC_4),G(KC_5),                G(KC_6), G(KC_7), G(KC_8), G(KC_9),G(KC_0),\
+          KC_WBAK, KC_WFWD, KC_HOME,   KC_END, KC_APP,                KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_F6,\
+           CTL_F1,ALT_F2,C(G(KC_LEFT)),C(G(KC_RIGHT)),KC_F5,          KC_F5,   KC_F7,    KC_F8,  ALT_F9, CTL_F10,\
                             _______, _______, _______,_______,        _______, _______, _______
 
 // Raise
-#define LAYOUT_LAYER_RAISE                                                                                                  \
-      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,          \
-      KC_QUOT,KC_DQT,   KC_LPRN, KC_RPRN, KC_PGUP,                     KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,KC_BSLS,        \
-      KC_ESC,_______,KC_ESC,KC_ENT,KC_PGDOWN,                          KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
+#define LAYOUT_LAYER_RAISE                                                                                        \
+      KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                     KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,\
+      KC_QUOT,  KC_DQT, KC_LPRN, KC_RPRN, KC_PGUP,                     KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,KC_BSLS,\
+      KC_ESC,  _______,  KC_ESC,  KC_ENT, KC_PGDN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC,KC_PIPE, \
                             _______, _______, _______, _______,        _______, _______, _______
 
 // Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                                                 \
 XXXXXXX, TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                  QK_BOOT, XXXXXXX, XXXXXXX,XXXXXXX , RGB_TOG,       \
        RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                    XXXXXXX, KC_WBAK, KC_WFWD, KC_APP, XXXXXXX,                        \
-       RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                    XXXXXXX , XXXXXXX, XXXXXXX, POINTER_DEFAULT_DPI_FORWARD, XXXXXXX,                       \
+       RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                    XXXXXXX, XXXXXXX, XXXXXXX, POINTER_DEFAULT_DPI_FORWARD, XXXXXXX,                       \
                             _______, _______, _______,_______,         KC_VOLD, KC_VOLU, KC_MPLY
 
 // Numpad
 #define LAYOUT_LAYER_NUMPAD                                                                                       \
-   TG(LAYER_NUMPAD), KC_F9,   KC_F8,  KC_F7,  KC_F12,                   KC_CIRC,   KC_7,   KC_8,   KC_9, KC_ASTR,\
-        KC_NO,       KC_F6,   KC_F5,  KC_F4,  KC_F11, 				    KC_MINS,   KC_4,   KC_5,   KC_6,  KC_EQL,\
-	       KC_LSFT,  KC_F3,   KC_F2,  KC_F1,  KC_F10,				    KC_PLUS,   KC_1,   KC_2,   KC_3, KC_SLSH,\
-                            _______, _______, _______,_______,          KC_ENT,    KC_0, KC_DOT
+   TG(LAYER_NUMPAD), KC_F9,   KC_F8,  KC_F7,  KC_F12,                  KC_CIRC,   KC_7,   KC_8,   KC_9, KC_ASTR,\
+             KC_NO,  KC_F6,   KC_F5,  KC_F4,  KC_F11,     		  	     KC_MINS,   KC_4,   KC_5,   KC_6,  KC_EQL,\
+  	       KC_LSFT,  KC_F3,   KC_F2,  KC_F1,  KC_F10,		      		     KC_PLUS,   KC_1,   KC_2,   KC_3, KC_SLSH,\
+                            _______, _______, _______,_______,          KC_ENT,   KC_0, KC_DOT
 
 
   #define _HOME_ROW_MOD_GACS(                                            \
@@ -210,7 +210,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef POINTING_DEVICE_ENABLE
 
 #    ifdef RGB_MATRIX_ENABLE
-void rgb_matrix_indicators_user(void) {
+bool rgb_matrix_indicators_user(void) {
    HSV hsv = {0,0,0};
 
      if (IS_LAYER_ON(LAYER_POINTER)) {
@@ -237,7 +237,7 @@ void rgb_matrix_indicators_user(void) {
         RGB rgb = hsv_to_rgb(hsv);
         rgb_matrix_set_color_all(rgb.r, rgb.g,rgb.b);
     }
-
+  return true;
 }
 #    endif
 
@@ -252,6 +252,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case LALT_T(KC_S):
         case LALT_T(KC_L):
             return TAPPING_TERM + 50;
+        case LCTL_T(KC_Z):
+            return TAPPING_TERM - 50;
         default:
             return TAPPING_TERM;
     }

@@ -15,19 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
-//#undef MATRIX_ROW_PINS
+/*#undef MATRIX_ROW_PINS
 //#define MATRIX_ROW_PINS \
     { GP26, GP5, GP4, GP9 }
   //{ GP27, GP5, GP4, GP9 } // switched
-
+*/
+/*
 //#undef MATRIX_COL_PINS
 //#define MATRIX_COL_PINS \
 //  { GP28, GP21, GP6, GP7, GP8 }
 //  { GP28, GP21, GP29, GP7, GP8 }
-
   //{ GP28, GP15, GP6, GP7, GP8 }
+  */
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
-#define POINTER_LAYER_TIMEOUT_MS 1500
+#define POINTER_LAYER_TIMEOUT_MS 8500
 #ifndef TAPPING_TERM
 
 //#undef MASTER_RIGHT
