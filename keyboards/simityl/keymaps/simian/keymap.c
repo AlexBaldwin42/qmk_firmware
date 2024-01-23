@@ -240,3 +240,15 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 // rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
 #endif
+
+
+bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch(keycode) {
+        case DRGSCRL:
+        case SNIPING:
+            return true;
+        default:
+            return false;
+    }
+    return  is_mouse_record_user(keycode, record);
+}
