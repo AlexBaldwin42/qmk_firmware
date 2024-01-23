@@ -181,9 +181,9 @@ bool rgb_matrix_indicators_user(void) {
         hsv = (HSV){HSV_MAGENTA};
     } else if (IS_LAYER_ON(LAYER_LOWER)) {
         hsv = (HSV){HSV_TEAL};
-    } else if (IS_LAYER_ON(LAYER_ADJUST)) {
+    } /*else if (IS_LAYER_ON(LAYER_ADJUST)) {
         hsv = (HSV){HSV_PINK};
-    }
+    }*/
     // If hsv is not the default (0,0,0), update the RGB matrix
     if (hsv.h != 0 || hsv.s != 0 || hsv.v != 0) {
         // Cap hsv.v to the maximum brightness level
