@@ -196,23 +196,21 @@ bool rgb_matrix_indicators_user(void) {
 
 #endif // RGB_MATRIX_ENABLE
 
-#ifndef VIA_ENABLE 
 // This does not work with vial
-    #ifdef TAPPING_TERM_PER_KEY
-    uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-        switch (keycode) {
-            case LGUI_T(KC_A):
-            case RGUI_T(KC_SCLN):
-                return TAPPING_TERM + 50;
-            case LALT_T(KC_S):
-            case LALT_T(KC_L):
-                return TAPPING_TERM + 50;
-            default:
-                return TAPPING_TERM;
-        }
+#ifdef TAPPING_TERM_PER_KEY
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LGUI_T(KC_A):
+        case RGUI_T(KC_SCLN):
+            return TAPPING_TERM + 50;
+        case LALT_T(KC_S):
+        case LALT_T(KC_L):
+            return TAPPING_TERM + 50;
+        default:
+            return TAPPING_TERM;
     }
-    #endif //TAPPING_TERM_PER_KEY
-#endif //VIA_ENABLE
+}
+#endif //TAPPING_TERM_PER_KEY
 
 #ifdef POINTING_DEVICE_ENABLE
 void pointing_device_init_user(void) {

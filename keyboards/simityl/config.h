@@ -18,19 +18,6 @@
 
 #pragma once
 
-#ifdef VIA_ENABLE
-/* VIA configuration. */
-#    define DYNAMIC_KEYMAP_LAYER_COUNT 16
-#    ifdef VIAL_ENABLE
-#        define VIAL_KEYBOARD_UID \
-          { 0x44, 0x9f,  0x26, 0x53, 0xD9, 0x7B, 0x72,  0x4F }
-#        define  VIAL_UNLOCK_COMBO_ROWS \
-            { 0, 4 }
-#        define VIAL_UNLOCK_COMBO_COLS \
-            { 0, 0 }
-#    endif // VIAL_ENABLE
-#endif // VIA_ENABLE
-
 #define CHARYBDIS_CONFIG_SYNC
 
 /* Handedness. */
@@ -82,13 +69,16 @@
 #    define SPLIT_TRANSPORT_MIRROR
 #    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED
-//#    define RGB_MATRIX_KEYPRESSES deprecated?
+#    define RGB_MATRIX_KEYPRESSES
+#    define RGB_MATRIX_LED_COUNT 48
+#    define RGB_MATRIX_SPLIT \
+        { 30, 18 }
 /*#    define RGB_MATRIX_LED_COUNT 36
 #    define RGB_MATRIX_SPLIT { 18, 18 } in info.json*/
 
 // Startup values.
-#    define RGB_MATRIX_DEFAULT_HUE 0
-#    define RGB_MATRIX_DEFAULT_SAT 255
+//#    define RGB_MATRIX_DEFAULT_HUE 0
+//#    define RGB_MATRIX_DEFAULT_SAT 255
 #    define RGB_MATRIX_DEFAULT_VAL 64
 
 #    define SPLIT_LAYER_STATE_ENABLE // form layer change indicator
