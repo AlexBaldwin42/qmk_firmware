@@ -79,10 +79,10 @@ combo_t key_combos[COMBO_COUNT] = {
                             NUM_TAB,LW_BSPC, RAI_DEL,               RAI_ENT,  LW_SPC, NUM_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                       \
-        _______, _______, _______, _______, _______,               KC_BTN1, _______, _______, _______, _______,    \
+        _______, _______, _______, _______, _______,               KC_BTN1, DRGSCRL, _______, _______, _______,    \
         _______, _______, _______, _______, _______,               KC_BTN2, _______, _______, _______, _______,    \
         _______, _______, _______, _______, _______,               _______, _______, _______, _______, _______,    \
-                          DRGSCRL, KC_BTN1, KC_BTN2,               _______, _______, _______
+                          _______, KC_BTN1, KC_BTN2,               _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                         \
@@ -246,6 +246,7 @@ bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
     switch(keycode) {
         case DRGSCRL:
         case SNIPING:
+        case KC_LCTL:
             return true;
         default:
             return false;
