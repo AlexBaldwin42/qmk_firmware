@@ -247,9 +247,26 @@ bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
         case DRGSCRL:
         case SNIPING:
         case KC_LCTL:
+        case RAI_ENT:
+        case LW_SPC:
+        case NUM_ESC:
             return true;
         default:
             return false;
     }
     return  is_mouse_record_user(keycode, record);
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        // toggle auto mouse enable key
+        case RAI_ENT:
+        case LW_SPC:
+        case NUM_ESC:
+        case LCTL_T(KC_Z):
+        if(record->event.pressed) { // key down
+                auto_mouse_layer_off(); // disable target layer if needed
+            } // do nothing on key up
+            return true;
+    }
 }
