@@ -20,6 +20,7 @@
 #    include "timer.h"
 #endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
+<<<<<<< HEAD
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
   debug_enable=true;
@@ -28,6 +29,8 @@ void keyboard_post_init_user(void) {
   //debug_mouse=true;
  print("keyboard_post_init_user");
 }
+=======
+>>>>>>> e68f52e489f2fc4425d877f2c08613619ffa4d16
 enum charybdis_keymap_layers {
     LAYER_BASE = 0,
     LAYER_FUNCTION,
@@ -64,7 +67,11 @@ static uint16_t auto_pointer_layer_timer = 0;
 /** \brief QWERTY layout (3 rows, 10 columns). */
 #define LAYOUT_LAYER_BASE                                                                     \
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
+<<<<<<< HEAD
        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, \
+=======
+       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_QUOT, \
+>>>>>>> e68f52e489f2fc4425d877f2c08613619ffa4d16
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       ESC_MED, SPC_NAV, TAB_FUN, ENT_SYM, BSP_NUM
 

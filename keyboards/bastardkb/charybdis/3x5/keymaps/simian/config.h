@@ -15,7 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #pragma once
+#define MASTER_RIGHT
 
+//Size reduction
+#ifndef NO_DEBUG
+#define NO_DEBUG
+#endif // !NO_DEBUG
+#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
+#define NO_PRINT
+#endif // !NO_PRINT
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
 #ifndef TAPPING_TERM
 /**
  * \brief Configure the global tapping term (default: 200ms).
@@ -28,9 +38,9 @@
 #    define TAPPING_TERM 140
 #    define IGNORE_MOD_TAP_INTERRUPT
 #endif  // TAPPING_TERM
-
 /* RGB Matrix. */
 
+// #undef RGB_MATRIX_ENABLE
 #ifdef RGB_MATRIX_ENABLE
 // Disable control of RGB matrix by keycodes (must use firmware implementation
 // to control the feature).
@@ -39,11 +49,18 @@
 // Limit maximum brightness to keep power consumption reasonable, and avoid
 // disconnects.
 #    undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 64
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 90
 
 // Rainbow swirl as startup mode.
 #    define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
+// #    define ENABLE_RGB_MATRIX_CYCLE_PINWHEEL
+// #    define ENABLE_RGB_MATRIX_CYCLE_SPIRAL
+// #    define ENABLE_RGB_MATRIX_RAINDROPS
+// #    define ENABLE_RGB_MATRIX_HUE_PENDULUM
+// #    define ENABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
+// #    define SPLIT_LAYER_STATE_ENABLE
 #    define RGB_MATRIX_STARTUP_MODE RGB_MATRIX_CYCLE_LEFT_RIGHT
+
 
 // Slow swirl at startup.
 #    define RGB_MATRIX_STARTUP_SPD 32
@@ -68,13 +85,14 @@
 //#define CHARYBDIS_DEFAULT_DPI_CONFIG_STEP 64000 // 200 400
 
 #ifdef POINTING_DEVICE_ENABLE
+#define PMW3360_CS_PIN B0
 #undef POINTING_DEVICE_INVERT_X
 #define POINTING_DEVICE_INVERT_Y
 #define CHARYBDIS_DRAGSCROLL_REVERSE_Y
 
 #    define CHARYBDIS_POINTER_ACCELERATION_ENABLE
 
-//#define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+#    define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
 //#    ifndef CHARYBDIS_MINIMUM_DEFAULT_DPI
 #        define CHARYBDIS_MINIMUM_DEFAULT_DPI 400

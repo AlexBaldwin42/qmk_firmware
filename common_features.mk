@@ -109,7 +109,7 @@ ifeq ($(strip $(MOUSEKEY_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/mousekey.c
 endif
 
-VALID_POINTING_DEVICE_DRIVER_TYPES := adns5050 adns9800 analog_joystick cirque_pinnacle_i2c cirque_pinnacle_spi pmw3360 pimoroni_trackball custom
+VALID_POINTING_DEVICE_DRIVER_TYPES := adns5050 adns9800 analog_joystick cirque_pinnacle_i2c cirque_pinnacle_spi pmw3360 pmw3389 pimoroni_trackball custom
 POINTING_DEVICE_DRIVER ?= custom
 ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
     ifeq ($(filter $(POINTING_DEVICE_DRIVER),$(VALID_POINTING_DEVICE_DRIVER_TYPES)),)
@@ -142,6 +142,9 @@ ifeq ($(strip $(POINTING_DEVICE_ENABLE)), yes)
             OPT_DEFS += -DSTM32_SPI -DHAL_USE_I2C=TRUE
             QUANTUM_LIB_SRC += i2c_master.c
         else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), pmw3360)
+            OPT_DEFS += -DSTM32_SPI -DHAL_USE_SPI=TRUE
+            QUANTUM_LIB_SRC += spi_master.c
+		else ifeq ($(strip $(POINTING_DEVICE_DRIVER)), pmw3389)
             OPT_DEFS += -DSTM32_SPI -DHAL_USE_SPI=TRUE
             QUANTUM_LIB_SRC += spi_master.c
         endif
@@ -179,6 +182,7 @@ else
     else ifeq ($(PLATFORM),CHIBIOS)
       ifneq ($(filter STM32F3xx_% STM32F1xx_% %_STM32F401xC %_STM32F401xE %_STM32F405xG %_STM32F411xE %_STM32F072xB %_STM32F042x6 %_GD32VF103xB %_GD32VF103x8, $(MCU_SERIES)_$(MCU_LDSCRIPT)),)
         OPT_DEFS += -DEEPROM_DRIVER
+        OPT_DEFS += -DSTM32_EEPROM_ENABLE
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         SRC += eeprom_driver.c
         SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32.c
@@ -459,6 +463,52 @@ ifeq ($(strip $(VIA_ENABLE)), yes)
     BOOTMAGIC_ENABLE := yes
     SRC += $(QUANTUM_DIR)/via.c
     OPT_DEFS += -DVIA_ENABLE
+endif
+
+ifeq ($(strip $(VIAL_ENABLE)), yes)
+    QMK_SETTINGS ?= yes
+    TAP_DANCE_ENABLE ?= yes
+    COMBO_ENABLE ?= yes
+    SRC += $(QUANTUM_DIR)/vial.c
+    EXTRAINCDIRS += $(KEYMAP_OUTPUT)
+    OPT_DEFS += -DVIAL_ENABLE -DNO_DEBUG -DSERIAL_NUMBER=\"vial:f64c2b3c\"
+
+$(QUANTUM_DIR)/vial.c: $(KEYMAP_OUTPUT)/vial_generated_keyboard_definition.h
+
+$(KEYMAP_OUTPUT)/vial_generated_keyboard_definition.h: $(KEYMAP_PATH)/vial.json
+	python3 util/vial_generate_definition.py $(KEYMAP_PATH)/vial.json $(KEYMAP_OUTPUT)/vial_generated_keyboard_definition.h
+endif
+
+ifeq ($(strip $(VIAL_INSECURE)), yes)
+    OPT_DEFS += -DVIAL_INSECURE
+endif
+
+ifeq ($(strip $(VIAL_ENCODERS_ENABLE)), yes)
+    OPT_DEFS += -DVIAL_ENCODERS_ENABLE
+endif
+
+ifeq ($(strip $(VIALRGB_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/vialrgb.c
+    OPT_DEFS += -DVIALRGB_ENABLE
+endif
+
+ifeq ($(strip $(DYNAMIC_KEYMAP_ENABLE)), yes)
+    OPT_DEFS += -DDYNAMIC_KEYMAP_ENABLE
+    SRC += $(QUANTUM_DIR)/dynamic_keymap.c
+endif
+
+ifeq ($(strip $(QMK_SETTINGS)), yes)
+    AUTO_SHIFT_ENABLE := yes
+    SRC += $(QUANTUM_DIR)/qmk_settings.c
+    OPT_DEFS += -DQMK_SETTINGS \
+        -DAUTO_SHIFT_NO_SETUP -DAUTO_SHIFT_REPEAT_PER_KEY -DAUTO_SHIFT_NO_AUTO_REPEAT_PER_KEY \
+        -DTAPPING_TERM_PER_KEY -DPERMISSIVE_HOLD_PER_KEY -DIGNORE_MOD_TAP_INTERRUPT_PER_KEY -DTAPPING_FORCE_HOLD_PER_KEY -DRETRO_TAPPING_PER_KEY \
+        -DCOMBO_TERM_PER_COMBO
+endif
+
+ifeq ($(strip $(DIP_SWITCH_ENABLE)), yes)
+    OPT_DEFS += -DDIP_SWITCH_ENABLE
+    SRC += $(QUANTUM_DIR)/dip_switch.c
 endif
 
 VALID_MAGIC_TYPES := yes

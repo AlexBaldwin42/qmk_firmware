@@ -33,17 +33,17 @@
   {   KC_NO, KC_NO,   KC_NO, k72, k70 },                \
 }
 
-void keyboard_post_init_user(void) {
-    //charybdis_set_pointer_sniping_enabled(true);
-    //pointing_device_set_cpi(12800);
-  // Customise these values to desired behaviour
-  debug_enable=true;
-  //debug_matrix=true;
-  //debug_keyboard=true;
-  //debug_mouse=true;
-  //pointing_device_set_cpi(10);
-  print("hello");
-}
+// void keyboard_post_init_user(void) {
+//     //charybdis_set_pointer_sniping_enabled(true);
+//     //pointing_device_set_cpi(12800);
+//   // Customise these values to desired behaviour
+//   debug_enable=true;
+//   //debug_matrix=true;
+//   //debug_keyboard=true;
+//   //debug_mouse=true;
+//   //pointing_device_set_cpi(10);
+//   print("hello");
+// }
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    include "timer.h"
 #endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -77,11 +77,11 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif  // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif      // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-#define ESC_MED LT(LAYER_MEDIA, KC_ESC)
-#define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
-#define TAB_FUN LT(LAYER_FUNCTION, KC_TAB)
-#define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
-#define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
+// #define ESC_MED LT(LAYER_MEDIA, KC_ESC)
+// #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
+// #define TAB_FUN LT(LAYER_FUNCTION, KC_TAB)
+// #define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
+// #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
 //#define _L_PTR(KC) LT(LAYER_POINTER, KC)
 #define _L_PTR(KC) LT(LAYER_POINTER, KC)
 
@@ -89,13 +89,13 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Left hand
 // Base
 // home row mods
-#define GUI_A LGUI_T(KC_A)
-#define ALT_S LALT_T(KC_S)
-#define SFT_D LSFT_T(KC_D)
-#define CTL_F LCTL_T(KC_F)
+// #define GUI_A LGUI_T(KC_A)
+// #define ALT_S LALT_T(KC_S)
+// #define SFT_D LSFT_T(KC_D)
+// #define CTL_F LCTL_T(KC_F)
 
-#define CTRL_TB MT(MOD_LCTL, KC_TAB)
-#define ALT_X MT(MOD_LALT, KC_X)
+// #define CTRL_TB MT(MOD_LCTL, KC_TAB)
+// #define ALT_X MT(MOD_LALT, KC_X)
 #define CTL_V MT(MOD_LCTL, KC_V)
 #define CTL_Z MT(MOD_LCTL, KC_Z)
 
@@ -145,27 +145,21 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Home row mods
 #define CTL_EQL RCTL_T(KC_EQL)
 // Don't work :(
-#define SFT_LCBR RSFT_T(KC_LCBR)
-#define ALT_RCBR LALT_T(KC_RCBR)
-#define GUI_BSLS RGUI_T(KC_BSLS)
+// #define SFT_LCBR RSFT_T(KC_LCBR)
+// #define ALT_RCBR LALT_T(KC_RCBR)
+/// #define GUI_BSLS RGUI_T(KC_BSLS)
 
 #define RSFT_TIL MT(MOD_RSFT, KC_TILD)
 
 
 
-// clang-format off
-/** \brief QWERTY layout (3 rows, 10 columns). */
-// #define LAYOUT_LAYER_BASE
-//        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-//        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,
-//        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,
-//                       ESC_MED, SPC_NAV, TAB_FUN, ENT_SYM, BSP_NUM
+
 #define LAYOUT_LAYER_BASE                                                                                             \
         ADJ_KCQ,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P, \
         KC_A,   KC_S,   KC_D,   KC_F,    KC_G,                         KC_H,   KC_J,    KC_K,  KC_L,   KC_SCLN,  \
         KC_Z,   KC_X,    KC_C,   CTL_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT,ADJ_KCSLASH, \
                                  NUM_TAB, LW_BSPC, RAI_DEL,   RAI_ENT,  LW_SPC
-/** Convenience row shorthands. */
+// // /** Convenience row shorthands. */
 #define _______________DEAD_HALF_ROW_______________ XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
 #define ______________HOME_ROW_GACS_L______________ KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX
 #define ______________HOME_ROW_GACS_R______________ XXXXXXX, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI
@@ -180,7 +174,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 // Raise
 #define LAYOUT_LAYER_RAISE                                                                                                  \
       KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_QUOT, KC_GRV,          \
-      KC_LABK, KC_RABK, KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,GUI_BSLS,        \
+      KC_QUOT,KC_DQT,   KC_LPRN, KC_RPRN, KC_PGUP,                      KC_MINS, CTL_EQL, KC_LCBR, KC_RCBR,KC_BSLS,        \
       KC_ESC,TO(LAYER_NUMPAD),KC_QUOT,KC_ENT,KC_PGDOWN,                     KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_PIPE,         \
                                           _______, _______,_______,     _______, _______
 
@@ -198,104 +192,11 @@ static uint16_t auto_pointer_layer_timer = 0;
 	  KC_LSFT,  KC_F10,   KC_F11,  KC_F12, KC_F5, 					   KC_PLUS,   KC_P1,   KC_P2,   KC_P3, KC_SLSH,\
 									       _______, _______, _______,     KC_ENT,   KC_P0
 
-/** \brief Mouse emulation and pointer functions. */
 #define LAYOUT_LAYER_POINTER                                                                                                                                        \
    TG(LAYER_POINTER) ,XXXXXXX , DPI_MOD, TO(LAYER_POINTER), S_D_MOD, S_D_MOD, DPI_MOD, POINTER_DEFAULT_DPI_REVERSE, POINTER_DEFAULT_DPI_FORWARD, TG(LAYER_POINTER), \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________,                                                                       \
-    DRG_TOG, SNIPING, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
+    DRG_TOG, _______, _______, DRGSCRL,   EEP_RST,   SNIPING, _______, DRGSCRL,KC_BTN1 ,KC_BTN2 ,                                                                     \
                       KC_BTN2, KC_BTN1, KC_BTN3, KC_ENT, KC_SPC
-
-
-
-
-/*
- * Layers used on the Charybdis Nano.
- *
- * These layers started off heavily inspired by the Miryoku layout, but trimmed
- * down and tailored for a stock experience that is meant to be fundation for
- * further personalization.
- *
- * See https://github.com/manna-harbour/miryoku for the original layout.
- */
-
-/**
- * \brief Function layer.
- *
- * Secondary right-hand layer has function keys mirroring the numerals on the
- * primary layer with extras on the pinkie column, plus system keys on the inner
- * column. App is on the tertiary thumb key and other thumb keys are duplicated
- * from the base layer to enable auto-repeat.
- */
-#define LAYOUT_LAYER_FUNCTION                                                                 \
-    _______________DEAD_HALF_ROW_______________, KC_PSCR,   KC_F7,   KC_F8,   KC_F9,  KC_F12, \
-    ______________HOME_ROW_GACS_L______________, KC_SLCK,   KC_F4,   KC_F5,   KC_F6,  KC_F11, \
-    _______________DEAD_HALF_ROW_______________, KC_PAUS,   KC_F1,   KC_F2,   KC_F3,  KC_F10, \
-                      XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX
-
-/**
- * \brief Media layer.
- *
- * Tertiary left- and right-hand layer is media and RGB control.  This layer is
- * symmetrical to accomodate the left- and right-hand trackball.
- */
-#define LAYOUT_LAYER_MEDIA                                                                    \
-    XXXXXXX,RGB_RMOD, RGB_TOG, RGB_MOD, XXXXXXX, XXXXXXX,RGB_RMOD, RGB_TOG, RGB_MOD, XXXXXXX, \
-    KC_MPRV, KC_VOLD, KC_MUTE, KC_VOLU, KC_MNXT, KC_MPRV, KC_VOLD, KC_MUTE, KC_VOLU, KC_MNXT, \
-    XXXXXXX, XXXXXXX, XXXXXXX, EEP_RST,   RESET,   RESET, EEP_RST, XXXXXXX, XXXXXXX, XXXXXXX, \
-                      _______, KC_MPLY, KC_MSTP, KC_MSTP, KC_MPLY
-
-
-
-/**
- * \brief Navigation layer.
- *
- * Primary right-hand layer (left home thumb) is navigation and editing. Cursor
- * keys are on the home position, line and page movement below, clipboard above,
- * caps lock and insert on the inner column. Thumb keys are duplicated from the
- * base layer to avoid having to layer change mid edit and to enable auto-repeat.
- */
-#define LAYOUT_LAYER_NAVIGATION                                                               \
-    _______________DEAD_HALF_ROW_______________, _______________DEAD_HALF_ROW_______________, \
-    ______________HOME_ROW_GACS_L______________, KC_CLCK, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
-    _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, \
-                      XXXXXXX, _______, XXXXXXX,  KC_ENT, KC_BSPC
-
-/**
- * \brief Numeral layout.
- *
- * Primary left-hand layer (right home thumb) is numerals and symbols. Numerals
- * are in the standard numpad locations with symbols in the remaining positions.
- * `KC_DOT` is duplicated from the base layer.
- */
-#define LAYOUT_LAYER_NUMERAL                                                                  \
-    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________DEAD_HALF_ROW_______________, \
-    KC_SCLN,    KC_4,    KC_5,    KC_6,  KC_EQL, ______________HOME_ROW_GACS_R______________, \
-     KC_GRV,    KC_1,    KC_2,    KC_3, KC_BSLS, _______________DEAD_HALF_ROW_______________, \
-                       KC_DOT,    KC_0, KC_MINS, XXXXXXX, _______
-
-/**
- * \brief Symbols layer.
- *
- * Secondary left-hand layer has shifted symbols in the same locations to reduce
- * chording when using mods with shifted symbols. `KC_LPRN` is duplicated next to
- * `KC_RPRN`.
- */
-#define LAYOUT_LAYER_SYMBOLS                                                                  \
-    KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, _______________DEAD_HALF_ROW_______________, \
-    KC_COLN,  KC_DLR, KC_PERC, KC_CIRC, KC_PLUS, ______________HOME_ROW_GACS_R______________, \
-    KC_TILD, KC_EXLM,   KC_AT, KC_HASH, KC_PIPE, _______________DEAD_HALF_ROW_______________, \
-                      KC_LPRN, KC_RPRN, KC_UNDS, _______, XXXXXXX
-
-/**
- * \brief Add Home Row mod to a layout.
- *
- * Expects a 10-key per row layout.  Adds support for GACS (Gui, Alt, Ctl, Shift)
- * home row.  The layout passed in parameter must contain at least 20 keycodes.
- *
- * This is meant to be used with `LAYER_ALPHAS_QWERTY` defined above, eg.:
- *
- *     HOME_ROW_MOD_GACS(LAYER_ALPHAS_QWERTY)
- */
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
     L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,                  \
@@ -371,6 +272,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_BLUE);
             break;
+        case LAYER_RAISE:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_MAGENTA);
+            break;
+        case LAYER_LOWER:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
+            break;
         default: // for any other layers, or the default layer
             rgb_matrix_mode_noeeprom(RGB_MATRIX_STARTUP_MODE);
             break;
@@ -380,6 +289,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #    endif // RGB_MATRIX_ENABLE
 #    endif //CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #    ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+//static bool hold_pointer_layer;
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
@@ -433,3 +343,56 @@ void shutdown_user(void) {
     rgb_matrix_update_pwm_buffers();
 #endif  // RGB_MATRIX_ENABLE
 }
+
+
+// bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+//     if (!process_record_user(keycode, record)) {
+//         debug_charybdis_config_to_console(&g_charybdis_config);
+//         return false;
+//     }
+// #    ifdef POINTING_DEVICE_ENABLE
+// #        ifndef NO_CHARYBDIS_KEYCODES
+//     switch (keycode) {
+//         case POINTER_DEFAULT_DPI_FORWARD:
+//             if (record->event.pressed) {
+//                 // Step backward if shifted, forward otherwise.
+//                 charybdis_cycle_pointer_default_dpi(/* forward= */ !has_shift_mod());
+//             }
+//             break;
+//         case POINTER_DEFAULT_DPI_REVERSE:
+//             if (record->event.pressed) {
+//                 // Step forward if shifted, backward otherwise.
+//                 charybdis_cycle_pointer_default_dpi(/* forward= */ has_shift_mod());
+//             }
+//             break;
+//         case POINTER_SNIPING_DPI_FORWARD:
+//             if (record->event.pressed) {
+//                 // Step backward if shifted, forward otherwise.
+//                 charybdis_cycle_pointer_sniping_dpi(/* forward= */ !has_shift_mod());
+//             }
+//             break;
+//         case POINTER_SNIPING_DPI_REVERSE:
+//             if (record->event.pressed) {
+//                 // Step forward if shifted, backward otherwise.
+//                 charybdis_cycle_pointer_sniping_dpi(/* forward= */ has_shift_mod());
+//             }
+//             break;
+//         case SNIPING_MODE:
+//             charybdis_set_pointer_sniping_enabled(record->event.pressed);
+//             break;
+//         case SNIPING_MODE_TOGGLE:
+//             if (record->event.pressed) {
+//                 charybdis_set_pointer_sniping_enabled(!charybdis_get_pointer_sniping_enabled());
+//             }
+//             break;
+//         case DRAGSCROLL_MODE:
+//             charybdis_set_pointer_dragscroll_enabled(record->event.pressed);
+//             break;
+//         case DRAGSCROLL_MODE_TOGGLE:
+//             if (record->event.pressed) {
+//                 charybdis_set_pointer_dragscroll_enabled(!charybdis_get_pointer_dragscroll_enabled());
+//             }
+//             break;
+//     }
+//     return true;
+// }
