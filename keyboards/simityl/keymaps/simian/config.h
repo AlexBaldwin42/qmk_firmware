@@ -22,9 +22,7 @@
 #    define PERMISSIVE_HOLD
 #endif // TAPPING_TERM
 
-#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_DEFAULT_LAYER 5
-#define AUTO_MOUSE_TIME 3500
+// Auto mouse configuration moved to main config.h
 
 #ifdef POINTING_DEVICE_ENABLE
 #    define POINTING_DEVICE_RIGHT

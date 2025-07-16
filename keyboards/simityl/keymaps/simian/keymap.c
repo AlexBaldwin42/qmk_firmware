@@ -25,7 +25,22 @@ enum charybdis_keymap_layers {
     LAYER_POINTER,
 };
 
-#define _L_PTR(KC) LT(LAYER_POINTER, KC)
+// Custom keycodes for DPI adjustment and sniping
+enum custom_keycodes {
+    DPI_UP = QK_KB_3,  // Use QK_KB_3 since simityl.h uses QK_KB_0-1
+    DPI_DOWN,
+    DPI_CYCLE,
+    SNIPING_MODE,
+    SNIPING_TOGGLE
+};
+
+// Auto mouse layer enabled - no manual layer switching needed
+
+// DPI adjustment and sniping variables
+static uint16_t dpi_levels[] = {400, 800, 1200, 1600, 2000};
+static uint8_t dpi_index = 1;  // Start at 800 DPI
+static uint16_t sniping_dpi = 200;  // Low DPI for precision mode
+static bool sniping_enabled = false;
 
 // Thumb clusters
 #define NUM_TAB LT(LAYER_NUMPAD, KC_TAB)
@@ -80,8 +95,8 @@ combo_t key_combos[COMBO_COUNT] = {
 
 #define LAYOUT_LAYER_POINTER                                                                                       \
         _______, _______, _______, _______, _______,               KC_BTN1, DRGSCRL, _______, _______, _______,    \
-        _______, _______, _______, _______, _______,               KC_BTN2, _______, _______, _______, _______,    \
-        _______, _______, _______, _______, _______,               _______, _______, _______, _______, _______,    \
+        _______, _______, _______, _______, _______,               KC_BTN2, SNIPING_MODE, _______, _______, _______,    \
+        _______, _______, _______, _______, _______,               _______, SNIPING_TOGGLE, _______, _______, _______,    \
                           _______, KC_BTN1, KC_BTN2,               _______, _______, _______
 
 // Lower
@@ -101,8 +116,8 @@ combo_t key_combos[COMBO_COUNT] = {
 // Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                        \
 XXXXXXX,TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,   \
-        RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                XXXXXXX, KC_WBAK, KC_WFWD,  KC_APP, XXXXXXX,   \
-        RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                XXXXXXX, XXXXXXX,DPI_RMOD, DPI_MOD, XXXXXXX,   \
+        RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                XXXXXXX, KC_WBAK, KC_WFWD,  KC_APP, DRG_TOG,   \
+        RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                XXXXXXX, XXXXXXX, DPI_DOWN, DPI_UP, DPI_CYCLE,   \
                           _______, _______, _______,                KC_VOLD, KC_VOLU, KC_MPLY
 
 // Numpad
@@ -141,25 +156,13 @@ XXXXXXX,TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                QK_BOOT, XXX
       __VA_ARGS__
 #define HOME_ROW_MOD_LEFT_GACS(...) _HOME_ROW_MOD_LEFT_GACS(__VA_ARGS__)
 
-#define _POINTER_MOD(                                                  \
-    L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
-    L10, L11, L12, L13, L14, R15, R16, R17, R18, R19,                  \
-    L20, L21, L22, L23, L24, R25, R26, R27, R28, R29,                  \
-    ...)                                                               \
-              L00,         L01,         L02,        L03,         L04,  \
-              R05,         R06, _L_PTR(R07),        R08,         R09,  \
-              L10,         L11,         L12,        L13,         L14,  \
-              R15,         R16,         R17,        R18,         R19,  \
-              L20,         L21, _L_PTR(L22),        L23,         L24,  \
-              R25,         R26,         R27,        R28,         R29,  \
-      __VA_ARGS__
-#define POINTER_MOD(...) _POINTER_MOD(__VA_ARGS__)
+// POINTER_MOD macro removed - auto mouse layer handles activation
 
 #define LAYOUT_wrapper(...) LAYOUT_split_3x5_3(__VA_ARGS__)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_wrapper(
-    POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LAYER_BASE))
+    HOME_ROW_MOD_GACS(LAYOUT_LAYER_BASE)
   ),
    [LAYER_POINTER] = LAYOUT_wrapper(LAYOUT_LAYER_POINTER),
    [LAYER_LOWER] = LAYOUT_wrapper(HOME_ROW_MOD_LEFT_GACS(LAYOUT_LAYER_LOWER)),
@@ -173,7 +176,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_user(void) {
     HSV hsv = {0, 0, 0};
-    if (IS_LAYER_ON(LAYER_POINTER)) {
+    
+    // Sniping mode takes priority - bright red indicator
+    if (sniping_enabled) {
+        hsv = (HSV){HSV_RED};
+    } 
+    // Drag scroll mode - orange indicator
+    else if (charybdis_get_pointer_dragscroll_enabled()) {
+        hsv = (HSV){HSV_ORANGE};
+    }
+    // Layer indicators
+    else if (IS_LAYER_ON(LAYER_POINTER)) {
         hsv = (HSV){HSV_GREEN};
     } else if (IS_LAYER_ON(LAYER_NUMPAD)) {
         hsv = (HSV){HSV_BLUE};
@@ -184,6 +197,7 @@ bool rgb_matrix_indicators_user(void) {
     } /*else if (IS_LAYER_ON(LAYER_ADJUST)) {
         hsv = (HSV){HSV_PINK};
     }*/
+    
     // If hsv is not the default (0,0,0), update the RGB matrix
     if (hsv.h != 0 || hsv.s != 0 || hsv.v != 0) {
         // Cap hsv.v to the maximum brightness level
@@ -214,7 +228,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef POINTING_DEVICE_ENABLE
 void pointing_device_init_user(void) {
-    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
+    set_auto_mouse_enable(true);         // Enable auto mouse layer
+    pointing_device_set_cpi(800);        // Set default DPI
 }
 #endif     // POINTING_DEVICE_ENABLE
 
@@ -242,31 +257,85 @@ void rgb_matrix_update_pwm_buffers(void);
 #endif
 
 
-bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
-    switch(keycode) {
-        case DRGSCRL:
-        case SNIPING:
-        case KC_LCTL:
-        case RAI_ENT:
-        case LW_SPC:
-        case NUM_ESC:
-            return true;
-        default:
-            return false;
+// is_mouse_record_user removed - auto mouse layer handles this automatically
+
+// Variables moved to top of file
+
+static void update_pointing_device_cpi(void) {
+    if (sniping_enabled) {
+        pointing_device_set_cpi(sniping_dpi);
+    } else {
+        pointing_device_set_cpi(dpi_levels[dpi_index]);
     }
-    return  is_mouse_record_user(keycode, record);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
-        // toggle auto mouse enable key
-        case RAI_ENT:
-        case LW_SPC:
-        case NUM_ESC:
-        case LCTL_T(KC_Z):
-        if(record->event.pressed) { // key down
-                auto_mouse_layer_off(); // disable target layer if needed
-            } // do nothing on key up
+        case DPI_UP:
+            if (record->event.pressed) {
+                if (dpi_index < (sizeof(dpi_levels)/sizeof(dpi_levels[0]) - 1)) {
+                    dpi_index++;
+                    update_pointing_device_cpi();
+                }
+            }
+            return false;
+            
+        case DPI_DOWN:
+            if (record->event.pressed) {
+                if (dpi_index > 0) {
+                    dpi_index--;
+                    update_pointing_device_cpi();
+                }
+            }
+            return false;
+            
+        case DPI_CYCLE:
+            if (record->event.pressed) {
+                dpi_index = (dpi_index + 1) % (sizeof(dpi_levels)/sizeof(dpi_levels[0]));
+                update_pointing_device_cpi();
+            }
+            return false;
+            
+        case SNIPING_MODE:
+            sniping_enabled = record->event.pressed;
+            update_pointing_device_cpi();
+            return false;
+            
+        case SNIPING_TOGGLE:
+            if (record->event.pressed) {
+                sniping_enabled = !sniping_enabled;
+                update_pointing_device_cpi();
+            }
+            return false;
+            
+        // Don't exit drag scroll for mouse/pointing device keys
+        case KC_MS_BTN1:
+        case KC_MS_BTN2:
+        case KC_MS_BTN3:
+        case KC_MS_BTN4:
+        case KC_MS_BTN5:
+        case KC_MS_WH_UP:
+        case KC_MS_WH_DOWN:
+        case KC_MS_WH_LEFT:
+        case KC_MS_WH_RIGHT:
+        case DRGSCRL:
+        case DRG_TOG:
+            return true; // Don't disable drag scroll for these keys
+            
+        // Exit drag scroll mode with ESC key (high priority)
+        case KC_ESC:
+            if (record->event.pressed && charybdis_get_pointer_dragscroll_enabled()) {
+                charybdis_set_pointer_dragscroll_enabled(false);
+                return false; // Don't process ESC normally when used to exit drag scroll
+            }
+            return true;
+            
+        default:
+            // Exit drag scroll mode on any other key press
+            if (record->event.pressed && charybdis_get_pointer_dragscroll_enabled()) {
+                charybdis_set_pointer_dragscroll_enabled(false);
+            }
             return true;
     }
+    return true;
 }

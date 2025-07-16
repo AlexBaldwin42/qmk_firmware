@@ -65,6 +65,14 @@
 // Invert X axis on mouse reports.
 #define POINTING_DEVICE_INVERT_X
 
+/* Auto mouse layer configuration. */
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+#define AUTO_MOUSE_DEFAULT_LAYER 5  // LAYER_POINTER
+#define AUTO_MOUSE_TIME 650         // Layer timeout in ms
+#define AUTO_MOUSE_DELAY 200        // Lockout time after non-mouse key
+#define AUTO_MOUSE_DEBOUNCE 25      // Delay between updates
+#define AUTO_MOUSE_THRESHOLD 10     // Movement threshold
+
 /* RGB matrix support. */
 #ifdef RGB_MATRIX_ENABLE
 #    define SPLIT_TRANSPORT_MIRROR
