@@ -44,7 +44,7 @@ Pro Micro (Atmega32u4), make sure to include `CONFIG_USB_ACM=y`. Other devices m
 
 Issues encountered when flashing keyboards on Windows are most often due to having the wrong drivers installed for the bootloader, or none at all.
 
-Re-running the QMK installation script (`./util/qmk_install.sh` from the `qmk_firmware` directory in MSYS2 or WSL) or reinstalling the QMK Toolbox may fix the issue. Alternatively, you can download and run the [`qmk_driver_installer`](https://github.com/qmk/qmk_driver_installer) package manually.
+Re-running the QMK installation script (`curl -fsSL https://install.qmk.fm | sh`) or reinstalling the QMK Toolbox may fix the issue. Alternatively, you can download and run the [`qmk_driver_installer`](https://github.com/qmk/qmk_driver_installer) package manually.
 
 If that doesn't work, then you may need to download and run Zadig. See [Bootloader Driver Installation with Zadig](driver_installation_zadig) for more detailed information.
 
@@ -66,4 +66,4 @@ Due to how EEPROM works on ARM based chips, saved settings may no longer be vali
 [Planck rev6 reset EEPROM](https://cdn.discordapp.com/attachments/473506116718952450/539284620861243409/planck_rev6_default.bin) can be used to force an eeprom reset. After flashing this image, flash your normal firmware again which should restore your keyboard to _normal_ working order.
 [Preonic rev3 reset EEPROM](https://cdn.discordapp.com/attachments/473506116718952450/537849497313738762/preonic_rev3_default.bin)
 
-If bootmagic is enabled in any form, you should be able to do this too (see [Bootmagic docs](feature_bootmagic) and keyboard info for specifics on how to do this).
+If bootmagic is enabled in any form, you should be able to do this too (see [Bootmagic docs](features/bootmagic) and keyboard info for specifics on how to do this).

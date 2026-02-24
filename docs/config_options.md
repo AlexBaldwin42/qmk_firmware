@@ -140,8 +140,6 @@ If you define these options you will enable the associated feature, which may in
 
 * `#define ENABLE_COMPILE_KEYCODE`
   * Enables the `QK_MAKE` keycode
-* `#define FORCE_NKRO`
-  * NKRO by default requires to be turned on, this forces it on during keyboard startup regardless of EEPROM setting. NKRO can still be turned off but will be turned on again if the keyboard reboots.
 * `#define STRICT_LAYER_RELEASE`
   * force a key release to be evaluated using the current layer stack instead of remembering which layer it came from (used for advanced cases)
 
@@ -207,7 +205,7 @@ If you define these options you will enable the associated feature, which may in
 * `#define TAP_HOLD_CAPS_DELAY 80`
   * Sets the delay for Tap Hold keys (`LT`, `MT`) when using `KC_CAPS_LOCK` keycode, as this has some special handling on MacOS.  The value is in milliseconds, and defaults to 80 ms if not defined. For macOS, you may want to set this to 200 or higher.
 * `#define KEY_OVERRIDE_REPEAT_DELAY 500`
-  * Sets the key repeat interval for [key overrides](feature_key_overrides).
+  * Sets the key repeat interval for [key overrides](features/key_overrides).
 * `#define LEGACY_MAGIC_HANDLING`
   * Enables magic configuration handling for advanced keycodes (such as Mod Tap and Layer Tap)
 
@@ -217,14 +215,14 @@ If you define these options you will enable the associated feature, which may in
 * `#define WS2812_DI_PIN D7`
   * pin the DI on the WS2812 is hooked-up to
 * `#define RGBLIGHT_LAYERS`
-  * Lets you define [lighting layers](feature_rgblight#lighting-layers) that can be toggled on or off. Great for showing the current keyboard layer or caps lock state.
+  * Lets you define [lighting layers](features/rgblight#lighting-layers) that can be toggled on or off. Great for showing the current keyboard layer or caps lock state.
 * `#define RGBLIGHT_MAX_LAYERS`
-  * Defaults to 8. Can be expanded up to 32 if more [lighting layers](feature_rgblight#lighting-layers) are needed.
+  * Defaults to 8. Can be expanded up to 32 if more [lighting layers](features/rgblight#lighting-layers) are needed.
   * Note: Increasing the maximum will increase the firmware size and slow sync on split keyboards.
 * `#define RGBLIGHT_LAYER_BLINK`
-  * Adds ability to [blink](feature_rgblight#lighting-layer-blink) a lighting layer for a specified number of milliseconds (e.g. to acknowledge an action).
+  * Adds ability to [blink](features/rgblight#lighting-layer-blink) a lighting layer for a specified number of milliseconds (e.g. to acknowledge an action).
 * `#define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF`
-  * If defined, then [lighting layers](feature_rgblight#overriding-rgb-lighting-onoff-status) will be shown even if RGB Light is off.
+  * If defined, then [lighting layers](features/rgblight#overriding-rgb-lighting-onoff-status) will be shown even if RGB Light is off.
 * `#define RGBLIGHT_LED_COUNT 12`
   * number of LEDs
 * `#define RGBLIGHT_SPLIT`
@@ -358,7 +356,7 @@ There are a few different ways to set handedness for split keyboards (listed in 
 
 * `#define SPLIT_TRANSACTION_IDS_KB .....`
 * `#define SPLIT_TRANSACTION_IDS_USER .....`
-  * Allows for custom data sync with the slave when using the QMK-provided split transport. See [custom data sync between sides](feature_split_keyboard#custom-data-sync) for more information.
+  * Allows for custom data sync with the slave when using the QMK-provided split transport. See [custom data sync between sides](features/split_keyboard#custom-data-sync) for more information.
 
 # The `rules.mk` File
 
@@ -366,8 +364,6 @@ This is a [make](https://www.gnu.org/software/make/manual/make.html) file that i
 
 ## Build Options
 
-* `DEFAULT_FOLDER`
-  * Used to specify a default folder when a keyboard has more than one sub-folder.
 * `FIRMWARE_FORMAT`
   * Defines which format (bin, hex) is copied to the root `qmk_firmware` folder after building.
 * `SRC`
@@ -401,6 +397,7 @@ This is a [make](https://www.gnu.org/software/make/manual/make.html) file that i
   * `atmel-dfu`
   * `lufa-dfu`
   * `qmk-dfu`
+  * `qmk-hid`
   * `halfkay`
   * `caterina`
   * `bootloadhid`
@@ -413,7 +410,7 @@ Use these to enable or disable building certain features. The more you have enab
 * `MAGIC_ENABLE`
   * MAGIC actions (BOOTMAGIC without the boot)
 * `BOOTMAGIC_ENABLE`
-  * Enable Bootmagic Lite
+  * Enable Bootmagic
 * `MOUSEKEY_ENABLE`
   * Mouse keys
 * `EXTRAKEY_ENABLE`
@@ -426,8 +423,6 @@ Use these to enable or disable building certain features. The more you have enab
   * Key combo feature
 * `NKRO_ENABLE`
   * USB N-Key Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-* `RING_BUFFERED_6KRO_REPORT_ENABLE`
-  * USB 6-Key Rollover - Instead of stopping any new input once 6 keys are pressed, the oldest key is released and the new key is pressed.
 * `AUDIO_ENABLE`
   * Enable the audio subsystem.
 * `KEY_OVERRIDE_ENABLE`

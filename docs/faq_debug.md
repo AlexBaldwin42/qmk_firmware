@@ -4,7 +4,7 @@ This page details various common questions people have about troubleshooting the
 
 ## Debugging {#debugging}
 
-Your keyboard will output debug information if you have `CONSOLE_ENABLE = yes` in your `rules.mk`. By default the output is very limited, but you can turn on debug mode to increase the amount of debug output. Use the `DB_TOGG` keycode in your keymap, use the [Command](feature_command) feature to enable debug mode, or add the following code to your keymap.
+Your keyboard will output debug information if you have `CONSOLE_ENABLE = yes` in your `rules.mk`. By default the output is very limited, but you can turn on debug mode to increase the amount of debug output. Use the `DB_TOGG` keycode in your keymap, use the [Command](features/command) feature to enable debug mode, or add the following code to your keymap.
 
 ```c
 void keyboard_post_init_user(void) {
@@ -77,6 +77,17 @@ KL: kc: 172, col: 2, row: 0, pressed: 1, time: 16303, int: 0, count: 0
 KL: kc: 172, col: 2, row: 0, pressed: 0, time: 16411, int: 0, count: 0
 ```
 
+### Which keycode is this keypress?
+
+Keycodes are logged in the example above as numerical codes, which may be difficult to interpret. For more readable logging, add `KEYCODE_STRING_ENABLE = yes` in your `rules.mk` and use `get_keycode_string(kc)`. For example:
+
+```c
+uprintf("kc: %s\n", get_keycode_string(keycode));
+```
+
+This logs the keycode as a human-readable string like "`LT(2,KC_D)`" rather than a numerical code like "`0x4207`." See the [Keycode String](unit_testing#keycode-string) section of the Unit Testing page for more information.
+
+
 ### How long did it take to scan for a keypress?
 
 When testing performance issues, it can be useful to know the frequency at which the switch matrix is being scanned. To enable logging for this scenario, add the following code to your keymaps `config.h`
@@ -129,7 +140,7 @@ needed for older distros.
 ## Can't Get Message on Console
 Check:
 - *hid_listen* finds your device. See above.
-- Enable debug by pressing **Magic**+d. See [Magic Commands](https://github.com/tmk/tmk_keyboard#magic-commands).
+- Enable debug by pressing **Magic**+d. See [Magic Commands](https://github.com/tmk/tmk_keyboard/wiki#magic-commands-for-debug).
 - Set `debug_enable=true`. See [Debugging](#debugging)
 - Try using `print` function instead of debug print. See **common/print.h**.
 - Disconnect other devices with console function. See [Issue #97](https://github.com/tmk/tmk_keyboard/issues/97).

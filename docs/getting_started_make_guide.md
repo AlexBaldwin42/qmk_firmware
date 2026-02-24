@@ -1,8 +1,8 @@
 # More Detailed `make` Instructions
 
-The full syntax of the `make` command is `<keyboard_folder>:<keymap>:<target>`, where:
+The full syntax of the `make` command is `<keyboard>:<keymap>:<target>`, where:
 
-* `<keyboard_folder>` is the path of the keyboard, for example `planck`
+* `<keyboard>` is the path of the keyboard, for example `planck`
   * Use `all` to compile all keyboards
   * Specify the path to compile a revision, for example `planck/rev4` or `planck/rev3`
   * If the keyboard doesn't have any folders, it can be left out
@@ -115,11 +115,11 @@ This allows you to send Unicode characters using `UM(<map index>)` in your keyma
 
 This allows you to send Unicode characters by inputting a mnemonic corresponding to the character you want to send. You will need to maintain a mapping table in your keymap file. All possible code points (up to `0x10FFFF`) are supported.
 
-For further details, as well as limitations, see the [Unicode page](feature_unicode).
+For further details, as well as limitations, see the [Unicode page](features/unicode).
 
 `AUDIO_ENABLE`
 
-This allows you output audio on the C6 pin (needs abstracting). See the [audio page](feature_audio) for more information.
+This allows you output audio on the C6 pin (needs abstracting). See the [audio page](features/audio) for more information.
 
 `VARIABLE_TRACE`
 
@@ -127,7 +127,7 @@ Use this to debug changes to variable values, see the [tracing variables](unit_t
 
 `KEY_LOCK_ENABLE`
 
-This enables [key lock](feature_key_lock).
+This enables [key lock](features/key_lock).
 
 `SPLIT_KEYBOARD`
 
