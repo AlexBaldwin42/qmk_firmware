@@ -80,8 +80,7 @@ enum combos{
 const uint16_t PROGMEM df_combo[] = {LSFT_T(KC_D), LCTL_T(KC_F), COMBO_END};
 const uint16_t PROGMEM sd_combo[] = {LALT_T(KC_S), LSFT_T(KC_D),  COMBO_END};
 
-#define COMBO_COUNT 2
-combo_t key_combos[COMBO_COUNT] = {
+combo_t key_combos[] = {
   [DF_DQT] = COMBO(df_combo, KC_DQT),
   [SD_QT] = COMBO(sd_combo, KC_QUOT)
 };
@@ -94,10 +93,10 @@ combo_t key_combos[COMBO_COUNT] = {
                             NUM_TAB,LW_BSPC, RAI_DEL,               RAI_ENT,  LW_SPC, NUM_ESC
 
 #define LAYOUT_LAYER_POINTER                                                                                       \
-        _______, _______, _______, _______, _______,               KC_BTN1, DRGSCRL, _______, _______, _______,    \
-        _______, _______, _______, _______, _______,               KC_BTN2, SNIPING_MODE, _______, _______, _______,    \
+        _______, _______, _______, _______, _______,               MS_BTN1, DRGSCRL, _______, _______, _______,    \
+        _______, _______, _______, _______, _______,               MS_BTN2, SNIPING_MODE, _______, _______, _______,    \
         _______, _______, _______, _______, _______,               _______, SNIPING_TOGGLE, _______, _______, _______,    \
-                          _______, KC_BTN1, KC_BTN2,               _______, _______, _______
+                          _______, MS_BTN1, MS_BTN2,               _______, _______, _______
 
 // Lower
 #define LAYOUT_LAYER_LOWER                                                                                         \
@@ -115,9 +114,9 @@ combo_t key_combos[COMBO_COUNT] = {
 
 // Adjust
 #define LAYOUT_LAYER_ADJUST                                                                                        \
-XXXXXXX,TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, RGB_TOG,   \
-        RGB_TOG, RGB_M_R, RGB_VAI, RGB_VAD, XXXXXXX,                XXXXXXX, KC_WBAK, KC_WFWD,  KC_APP, DRG_TOG,   \
-        RGB_MOD,RGB_RMOD, RGB_HUI, RGB_HUD, QK_BOOT,                XXXXXXX, XXXXXXX, DPI_DOWN, DPI_UP, DPI_CYCLE,   \
+XXXXXXX,TG(LAYER_NUMPAD), KC_CAPS, XXXXXXX, XXXXXXX,                QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, RM_TOGG,   \
+        RM_TOGG, RM_NEXT, RM_VALU, RM_VALD, XXXXXXX,                XXXXXXX, KC_WBAK, KC_WFWD,  KC_APP, DRG_TOG,   \
+        RM_NEXT,RM_PREV, RM_HUEU, RM_HUED, QK_BOOT,                XXXXXXX, XXXXXXX, DPI_DOWN, DPI_UP, DPI_CYCLE,   \
                           _______, _______, _______,                KC_VOLD, KC_VOLU, KC_MPLY
 
 // Numpad
@@ -240,12 +239,12 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         tap_code16(clockwise ? C(KC_TAB) : C(S(KC_TAB)));
     } else if (IS_LAYER_ON(LAYER_RAISE)) {
         for (int i = 0; i < 5; i++) {
-            tap_code16(clockwise ? KC_WH_U : KC_WH_D);
+            tap_code16(clockwise ? MS_WHLU : MS_WHLD);
         }
     } else if (IS_LAYER_ON(LAYER_NUMPAD)) {
         tap_code16(clockwise ? KC_RIGHT : KC_LEFT);
     } else {
-        tap_code16(clockwise ? KC_WH_U : KC_WH_D);
+        tap_code16(clockwise ? MS_WHLU : MS_WHLD);
     }
     return false;
 }
@@ -309,15 +308,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             return false;
             
         // Don't exit drag scroll for mouse/pointing device keys
-        case KC_MS_BTN1:
-        case KC_MS_BTN2:
-        case KC_MS_BTN3:
-        case KC_MS_BTN4:
-        case KC_MS_BTN5:
-        case KC_MS_WH_UP:
-        case KC_MS_WH_DOWN:
-        case KC_MS_WH_LEFT:
-        case KC_MS_WH_RIGHT:
+        case MS_BTN1:
+        case MS_BTN2:
+        case MS_BTN3:
+        case MS_BTN4:
+        case MS_BTN5:
+        case MS_WHLU:
+        case MS_WHLD:
+        case MS_WHLL:
+        case MS_WHLR:
         case DRGSCRL:
         case DRG_TOG:
             return true; // Don't disable drag scroll for these keys
