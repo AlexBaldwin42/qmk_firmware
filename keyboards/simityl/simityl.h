@@ -19,28 +19,3 @@
 #pragma once
 
 #include "quantum.h"
-
-#ifdef POINTING_DEVICE_ENABLE
-
-// Simplified drag scroll keycodes
-enum simityl_keycodes {
-    DRAGSCROLL_MODE = QK_KB_0,
-    DRAGSCROLL_MODE_TOGGLE,
-};
-
-// Simplified aliases
-#define DRGSCRL DRAGSCROLL_MODE
-#define DRG_TOG DRAGSCROLL_MODE_TOGGLE
-
-/** \brief Whether drag-scroll is enabled. */
-bool charybdis_get_pointer_dragscroll_enabled(void);
-
-/**
- * \brief Enable/disable drag-scroll mode.
- *
- * When drag-scroll mode is enabled, horizontal and vertical pointer movements
- * are translated into horizontal and vertical scroll movements.
- */
-void charybdis_set_pointer_dragscroll_enabled(bool enable);
-
-#endif // POINTING_DEVICE_ENABLE

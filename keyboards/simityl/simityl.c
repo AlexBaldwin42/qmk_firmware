@@ -17,67 +17,6 @@
 
 #include "simityl.h"
 
-#ifdef POINTING_DEVICE_ENABLE
-
-// Simple drag scroll implementation
-static bool drag_scroll_enabled = false;
-
-void charybdis_set_pointer_dragscroll_enabled(bool enable) {
-    drag_scroll_enabled = enable;
-}
-
-bool charybdis_get_pointer_dragscroll_enabled(void) {
-    return drag_scroll_enabled;
-}
-
-report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
-    if (is_keyboard_master() && drag_scroll_enabled) {
-        // Convert mouse movement to scroll
-        static int16_t scroll_buffer_x = 0;
-        static int16_t scroll_buffer_y = 0;
-        
-        scroll_buffer_x += mouse_report.x;
-        scroll_buffer_y += mouse_report.y;
-        
-        mouse_report.x = 0;
-        mouse_report.y = 0;
-        
-        // Apply scroll when buffer exceeds threshold
-        if (abs(scroll_buffer_x) > 6) {
-            mouse_report.h = scroll_buffer_x > 0 ? 1 : -1;
-            scroll_buffer_x = 0;
-        }
-        if (abs(scroll_buffer_y) > 6) {
-            mouse_report.v = scroll_buffer_y > 0 ? 1 : -1;
-            scroll_buffer_y = 0;
-        }
-    }
-    
-    return pointing_device_task_user(mouse_report);
-}
-
-bool process_record_kb(uint16_t keycode, keyrecord_t* record) {
-    if (!process_record_user(keycode, record)) {
-        return false;
-    }
-    
-    // Handle drag scroll toggle
-    switch (keycode) {
-        case DRAGSCROLL_MODE:
-            charybdis_set_pointer_dragscroll_enabled(record->event.pressed);
-            break;
-        case DRAGSCROLL_MODE_TOGGLE:
-            if (record->event.pressed) {
-                charybdis_set_pointer_dragscroll_enabled(!charybdis_get_pointer_dragscroll_enabled());
-            }
-            break;
-    }
-    
-    return true;
-}
-
-#endif // POINTING_DEVICE_ENABLE
-
 bool shutdown_kb(bool jump_to_bootloader) {
     if (!shutdown_user(jump_to_bootloader)) {
         return false;
