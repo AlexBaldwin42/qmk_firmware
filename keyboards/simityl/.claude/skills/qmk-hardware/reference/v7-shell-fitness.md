@@ -58,6 +58,22 @@ Three conclusions worth acting on:
    mechanically easiest θ_B** — hand clearance, ball removal and printability outrank the
    last few degrees. Only below ~60° does the geometry start costing real performance.
 
+   **Why it is free, in one line:** yaw signal scales as `sin θ`, and its derivative is
+   `cos θ` — which goes to zero at the equator. Sensitivity is *stationary* up there, so
+   placement precision stops paying.
+
+   | θ | sin θ | dsin/dθ = cos θ |
+   |---|---|---|
+   | 0° | 0.000 | 1.000 ← steepest |
+   | 60° | 0.866 | 0.500 |
+   | 75° | 0.966 | 0.259 |
+   | 80° | 0.985 | 0.174 |
+   | 90° | 1.000 | 0.000 ← flat |
+
+   The same table explains the opposite end: the first degree *off* the bottom pole buys more
+   yaw signal than any degree after it. That is why a conventional cup is not merely
+   suboptimal but structurally wrong — it sits where the signal has barely started.
+
 2. **A's offset direction matters far more than its magnitude.** Front-displaced (as it
    reads) opens γ to 95° and is fine — better than a true pole mount. Back-displaced puts
    both sensors on one meridian, collapsing γ to 65° and cond to 1.86. Verify the sign.
