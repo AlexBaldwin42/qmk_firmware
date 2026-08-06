@@ -1,0 +1,3 @@
+# QMK's root .gitignore excludes *.png (build artifacts). Reference images for the
+# hardware skill are source material, not artifacts — re-include them here.
+!*.png
